@@ -1,11 +1,13 @@
 import User from "../models/user.model.js";
 import bycrypt from "bcryptjs";
 import { createAccesToken } from "../libs/jwt.js";
-import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { email, password, username } = req.body;
   try {
+    const userFound = await User.findOne({ email });
+    if (userFound) return res.status(400).json(["El correo ya está en uso"]);
+
     const passwordHash = await bycrypt.hash(password, 10);
 
     const newUser = new User({
@@ -33,10 +35,11 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const userFound = await User.findOne({ email });
-    if (!userFound) return res.status(400).json({ message: "User not found" });
+    if (!userFound)
+      return res.status(400).json({ message: "Usuario no encontrado" });
     const isMatch = await bycrypt.compare(password, userFound.password);
     if (!isMatch)
-      return res.status(400).json({ message: "Incorrect password" });
+      return res.status(400).json({ message: "Contraseña incorrecta" });
 
     const token = await createAccesToken({ id: userFound._id });
     res.cookie("token", token);
@@ -61,7 +64,8 @@ export const logout = async (req, res) => {
 
 export const profile = async (req, res) => {
   const userFound = await User.findById(req.user.id);
-  if (!userFound) return res.status(400).json({ message: "User not found" });
+  if (!userFound)
+    return res.status(400).json({ message: "Usuario no encontrado" });
   return res.json({
     id: userFound._id,
     username: userFound.username,

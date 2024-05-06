@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const pages = ["Cursos", "Hackathons", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -43,8 +44,8 @@ function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to={"/"}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

@@ -5,6 +5,9 @@ import DeleteCourse from "./pages/DeleteCourse";
 import EditCourse from "./pages/EditCourse";
 import ShowCourse from "./pages/ShowCourse";
 import Header from "./components/Header";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -12,6 +15,9 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/courses/create" element={<CreateCourse />} />
         <Route path="/courses/details/:id" element={<ShowCourse />} />
         <Route path="/courses/edit/:id" element={<EditCourse />} />
