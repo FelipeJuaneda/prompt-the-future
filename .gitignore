@@ -24,7 +24,6 @@ test/
 *.test.jsx
 
 # Archivos de desarrollo
-src/
 webpack.config.js
 webpack.dev.js
 webpack.prod.js
