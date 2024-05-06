@@ -1,0 +1,47 @@
+# Directorios de Node.js
+node_modules/
+.cache/
+.yarn/
+
+# Archivos de configuración
+package-lock.json
+npm-shrinkwrap.json
+yarn.lock
+
+# Archivos de entorno
+.env
+.env.production
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de prueba
+test/
+*.spec.js
+*.spec.jsx
+*.test.js
+*.test.jsx
+
+# Archivos de desarrollo
+src/
+webpack.config.js
+webpack.dev.js
+webpack.prod.js
+
+# Archivos de compilación
+dist/
+build/
+
+# Archivos de caché del navegador
+# (Si usas un preprocesador como Sass o Less)
+.sass-cache/
+.less-cache/
+
+# Archivos IDE
+*.iml
+*.idea/
+.vscode/
+
+# Archivos temporales
+tmp/
