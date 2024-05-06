@@ -21,7 +21,6 @@ export default function Login() {
   } = useForm();
   const { signin, isAuthenticated, errors: loginErrors } = useAuth();
   const navigation = useNavigate();
-
   useEffect(() => {
     if (isAuthenticated) navigation("/");
   }, [isAuthenticated]);

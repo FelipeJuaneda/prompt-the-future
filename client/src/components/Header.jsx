@@ -14,8 +14,15 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const pages = ["Cursos", "Hackathons", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = [
+  { page: "Cursos", to: "/" },
+  { page: "Hackathons", to: "/" },
+  { page: "Blog", to: "/" },
+];
+const settings = [
+  { name: "Profile", action: "/profile" },
+  { name: "Logout", action: "/logout" },
+];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -89,8 +96,13 @@ function Header() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page.page}
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  to={page.to}
+                >
+                  <Typography textAlign="center">{page.page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -117,11 +129,13 @@ function Header() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={Link}
+                to={page.to}
               >
-                {page}
+                {page.page}
               </Button>
             ))}
           </Box>
@@ -149,8 +163,13 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting.name}
+                  onClick={handleCloseUserMenu}
+                  component={Link}
+                  to={setting.action}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

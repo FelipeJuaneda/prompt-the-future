@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   return (
@@ -17,11 +18,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/courses/create" element={<CreateCourse />} />
-        <Route path="/courses/details/:id" element={<ShowCourse />} />
-        <Route path="/courses/edit/:id" element={<EditCourse />} />
-        <Route path="/courses/delete/:id" element={<DeleteCourse />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/courses/create" element={<CreateCourse />} />
+          <Route path="/courses/details/:id" element={<ShowCourse />} />
+          <Route path="/courses/edit/:id" element={<EditCourse />} />
+          <Route path="/courses/delete/:id" element={<DeleteCourse />} />
+        </Route>
       </Routes>
     </>
   );
