@@ -7,6 +7,9 @@ import {
   getCourseById,
   updateCourse,
 } from "../controllers/coursesController.js";
+import { validateSchema } from "../middlewares/validator.middleware.js";
+import { courseSchema } from "../schemas/courses.schema.js";
+
 const router = express.Router();
 
 //Traer todos los cursos
@@ -16,10 +19,10 @@ router.get("/", getAllCourses);
 router.get("/:id", getCourseById);
 
 //Crear curso
-router.post("/", createCourse);
+router.post("/", validateSchema(courseSchema), createCourse);
 
 //Actualizar/editar curso
-router.put("/:id", updateCourse);
+router.put("/:id", validateSchema(courseSchema), updateCourse);
 
 //Borrar curso
 router.delete("/:id", deleteCourse);
