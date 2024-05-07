@@ -1,8 +1,8 @@
 import { Grid, Typography, Button, Box } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import { getCourseRequest } from "../api/courses";
 
 export default function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
@@ -12,16 +12,17 @@ export default function CourseDetail() {
   console.log("🚀 ~ CourseDetail ~ id:", id);
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`http://localhost:4000/courses/${id}`)
-      .then((response) => {
-        setCourseDetail(response.data);
+    async function getCourse() {
+      try {
+        const res = await getCourseRequest(id);
+        setCourseDetail(res.data);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
         setLoading(false);
-      });
+      }
+    }
+    getCourse();
   }, [id]);
 
   return (

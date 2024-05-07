@@ -1,20 +1,19 @@
 import {
   Box,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   Stack,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import Spinner from "../components/Spinner";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getCoursesRequest } from "../api/courses";
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
@@ -22,16 +21,16 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get("http://localhost:4000/courses")
-      .then((response) => {
-        setCourses(response.data.data);
+    async function getCourses() {
+      try {
+        const res = await getCoursesRequest();
+        setCourses(res.data.data);
         setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
+      } catch (error) {
         setLoading(false);
-      });
+      }
+    }
+    getCourses();
   }, []);
 
   return (

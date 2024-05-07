@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-app.use("/courses", coursesRoute);
+app.use("/api/courses", coursesRoute);
 app.use("/api/auth", authRoutes);
 
 export default app;

@@ -1,32 +1,36 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Stack,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const pages = [
   { page: "Cursos", to: "/" },
   { page: "Hackathons", to: "/" },
   { page: "Blog", to: "/" },
 ];
-const settings = [
-  { name: "Profile", action: "/profile" },
-  { name: "Logout", action: "/logout" },
-];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { isAuthenticated, user, logout } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -131,7 +135,12 @@ function Header() {
               <Button
                 key={page.page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  textTransform: "none",
+                }}
                 component={Link}
                 to={page.to}
               >
@@ -141,11 +150,43 @@ function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            {isAuthenticated ? (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={user.email}>
+                    {user.email.charAt(0).toUpperCase()}
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Stack direction={"row"} gap={0}>
+                <Button
+                  component={Link}
+                  to="/login"
+                  color="inherit"
+                  sx={{ textTransform: "none" }}
+                >
+                  Iniciar sesión
+                </Button>
+                <Button
+                  component={Link}
+                  to="/register"
+                  variant="contained"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "white",
+                    color: "#0d0d0d",
+                    "&:hover": {
+                      backgroundColor: "#0d0d0d",
+                      color: "white",
+                    },
+                  }}
+                >
+                  Regístrate
+                </Button>
+              </Stack>
+            )}
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -162,16 +203,35 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting.name}
-                  onClick={handleCloseUserMenu}
-                  component={Link}
-                  to={setting.action}
-                >
-                  <Typography textAlign="center">{setting.name}</Typography>
-                </MenuItem>
-              ))}
+              {isAuthenticated && (
+                <Box>
+                  <MenuItem
+                    component={Link}
+                    to="/profile"
+                    onClick={handleCloseUserMenu}
+                    sx={{ justifyContent: "center" }}
+                  >
+                    <Typography textAlign="center">{user.email}</Typography>
+                  </MenuItem>
+                  <Divider variant="middle" />
+                  <MenuItem
+                    onClick={() => {
+                      handleCloseUserMenu();
+                      logout();
+                    }}
+                  >
+                    <ListItemIcon>
+                      <LogoutOutlinedIcon fontSize="small" />
+                    </ListItemIcon>
+                    <Typography
+                      sx={{ textTransform: "none" }}
+                      textAlign="center"
+                    >
+                      Cerrar sesión
+                    </Typography>
+                  </MenuItem>
+                </Box>
+              )}
             </Menu>
           </Box>
         </Toolbar>

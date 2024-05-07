@@ -7,8 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { useState, useEffect } from "react";
+import { getCourseRequest, updateCourseRequest } from "../api/courses";
 export default function EditCourse() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -20,37 +20,36 @@ export default function EditCourse() {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`http://localhost:4000/courses/${id}`)
-      .then((response) => {
-        setTitle(response.data.title);
-        setPrice(response.data.price);
-        setImg(response.data.img);
+    async function getCourse() {
+      try {
+        const res = await getCourseRequest(id);
+        setTitle(res.data.title);
+        setPrice(res.data.price);
+        setImg(res.data.img);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         alert("Ocurrio un error, revice la consola");
-        console.log(error);
-      });
+        setLoading(false);
+      }
+    }
+    getCourse();
   }, [id]);
 
-  const handleEditCourse = () => {
+  const handleEditCourse = async () => {
     const data = {
       title,
-      price,
+      price: parseInt(price),
       img,
     };
     setLoading(true);
-    axios
-      .put(`http://localhost:4000/courses/${id}`, data)
-      .then(() => {
-        setLoading(false);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    try {
+      await updateCourseRequest(id, data);
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
   return (
     <Container maxWidth="md">

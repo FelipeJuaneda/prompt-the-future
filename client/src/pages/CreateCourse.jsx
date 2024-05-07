@@ -7,35 +7,32 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { createCourseRequest } from "../api/courses";
 
 const CreateCourse = () => {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [img, setImg] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
-  const handleSaveCourse = () => {
-    const data = {
-      title,
-      price,
-      img,
-    };
+  const handleSaveCourse = async (formData) => {
+    formData.price = parseFloat(formData.price);
     setLoading(true);
-    axios
-      .post("http://localhost:4000/courses", data)
-      .then(() => {
-        setLoading(false);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    try {
+      await createCourseRequest(formData);
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
+
   return (
     <Container maxWidth="md">
       <Box sx={{ mt: 5 }}>
@@ -43,36 +40,44 @@ const CreateCourse = () => {
           Crear un nuevo Curso
         </Typography>
         <Box sx={{ mt: 4 }}>
-          <Grid container spacing={3}>
+          <Grid
+            component={"form"}
+            container
+            spacing={3}
+            onSubmit={handleSubmit(handleSaveCourse)}
+          >
             <Grid item xs={12}>
               <TextField
                 fullWidth
                 label="Titulo"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                {...register("title", { required: true })}
                 variant="outlined"
                 placeholder="ingresa el titulo del curso"
+                error={!!errors.title}
+                helperText={errors.title ? "El titulo es requerido" : ""}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="precio"
+                {...register("price", { required: true })}
                 variant="outlined"
                 type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
                 placeholder="ingresa el precio del curso"
+                error={!!errors.price}
+                helperText={errors.price ? "El precio es requerido" : ""}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Imagen URL"
+                {...register("img", { required: true })}
                 variant="outlined"
-                value={img}
-                onChange={(e) => setImg(e.target.value)}
                 placeholder="ingresa la url de la imagen "
+                error={!!errors.img}
+                helperText={errors.img ? "La URL es requerida" : ""}
               />
             </Grid>
             <Grid item xs={12}>
@@ -85,7 +90,7 @@ const CreateCourse = () => {
                   variant="contained"
                   fullWidth
                   color="primary"
-                  onClick={handleSaveCourse}
+                  type="submit"
                 >
                   Crear Curso
                 </Button>
