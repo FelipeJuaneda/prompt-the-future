@@ -156,13 +156,10 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <Stack
-            direction={"row"}
-            alignItems={"center"}
-            gap={2}
-            sx={{ flexGrow: 0 }}
-          >
-            <Typography color={"secondary.main"}>Plataforma</Typography>
+          <Stack direction={"row"} alignItems={"center"} sx={{ flexGrow: 0 }}>
+            <Button sx={{ color: "secondary.main", textTransform: "none" }}>
+              Plataforma
+            </Button>
             <IconButton
               sx={{ color: "secondary.main" }}
               aria-label="plataforma"
