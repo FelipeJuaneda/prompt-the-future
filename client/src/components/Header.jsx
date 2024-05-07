@@ -1,57 +1,58 @@
-import AdbIcon from "@mui/icons-material/Adb";
+// import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 import {
   AppBar,
-  Avatar,
+  // Avatar,
   Box,
   Button,
   Container,
-  Divider,
+  // Divider,
   IconButton,
-  ListItemIcon,
+  // ListItemIcon,
   Menu,
   MenuItem,
   Stack,
   Toolbar,
-  Tooltip,
+  // Tooltip,
   Typography,
 } from "@mui/material";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+// import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const pages = [
   { page: "Cursos", to: "/" },
   { page: "Hackathons", to: "/" },
-  { page: "Blog", to: "/" },
+  { page: "Eventos", to: "/" },
+  { page: "Empresas", to: "/" },
 ];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-  const { isAuthenticated, user, logout } = useAuth();
+  // const [anchorElUser, setAnchorElUser] = useState(null);
+  // const { isAuthenticated, user, logout } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
 
   return (
-    <AppBar sx={{ backgroundColor: "#0d0d0d" }} position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+    <AppBar sx={{ backgroundColor: "primary.main" }} position="static">
+      <Container sx={{ height: "75px" }} maxWidth="xl">
+        <Toolbar sx={{ height: "100%" }} disableGutters>
           <Typography
             variant="h6"
             noWrap
@@ -60,14 +61,12 @@ function Header() {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
+              color: "secondary.main",
               textDecoration: "none",
             }}
           >
-            LOGO
+            PTF
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -111,32 +110,36 @@ function Header() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to={"/"}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
+              color: "secondary.main",
               textDecoration: "none",
             }}
           >
-            LOGO
+            PTF
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              gap: "45px",
+            }}
+          >
+            {pages.map((page, i) => (
               <Button
-                key={page.page}
+                key={i}
                 onClick={handleCloseNavMenu}
                 sx={{
-                  my: 2,
+                  paddingRight: 0,
                   color: "white",
                   display: "block",
                   textTransform: "none",
@@ -144,12 +147,30 @@ function Header() {
                 component={Link}
                 to={page.to}
               >
-                {page.page}
+                <Stack direction={"row"} alignItems={"center"}>
+                  {page.page}
+                  <ArrowDropDownIcon
+                    sx={{ color: "secondary.main", fontSize: 20 }}
+                  />
+                </Stack>
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
+            gap={2}
+            sx={{ flexGrow: 0 }}
+          >
+            <Typography color={"secondary.main"}>Plataforma</Typography>
+            <IconButton
+              sx={{ color: "secondary.main" }}
+              aria-label="plataforma"
+            >
+              <MenuIcon color="secondary.main" />
+            </IconButton>
+          </Stack>
+          {/* <Box sx={{ flexGrow: 0 }}>
             {isAuthenticated ? (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -233,7 +254,7 @@ function Header() {
                 </Box>
               )}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

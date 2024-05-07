@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import Landing from "./pages/Landing";
 import CreateCourse from "./pages/CreateCourse";
 import DeleteCourse from "./pages/DeleteCourse";
 import EditCourse from "./pages/EditCourse";
@@ -15,7 +15,7 @@ const App = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 

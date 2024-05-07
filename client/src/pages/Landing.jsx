@@ -15,7 +15,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getCoursesRequest } from "../api/courses";
 
-const Home = () => {
+const Landing = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -88,4 +88,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Landing;
