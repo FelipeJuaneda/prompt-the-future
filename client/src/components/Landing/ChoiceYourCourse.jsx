@@ -44,18 +44,26 @@ const ChoiceYourCourse = () => {
         </Typography>
       </Box>
 
-      <OnlineButton />
+      <Box sx={{ paddingLeft: 4 }}>
+        <OnlineButton />
+      </Box>
 
       <Box sx={{ py: "40px" }}>
         <Typography
           color={"secondary.main"}
           sx={{ fontWeight: "bold" }}
-          variant="h5"
+          variant="h4"
         >
           Nuestros cursos
         </Typography>
 
-        <Grid container spacing={4} justifyContent="center" alignItems="center">
+        <Grid
+          container
+          spacing={4}
+          padding={"70px 0"}
+          justifyContent="center"
+          alignItems="center"
+        >
           {courses.map((course, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <CourseCard />
