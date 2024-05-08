@@ -16,6 +16,8 @@ const CourseCard = () => {
         bgcolor: "secondary.main",
         borderRadius: "16px",
         boxShadow: 3,
+        position: "relative",
+        overflow: "visible",
       }}
     >
       <CardContent sx={{ padding: 3 }}>
@@ -57,7 +59,14 @@ const CourseCard = () => {
           >
             $40.000 ARS
           </Typography>
-          <Box sx={{ bgcolor: "#B670E0" }}>
+          <Box
+            sx={{
+              bgcolor: "#B670E0",
+              position: "absolute",
+              right: -15,
+              bottom: 90,
+            }}
+          >
             <Typography
               variant="button"
               color="#000000"
