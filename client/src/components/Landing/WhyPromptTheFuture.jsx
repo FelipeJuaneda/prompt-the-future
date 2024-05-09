@@ -7,6 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import fondoImg from "../../assets/imgs/whyPromptTheFuture.png";
+import certificateIcon from "../../assets/icons/certificateIcon.svg";
+import comunityIcon from "../../assets/icons/comunityIcon.svg";
+import rocketIcon from "../../assets/icons/rocketIcon.svg";
+import tecnologyIcon from "../../assets/icons/tecnologyIcon.svg";
 
 const WhyPromptTheFuture = () => {
   return (
@@ -19,22 +23,34 @@ const WhyPromptTheFuture = () => {
       >
         <Typography
           variant="h5"
-          sx={{ textAlign: "center", fontWeight: "bold" }}
-          color={"secondary.main"}
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "secondary.main",
+            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+          }}
         >
           Aprende
         </Typography>
         <Typography
           variant="h5"
-          sx={{ textAlign: "center", fontWeight: "bold" }}
-          color={"secondary.main"}
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "secondary.main",
+            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+          }}
         >
           Innova
         </Typography>
         <Typography
           variant="h5"
-          sx={{ textAlign: "center", fontWeight: "bold" }}
-          color={"secondary.main"}
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "secondary.main",
+            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+          }}
         >
           Transforma
         </Typography>
@@ -44,7 +60,6 @@ const WhyPromptTheFuture = () => {
         spacing={4}
         sx={{ alignItems: "center", minHeight: "500px" }}
       >
-        {/* Bloque de la izquierda */}
         <Grid item xs={12} md={6}>
           <Box
             sx={{
@@ -57,7 +72,7 @@ const WhyPromptTheFuture = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              minHeight: "400px",
+              minHeight: "376px",
               p: 4,
             }}
           >
@@ -79,19 +94,29 @@ const WhyPromptTheFuture = () => {
           </Box>
         </Grid>
 
-        {/* Bloque de la derecha con tarjetas */}
         <Grid item xs={12} md={6}>
           <Grid container spacing={2}>
             {[
-              { icon: "🚀", text: "Potencia tu carrera profesional" },
               {
-                icon: "🎓",
-                text: "Certifícate con empresas líderes de la Industria",
+                icon: rocketIcon,
+                title: "Potencia tu carrera profesional",
+                text: "Aprende a utilizar la IA para potenciar tu carrera y adaptarte a las nuvas tecnologias, manteniendote en la vanguardia del desarollo tecnologico",
               },
-              { icon: "👥", text: "Participa activamente de una comunidad." },
               {
-                icon: "🌐",
-                text: "Trabaja con las tecnologías mas nuevas y revolucionarias",
+                icon: certificateIcon,
+                title: "Certifícate con empresas líderes de la Industria",
+                text: "Nuestros certificados estan avalados por los mejores profesionales trabajando con IA y las empresas lideres de la industria",
+              },
+              {
+                icon: comunityIcon,
+                title: "Participa activamente de una comunidad.",
+                text: "Conviertete en parte de nuestra comunidad, aportando experiencias, recursos y participando de nuestras actividades para ganar experiencia practica",
+              },
+              {
+                icon: tecnologyIcon,
+                title:
+                  "Trabaja con las tecnologías mas nuevas y revolucionarias",
+                text: "Todos nuestros cursos y actividades estan constantemente actualizadas para utilizar las tecnologias mas novedosas.",
               },
             ].map((item, index) => (
               <Grid item xs={12} sm={6} md={6} key={index}>
@@ -100,20 +125,41 @@ const WhyPromptTheFuture = () => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-evenly",
                     bgcolor: "#454444",
                     borderRadius: 3,
                     height: 180,
-                    gap: 2,
                     p: 2,
+                    overflow: "hidden",
                   }}
                 >
-                  <Box sx={{ fontSize: 24 }}>{item.icon}</Box>
+                  <Stack
+                    width={"100%"}
+                    direction={"row"}
+                    justifyContent={"space-between"}
+                    gap={2}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: "bold",
+                        textAlign: "start",
+                        color: "white",
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Box
+                      component={"img"}
+                      src={item.icon}
+                      alt={item.title}
+                      sx={{ width: 25, height: 25 }}
+                    />
+                  </Stack>
                   <Typography
-                    variant="body1"
+                    variant="caption"
                     sx={{
-                      fontWeight: "bold",
-                      textAlign: "center",
+                      textAlign: "start",
                       color: "white",
                     }}
                   >
