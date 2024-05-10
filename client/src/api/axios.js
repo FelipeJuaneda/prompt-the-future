@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://prompt-the-future.vercel.app/api/",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
 });
 export default instance;

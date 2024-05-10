@@ -12,10 +12,21 @@ app.use(morgan("dev"));
 app.use(express.json());
 //For parsing cookies
 app.use(cookieParser());
-//Middleware for handling CORS POLICY
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://prompt-the-future-trok.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://prompt-the-future-trok.vercel.app",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
