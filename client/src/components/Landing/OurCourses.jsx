@@ -66,7 +66,7 @@ const OurCourses = () => {
         >
           {courses.map((course, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <CourseCard course={course} />
+              <CourseCard course={course} loading={loading} />
             </Grid>
           ))}
         </Grid>
