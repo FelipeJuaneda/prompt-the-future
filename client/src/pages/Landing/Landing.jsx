@@ -1,6 +1,6 @@
 import Header from "../../components/Landing/Header";
 import Title from "../../components/Landing/Title";
-import ChoiceYourCourse from "../../components/Landing/ChoiceYourCourse";
+import OurCourses from "../../components/Landing/OurCourses";
 import WhyPromptTheFuture from "../../components/Landing/WhyPromptTheFuture";
 import Hackathons from "../../components/Landing/Hackathons";
 import Footer from "../../components/Landing/Footer";
@@ -10,7 +10,7 @@ const Landing = () => {
     <>
       <Header />
       <Title />
-      <ChoiceYourCourse />
+      <OurCourses />
       <WhyPromptTheFuture />
       <Hackathons />
       <Footer />

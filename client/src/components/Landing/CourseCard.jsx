@@ -7,8 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CourseCard = () => {
+const CourseCard = ({ course }) => {
+  console.log(course);
   return (
     <Card
       sx={{
@@ -81,6 +83,8 @@ const CourseCard = () => {
           </Box>
         </Box>
         <Button
+          LinkComponent={Link}
+          to={`/courses/details/${course._id}`}
           sx={{
             textTransform: "none",
             variant: "contained",
@@ -90,7 +94,7 @@ const CourseCard = () => {
               bgcolor: "#7b1fa2",
             },
             borderRadius: 20,
-            width: "auto",
+            width: "max-content",
             py: 0.2,
             px: 3,
             mx: "auto",

@@ -5,7 +5,7 @@ import OnlineButton from "../../commons/OnlineButton";
 import CourseCard from "./CourseCard";
 import { getCoursesRequest } from "../../api/courses";
 
-const ChoiceYourCourse = () => {
+const OurCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -66,7 +66,7 @@ const ChoiceYourCourse = () => {
         >
           {courses.map((course, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <CourseCard />
+              <CourseCard course={course} />
             </Grid>
           ))}
         </Grid>
@@ -75,4 +75,4 @@ const ChoiceYourCourse = () => {
   );
 };
 
-export default ChoiceYourCourse;
+export default OurCourses;
