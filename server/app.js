@@ -15,7 +15,7 @@ app.use(cookieParser());
 //Middleware for handling CORS POLICY
 app.use(
   cors({
-    origin: "https://prompt-the-future-trok.vercel.app/",
+    origin: "https://prompt-the-future-trok.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
