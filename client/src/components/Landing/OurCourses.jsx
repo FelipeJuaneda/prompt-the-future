@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import OnlineButton from "../../commons/OnlineButton";
 import CourseCard from "./CourseCard";
 import { getCoursesRequest } from "../../api/courses";
@@ -8,6 +7,7 @@ import { getCoursesRequest } from "../../api/courses";
 const OurCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [skeletonCount, setSkeletonCount] = useState(2);
 
   useEffect(() => {
     const getCourses = async () => {
@@ -64,11 +64,17 @@ const OurCourses = () => {
           justifyContent="center"
           alignItems="center"
         >
-          {courses.map((course, index) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <CourseCard course={course} loading={loading} />
-            </Grid>
-          ))}
+          {loading
+            ? Array.from({ length: skeletonCount }).map((_, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <CourseCard loading={true} />
+                </Grid>
+              ))
+            : courses.map((course, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <CourseCard course={course} loading={false} />
+                </Grid>
+              ))}
         </Grid>
       </Box>
     </Container>
