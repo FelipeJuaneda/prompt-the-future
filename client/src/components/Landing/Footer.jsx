@@ -34,23 +34,26 @@ const Footer = () => {
             >
               Educacion
             </Typography>
-            <LinkRouter
+            <Link
               to={"/"}
+              component={LinkRouter}
+              underline="hover"
               style={{
-                textDecoration: "none",
                 color: "white",
                 display: "block",
                 marginBottom: "8px",
               }}
             >
               Curso Fundamentos Inteligencia Artificial
-            </LinkRouter>
-            <LinkRouter
+            </Link>
+            <Link
               to={"/"}
-              style={{ textDecoration: "none", color: "white" }}
+              component={LinkRouter}
+              underline="hover"
+              style={{ color: "white" }}
             >
               Curso Prompt Engineering
-            </LinkRouter>
+            </Link>
           </Grid>
           <Grid item xs={12} sm={3}>
             <Typography
@@ -60,23 +63,26 @@ const Footer = () => {
             >
               Nosotros
             </Typography>
-            <LinkRouter
+            <Link
               to={"/"}
+              component={LinkRouter}
+              underline="hover"
               style={{
-                textDecoration: "none",
                 color: "white",
                 display: "block",
                 marginBottom: "8px",
               }}
             >
               Equipo
-            </LinkRouter>
-            <LinkRouter
+            </Link>
+            <Link
               to={"/"}
-              style={{ textDecoration: "none", color: "white" }}
+              component={LinkRouter}
+              underline="hover"
+              style={{ color: "white" }}
             >
               Profesores y Tutores
-            </LinkRouter>
+            </Link>
           </Grid>
           <Grid item xs={12} sm={3}>
             <Typography
@@ -86,23 +92,26 @@ const Footer = () => {
             >
               Contacto
             </Typography>
-            <LinkRouter
+            <Link
               to={"/"}
+              component={LinkRouter}
+              underline="hover"
               style={{
-                textDecoration: "none",
                 color: "white",
                 display: "block",
                 marginBottom: "8px",
               }}
             >
               Email: info@example.com
-            </LinkRouter>
-            <LinkRouter
+            </Link>
+            <Link
               to={"/"}
-              style={{ textDecoration: "none", color: "white" }}
+              component={LinkRouter}
+              underline="hover"
+              style={{ color: "white" }}
             >
               Whatsapp: +1 234 567 890
-            </LinkRouter>
+            </Link>
           </Grid>
           <Grid item xs={12} sm={3}>
             <Typography
@@ -112,12 +121,14 @@ const Footer = () => {
             >
               Discord
             </Typography>
-            <LinkRouter
+            <Link
               to={"/"}
-              style={{ textDecoration: "none", color: "white" }}
+              component={LinkRouter}
+              underline="hover"
+              style={{ color: "white" }}
             >
               Únete a nuestro Discord!
-            </LinkRouter>
+            </Link>
           </Grid>
         </Grid>
         <Stack
@@ -126,30 +137,30 @@ const Footer = () => {
           gap={5}
           sx={{ pt: 5, pb: 2 }}
         >
-          <LinkRouter to={"/"}>
+          <Link to={"/"} component={LinkRouter} underline="hover">
             <Box
               component={"img"}
               src={linkedinIcon}
               alt=""
               sx={{ width: 30, height: 30, "&:hover": { opacity: 0.6 } }}
             />
-          </LinkRouter>
-          <LinkRouter to={"/"}>
+          </Link>
+          <Link to={"/"} component={LinkRouter} underline="hover">
             <Box
               component={"img"}
               src={instagramIcon}
               alt=""
               sx={{ width: 30, height: 30, "&:hover": { opacity: 0.6 } }}
             />
-          </LinkRouter>
-          <LinkRouter to={"/"}>
+          </Link>
+          <Link to={"/"} component={LinkRouter} underline="hover">
             <Box
               component={"img"}
               src={arrobaIcon}
               alt=""
               sx={{ width: 30, height: 30, "&:hover": { opacity: 0.6 } }}
             />
-          </LinkRouter>
+          </Link>
         </Stack>
         <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
         <Box sx={{ textAlign: "center", pt: 3 }}>
