@@ -10,6 +10,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
+  const formatPrice = (price) => {
+    return price.toLocaleString("es-AR");
+  };
+
   console.log(course);
   return (
     <Card
@@ -28,7 +32,7 @@ const CourseCard = ({ course }) => {
     >
       <CardContent sx={{ padding: 3, flexGrow: 1 }}>
         <Typography variant="subtitle2" color="text.secondary">
-          Nivel principiante
+          Nivel {course.level}
         </Typography>
         <Typography
           variant="h6"
@@ -48,6 +52,8 @@ const CourseCard = ({ course }) => {
           sx={{
             mt: 1.5,
             fontWeight: "bold",
+            alignContent: "center",
+            minHeight: 81,
             maxHeight: 90,
             overflow: "hidden",
             display: "-webkit-box",
@@ -56,12 +62,11 @@ const CourseCard = ({ course }) => {
             textOverflow: "ellipsis",
           }}
         >
-          Aprende las bases de la inteligencia Artificial y cómo aplicarla en tu
-          vida profesional.
+          {course.overview}
         </Typography>
         <Divider sx={{ my: 1.5 }} />
         <Typography variant="body2" sx={{ fontSize: 14 }}>
-          6 Semanas / 1 Clase semanal de 2h
+          {course.duration}
         </Typography>
       </CardContent>
       <Box
@@ -74,7 +79,7 @@ const CourseCard = ({ course }) => {
         }}
       >
         <Typography variant="body1" component="div" sx={{ fontWeight: "bold" }}>
-          $40.000 ARS
+          ${formatPrice(course.price)} ARS
         </Typography>
         <Box
           sx={{
@@ -93,7 +98,7 @@ const CourseCard = ({ course }) => {
               padding: "0px 10px 0px 35px",
             }}
           >
-            20%
+            {course.discount}%
           </Typography>
         </Box>
       </Box>
@@ -113,7 +118,7 @@ const CourseCard = ({ course }) => {
           py: 0.2,
           px: 3,
           mx: "auto",
-          mb: 2, // Margen abajo para asegurar la posición constante del botón
+          mb: 2,
           display: "block",
         }}
       >

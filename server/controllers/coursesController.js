@@ -32,23 +32,34 @@ export const getCourseById = async (request, response) => {
 //Crear curso
 export const createCourse = async (request, response) => {
   try {
-    if (!request.body.title || !request.body.price || !request.body.img) {
-      return response.status.send({
-        message: "Enviar todos los campos requeridos: title, price, img ",
-      });
+    const requiredFields = [
+      "title",
+      "price",
+      "img",
+      "overview",
+      "description",
+      "duration",
+      "level",
+      "program",
+      "introduction",
+      "requirements",
+      "certification",
+      "finalProject",
+    ];
+    for (const field of requiredFields) {
+      if (!request.body[field]) {
+        return response.status(400).json({
+          message: `Falta campo requerido: ${field}`,
+        });
+      }
     }
 
-    const newCourse = {
-      title: request.body.title,
-      price: request.body.price,
-      img: request.body.img,
-    };
-
-    const course = await Course.create(newCourse);
-    return response.status(201).send(course);
+    const newCourse = new Course(request.body);
+    const course = await newCourse.save();
+    return response.status(201).json(course);
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };
 
@@ -56,10 +67,26 @@ export const createCourse = async (request, response) => {
 export const updateCourse = async (request, response) => {
   try {
     const { id } = request.params;
-    if (!request.body.title || !request.body.price || !request.body.img) {
-      return response.status.send({
-        message: "Enviar todos los campos requeridos: title, price, img ",
-      });
+    const requiredFields = [
+      "title",
+      "price",
+      "img",
+      "overview",
+      "description",
+      "duration",
+      "level",
+      "program",
+      "introduction",
+      "requirements",
+      "certification",
+      "finalProject",
+    ];
+    for (const field of requiredFields) {
+      if (!request.body[field]) {
+        return response.status(400).json({
+          message: `Falta campo requerido: ${field}`,
+        });
+      }
     }
 
     const result = await Course.findByIdAndUpdate(id, request.body);

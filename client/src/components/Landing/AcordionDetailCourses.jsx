@@ -42,7 +42,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-function AcordionDetailCourses() {
+function AcordionDetailCourses({ courseDetail }) {
   const [expanded, setExpanded] = useState(null);
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -59,12 +59,7 @@ function AcordionDetailCourses() {
           <Typography sx={{ fontWeight: "bold" }}>Introducción</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Typography>{courseDetail.introduction}</Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -75,12 +70,7 @@ function AcordionDetailCourses() {
           <Typography sx={{ fontWeight: "bold" }}>Requisitos</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Typography>{courseDetail.requirements}</Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -91,12 +81,7 @@ function AcordionDetailCourses() {
           <Typography sx={{ fontWeight: "bold" }}>Certificacion</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Typography>{courseDetail.certification}</Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -107,12 +92,7 @@ function AcordionDetailCourses() {
           <Typography sx={{ fontWeight: "bold" }}>Proyecto Final</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Typography>{courseDetail.finalProject}</Typography>
         </AccordionDetails>
       </Accordion>
     </Box>

@@ -74,16 +74,7 @@ function CourseDetail() {
               variant="caption"
               sx={{ mb: 1, color: "secondary.main" }}
             >
-              Una introducción comprensiva a los principios básicos y las
-              tecnologías subyacentes que definen el campo de la IA. Los
-              estudiantes aprenderán sobre algoritmos de aprendizaje automático,
-              procesamiento de lenguaje natural, visión por computadora, y
-              robótica. Además, el curso abordará las implicaciones éticas y
-              sociales de la IA, preparando a los estudiantes para aplicar
-              responsablemente la tecnología en diversas industrias. Ideal para
-              principiantes y profesionales que buscan entender cómo la
-              inteligencia artificial puede ser implementada en su practica
-              profesional para resolver problemas reales.
+              {courseDetail.description}
             </Typography>
           </Box>
           <Stack
@@ -103,7 +94,8 @@ function CourseDetail() {
               >
                 Informacion sobre el curso
               </Typography>
-              <AcordionDetailCourses />
+
+              <AcordionDetailCourses courseDetail={courseDetail} />
             </Box>
             <Stack
               direction={"column"}
@@ -112,6 +104,9 @@ function CourseDetail() {
               gap={{ xs: 3 }}
             >
               <Button
+                component="a"
+                href={courseDetail.program}
+                download
                 variant="contained"
                 endIcon={<FileDownloadOutlinedIcon />}
                 sx={{
