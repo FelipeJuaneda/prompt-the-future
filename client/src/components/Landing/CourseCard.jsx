@@ -15,7 +15,7 @@ const CourseCard = ({ course, loading }) => {
     return price.toLocaleString("es-AR");
   };
 
-  console.log(course);
+  console.log(loading);
   return (
     <Card
       sx={{

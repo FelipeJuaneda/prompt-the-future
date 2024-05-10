@@ -7,19 +7,19 @@ import { getCoursesRequest } from "../../api/courses";
 
 const OurCourses = () => {
   const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    async function getCourses() {
+    const getCourses = async () => {
       try {
-        const res = await getCoursesRequest();
-        setCourses(res.data.data);
-        setLoading(false);
+        const response = await getCoursesRequest();
+        setCourses(response.data.data);
       } catch (error) {
+        console.error("Error al cargar los cursos:", error);
+      } finally {
         setLoading(false);
       }
-    }
+    };
     getCourses();
   }, []);
 
