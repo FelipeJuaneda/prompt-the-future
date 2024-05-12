@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { Link as LinkRouter, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function Register() {
   const {
@@ -37,8 +38,14 @@ export default function Register() {
       }
     }
   }, [isAuthenticated, redirectAfterLogin, navigate]);
-  const handlerOnSubmit = handleSubmit(async (values) => {
-    signup(values);
+
+  const handlerOnSubmit = handleSubmit(async (values, event) => {
+    event.preventDefault();
+    toast.promise(signup(values), {
+      loading: "Registrando...",
+      success: "Registrado/a con éxito",
+      error: "Error al registrarse",
+    });
   });
 
   return (

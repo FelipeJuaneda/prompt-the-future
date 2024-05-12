@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function Login() {
   const {
@@ -39,8 +40,13 @@ export default function Login() {
     }
   }, [isAuthenticated, redirectAfterLogin, navigate]);
 
-  const handlerOnSubmit = handleSubmit(async (values) => {
-    signin(values);
+  const handlerOnSubmit = handleSubmit(async (values, event) => {
+    event.preventDefault();
+    toast.promise(signin(values), {
+      loading: "Iniciando sesión...",
+      success: "¡Sesión iniciada!",
+      error: "Error al iniciar sesión",
+    });
   });
 
   return (

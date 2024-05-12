@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [redirectAfterLogin, setRedirectAfterLogin] = useState("");
-  console.log("🚀 ~ AuthProvider ~ redirectAfterLogin:", redirectAfterLogin);
 
   const signup = async (user) => {
     try {
@@ -42,6 +41,7 @@ export const AuthProvider = ({ children }) => {
       setErrors([error.response.data.message]);
     }
   };
+
   const logout = () => {
     Cookies.remove("token");
     setIsAuthenticated(false);
