@@ -15,7 +15,6 @@ export const createOrder = async (req, res) => {
   try {
     const body = {
       items: [
-        // Define los ítems que se pagarán
         {
           id: course.id, // Identificador del ítem
           title: course.title, // Título del curso
@@ -23,28 +22,40 @@ export const createOrder = async (req, res) => {
           quantity: 1, // Cantidad, en este caso es 1 porque es un curso
           currency_id: "ARS", // Moneda en la que se realiza el cobro
           unit_price: course.price, // Precio unitario del curso
+          category_id: "Educación",
         },
       ],
       payer: {
-        // Información del pagador
-        name: "Test", // Nombre del pagador
-        surname: "User", // Apellido del pagador
-        email: "test_user@example.com", // Email del pagador
+        name: "Test",
+        surname: "User",
+        email: "your_test_email@example.com",
       },
       back_urls: {
-        // URLs de redirección después del pago
-        success: `${API_BASE_URL}/payment/success`, // URL de éxito
-        failure: `${API_BASE_URL}/payment/failure`, // URL de fracaso
-        pending: `${API_BASE_URL}/payment/pending`, // URL de pendiente
+        success: `${API_BASE_URL}/payment/success`,
+        failure: `${API_BASE_URL}/payment/failure`,
+        pending: `${API_BASE_URL}/payment/pending`,
       },
+
       auto_return: "approved", // Automáticamente redirige al éxito si el pago fue aprobado
-      notification_url:
-        "https://b4ea-201-231-72-208.ngrok-free.app/api/payment/webhook", // URL para recibir notificaciones de webhook
+      binary_mode: true,
       external_reference: "Order1234ABC", // Referencia externa para identificar el pago
-      statement_descriptor: "My Online Course Platform", // Descripción que aparecerá en el estado de cuenta del cliente
-      additional_info:
-        "Contiene 12 horas de contenido en video, quizzes y certificación.", // Información adicional sobre el pago
-      binary_mode: true, // Modo binario para procesar el pago inmediatamente
+      notification_url:
+        "https://b4ea-201-231-72-208.ngrok-free.app/api/payment/webhook",
+      operation_type: "regular_payment",
+      payment_methods: {
+        default_payment_method_id: "master",
+        excluded_payment_types: [
+          {
+            id: "ticket",
+            id: "atm",
+          },
+        ],
+
+        installments: 12,
+        default_installments: 1,
+      },
+      additional_info: course.overview, // Información adicional sobre el pago
+      statement_descriptor: `Pago Curso: ${course.title}`, // Descripción que aparecerá en el estado de cuenta del cliente,
     };
     const response = await preference.create({ body });
     console.log(response);

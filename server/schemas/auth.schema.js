@@ -1,9 +1,20 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-  username: z.string({
-    required_error: "El nombre de usuario es obligatorio",
-  }),
+  name: z
+    .string({
+      required_error: "El nombre es obligatorio",
+    })
+    .min(1, {
+      message: "El nombre no puede estar vacío",
+    }),
+  surname: z
+    .string({
+      required_error: "El apellido es obligatorio",
+    })
+    .min(1, {
+      message: "El apellido no puede estar vacío",
+    }),
   email: z
     .string({
       required_error: "El correo electrónico es obligatorio",

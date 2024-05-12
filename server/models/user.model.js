@@ -2,7 +2,12 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    username: {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    surname: {
       type: String,
       required: true,
       trim: true,
@@ -20,4 +25,5 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 export default mongoose.model("User", userSchema);

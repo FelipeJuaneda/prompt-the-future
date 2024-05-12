@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { Link as LinkRouter, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
 export default function Register() {
   const {
     register,
@@ -18,10 +19,10 @@ export default function Register() {
     formState: { errors },
   } = useForm();
   const { signup, isAuthenticated, errors: registerErrors } = useAuth();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigation("/");
+    if (isAuthenticated) navigate("/");
   }, [isAuthenticated]);
 
   const handlerOnSubmit = handleSubmit(async (values) => {
@@ -55,11 +56,25 @@ export default function Register() {
             label="Nombre"
             variant="outlined"
             fullWidth
-            {...register("username", { required: true })}
+            {...register("name", { required: true })}
           />
-          {errors.username && (
+          {errors.name && (
             <Alert variant="outlined" severity="warning">
               El nombre es requerido
+            </Alert>
+          )}
+        </Stack>
+        <Stack spacing={2}>
+          <TextField
+            id="surname"
+            label="Apellido"
+            variant="outlined"
+            fullWidth
+            {...register("surname", { required: true })}
+          />
+          {errors.surname && (
+            <Alert variant="outlined" severity="warning">
+              El apellido es requerido
             </Alert>
           )}
         </Stack>

@@ -94,6 +94,26 @@ const CourseCard = ({ course, loading }) => {
             >
               ${formatPrice(course.price)} ARS
             </Typography>
+            <Box
+              sx={{
+                bgcolor: "#B670E0",
+                position: "absolute",
+                right: -15,
+                bottom: 90,
+              }}
+            >
+              <Typography
+                variant="button"
+                color="#000000"
+                sx={{
+                  fontSize: "0.875rem",
+                  fontWeight: "bold",
+                  padding: "0px 10px 0px 35px",
+                }}
+              >
+                {course.discount}%
+              </Typography>
+            </Box>
           </Box>
           <Button
             LinkComponent={Link}
