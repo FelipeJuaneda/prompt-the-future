@@ -1,5 +1,5 @@
 import { MercadoPagoConfig, Payment, Preference } from "mercadopago";
-import { BASE_URL, MERCADOPAGO_API_KEY } from "../config.js";
+import { API_BASE_URL, BASE_URL, MERCADOPAGO_API_KEY } from "../config.js";
 
 // Inicializa el objeto cliente
 const client = new MercadoPagoConfig({
@@ -33,9 +33,9 @@ export const createOrder = async (req, res) => {
       },
       back_urls: {
         // URLs de redirección después del pago
-        success: "http://localhost:4000/api/payment/success", // URL de éxito
-        failure: "http://localhost:4000/api/payment/failure", // URL de fracaso
-        pending: "http://localhost:4000/api/payment/pending", // URL de pendiente
+        success: `${API_BASE_URL}/payment/success`, // URL de éxito
+        failure: `${API_BASE_URL}/payment/failure`, // URL de fracaso
+        pending: `${API_BASE_URL}/payment/pending`, // URL de pendiente
       },
       auto_return: "approved", // Automáticamente redirige al éxito si el pago fue aprobado
       notification_url:

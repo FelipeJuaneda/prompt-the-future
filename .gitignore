@@ -11,6 +11,7 @@ yarn.lock
 # Archivos de entorno
 .env
 .env.production
+.env.development
 
 # Archivos de logs
 logs/

@@ -7,6 +7,7 @@ dotenv.config({ path: envFile });
 
 export const PORT = process.env.PORT || 4000;
 export const BASE_URL = process.env.BASE_URL;
+export const API_BASE_URL = process.env.API_BASE_URL;
 export const mongoDBURL = process.env.MONGODB_URL;
 export const TOKEN_SECRET = process.env.TOKEN_SECRET;
 export const MERCADOPAGO_API_KEY = process.env.MERCADOPAGO_TOKEN;
