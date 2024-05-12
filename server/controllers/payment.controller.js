@@ -1,5 +1,5 @@
 import { MercadoPagoConfig, Payment, Preference } from "mercadopago";
-import { MERCADOPAGO_API_KEY } from "../config.js";
+import { BASE_URL, MERCADOPAGO_API_KEY } from "../config.js";
 
 // Inicializa el objeto cliente
 const client = new MercadoPagoConfig({
@@ -87,11 +87,13 @@ export const receiveWebHook = async (req, res) => {
 };
 
 export const onSuccess = (req, res) => {
-  res.redirect("http://localhost:5173/success-page");
+  //transofrm a backsticks
+
+  res.redirect(`${BASE_URL}/success-page`);
 };
 export const onFailure = (req, res) => {
-  res.redirect("http://localhost:5173/failure-page");
+  res.redirect(`${BASE_URL}/failure-page`);
 };
 export const onPending = (req, res) => {
-  res.redirect("http://localhost:5173/pending-page");
+  res.redirect(`${BASE_URL}/pending-page`);
 };
