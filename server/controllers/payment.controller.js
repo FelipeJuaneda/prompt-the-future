@@ -8,8 +8,9 @@ const client = new MercadoPagoConfig({
 
 // Controlador para crear un pedido de pago
 export const createOrder = async (req, res) => {
-  const { course } = req.body;
+  const { course, user } = req.body;
   console.log("🚀 ~ createOrder ~ course:", course);
+  console.log("🚀 ~ createOrder ~ user:", user);
   // Inicializa el objeto API que deseas usar
   const preference = new Preference(client);
   try {
@@ -26,9 +27,9 @@ export const createOrder = async (req, res) => {
         },
       ],
       payer: {
-        name: "Test",
-        surname: "User",
-        email: "your_test_email@example.com",
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
       },
       back_urls: {
         success: `${API_BASE_URL}/payment/success`,

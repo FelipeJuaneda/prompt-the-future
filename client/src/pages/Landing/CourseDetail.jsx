@@ -1,6 +1,6 @@
 import { Typography, Button, Box, Container, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../commons/Spinner";
 import robotImg from "../../assets/imgs/robot.png";
 import { getCourseRequest } from "../../api/courses";
@@ -9,15 +9,15 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import AcordionDetailCourses from "../../components/Landing/AcordionDetailCourses";
 import { createPaymentForCourse } from "../../api/payment";
 import { useAuth } from "../../context/AuthContext";
-import { redirect } from "react-router-dom";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
-
+  const { user, isAuthenticated, setRedirectAfterLogin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
-  console.log("🚀 ~ CourseDetail ~ courseDetail:", courseDetail);
+
   useEffect(() => {
     setLoading(true);
     async function getCourse() {
@@ -34,6 +34,11 @@ function CourseDetail() {
   }, [id]);
 
   const handleBuyCourse = async () => {
+    if (!isAuthenticated) {
+      setRedirectAfterLogin(location.pathname);
+      navigate("/login");
+      return;
+    }
     try {
       setLoading(true);
       const courseDetailPayment = {
@@ -42,7 +47,7 @@ function CourseDetail() {
         overview: courseDetail.overview,
         price: courseDetail.price,
       };
-      const response = await createPaymentForCourse(courseDetailPayment);
+      const response = await createPaymentForCourse(courseDetailPayment, user);
       setLoading(false);
       if (response.data.init_point) {
         window.location.href = response.data.init_point;
@@ -173,9 +178,7 @@ function CourseDetail() {
                         boxShadow: 3,
                       }}
                     >
-                      <Typography
-                        sx={{ color: "text.primary", flexGrow: 1 }}
-                      ></Typography>
+                      <Box sx={{ color: "text.primary", flexGrow: 1 }}></Box>
                       <Button
                         variant="contained"
                         sx={{

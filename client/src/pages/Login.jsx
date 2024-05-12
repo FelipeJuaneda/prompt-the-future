@@ -19,11 +19,25 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signin, isAuthenticated, errors: loginErrors } = useAuth();
-  const navigation = useNavigate();
+  const {
+    signin,
+    isAuthenticated,
+    errors: loginErrors,
+    redirectAfterLogin,
+    setRedirectAfterLogin,
+  } = useAuth();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (isAuthenticated) navigation("/");
-  }, [isAuthenticated]);
+    if (isAuthenticated) {
+      if (redirectAfterLogin) {
+        navigate(redirectAfterLogin);
+        setRedirectAfterLogin("");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [isAuthenticated, redirectAfterLogin, navigate]);
 
   const handlerOnSubmit = handleSubmit(async (values) => {
     signin(values);

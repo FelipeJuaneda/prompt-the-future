@@ -18,13 +18,25 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
+  const {
+    signup,
+    isAuthenticated,
+    errors: registerErrors,
+    redirectAfterLogin,
+    setRedirectAfterLogin,
+  } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/");
-  }, [isAuthenticated]);
-
+    if (isAuthenticated) {
+      if (redirectAfterLogin) {
+        navigate(redirectAfterLogin);
+        setRedirectAfterLogin("");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [isAuthenticated, redirectAfterLogin, navigate]);
   const handlerOnSubmit = handleSubmit(async (values) => {
     signup(values);
   });

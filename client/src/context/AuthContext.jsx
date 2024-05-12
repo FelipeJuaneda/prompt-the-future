@@ -17,6 +17,9 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [redirectAfterLogin, setRedirectAfterLogin] = useState("");
+  console.log("🚀 ~ AuthProvider ~ redirectAfterLogin:", redirectAfterLogin);
+
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
@@ -91,6 +94,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         errors,
         loading,
+        setRedirectAfterLogin,
+        redirectAfterLogin,
       }}
     >
       {children}
