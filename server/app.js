@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.routes.js";
 import coursesRoute from "./routes/courses.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
+import { BASE_URL } from "./config.js";
 
 const app = express();
 app.use(morgan("dev"));
@@ -13,27 +15,17 @@ app.use(express.json());
 //For parsing cookies
 app.use(cookieParser());
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://prompt-the-future-trok.vercel.app",
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: BASE_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
   })
 );
 
-app.use("/api/courses", coursesRoute);
 app.use("/api/auth", authRoutes);
+app.use("/api/courses", coursesRoute);
+app.use("/api/payment", paymentRoutes);
 
 export default app;

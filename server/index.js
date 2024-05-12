@@ -1,5 +1,4 @@
 import app from "./app.js";
-import express from "express";
 import { PORT } from "./config.js";
 import { connectDB } from "./db.js";
 

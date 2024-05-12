@@ -7,10 +7,15 @@ import { getCourseRequest } from "../../api/courses";
 import OnlineButton from "../../commons/OnlineButton";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import AcordionDetailCourses from "../../components/Landing/AcordionDetailCourses";
+import { createPaymentForCourse } from "../../api/payment";
+import { useAuth } from "../../context/AuthContext";
+import { redirect } from "react-router-dom";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
+
   const { id } = useParams();
   console.log("🚀 ~ CourseDetail ~ courseDetail:", courseDetail);
   useEffect(() => {
@@ -28,6 +33,27 @@ function CourseDetail() {
     getCourse();
   }, [id]);
 
+  const handleBuyCourse = async () => {
+    try {
+      setLoading(true);
+      const courseDetailPayment = {
+        id: courseDetail._id,
+        title: courseDetail.title,
+        overview: courseDetail.overview,
+        price: courseDetail.price,
+      };
+      const response = await createPaymentForCourse(courseDetailPayment);
+      setLoading(false);
+      if (response.data.init_point) {
+        window.location.href = response.data.init_point;
+      } else {
+        console.error("No se pudo iniciar el proceso de pago");
+      }
+    } catch (error) {
+      console.error("Error al comprar el curso:", error);
+      setLoading(false);
+    }
+  };
   return (
     <>
       {loading ? (
@@ -171,6 +197,13 @@ function CourseDetail() {
               </Box>
             </Stack>
           </Stack>
+          <Button
+            sx={{ backgroundColor: "green", "&:hover": { bgcolor: "#098609" } }}
+            variant="outlined"
+            onClick={handleBuyCourse}
+          >
+            Comprar curso
+          </Button>
         </Container>
       )}
     </>
