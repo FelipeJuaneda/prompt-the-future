@@ -9,7 +9,7 @@ npm-shrinkwrap.json
 yarn.lock
 
 # Archivos de entorno
-.env
+.env*
 .env.production
 .env.development
 
