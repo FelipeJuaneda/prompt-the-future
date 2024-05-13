@@ -157,7 +157,11 @@ function Header() {
             ))}
           </Box>
           <Stack direction={"row"} alignItems={"center"} sx={{ flexGrow: 0 }}>
-            <Button sx={{ color: "secondary.main", textTransform: "none" }}>
+            <Button
+              component={Link}
+              to={"/platform"}
+              sx={{ color: "secondary.main", textTransform: "none" }}
+            >
               Plataforma
             </Button>
             <IconButton

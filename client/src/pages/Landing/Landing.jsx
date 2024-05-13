@@ -8,12 +8,10 @@ import Footer from "../../components/Landing/Footer";
 const Landing = () => {
   return (
     <>
-      <Header />
       <Title />
       <OurCourses />
       <WhyPromptTheFuture />
       <Hackathons />
-      <Footer />
     </>
   );
 };
