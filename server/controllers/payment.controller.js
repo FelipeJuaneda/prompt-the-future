@@ -1,6 +1,6 @@
 import { MercadoPagoConfig, Payment, Preference } from "mercadopago";
 import { API_BASE_URL, BASE_URL, MERCADOPAGO_API_KEY } from "../config.js";
-
+import { User } from "../models/user.model.js";
 // Inicializa el objeto cliente
 const client = new MercadoPagoConfig({
   accessToken: MERCADOPAGO_API_KEY,
@@ -8,12 +8,19 @@ const client = new MercadoPagoConfig({
 
 // Controlador para crear un pedido de pago
 export const createOrder = async (req, res) => {
-  const { course, user } = req.body;
-  console.log("🚀 ~ createOrder ~ course:", course);
-  console.log("🚀 ~ createOrder ~ user:", user);
-  // Inicializa el objeto API que deseas usar
   const preference = new Preference(client);
+  const { course, user } = req.body;
+  const externalReference = `${user.id}:${course.id}`;
+  console.log("🚀 ~ User ID:", user.id);
+  console.log("🚀 ~ Course ID:", course.id);
+  // Inicializa el objeto API que deseas usar
   try {
+    // Primero verificar si el usuario ya posee el curso
+    const existingUser = await User.findById(user.id);
+    if (existingUser.courses.includes(course.id)) {
+      // Si el usuario ya tiene el curso, devolver mensaje de error
+      return res.status(400).json({ message: "Ya posees este curso." });
+    }
     const body = {
       items: [
         {
@@ -39,7 +46,7 @@ export const createOrder = async (req, res) => {
 
       auto_return: "approved", // Automáticamente redirige al éxito si el pago fue aprobado
       binary_mode: true,
-      external_reference: "Order1234ABC", // Referencia externa para identificar el pago
+      external_reference: externalReference, // Referencia externa para identificar el pago
       notification_url:
         "https://b4ea-201-231-72-208.ngrok-free.app/api/payment/webhook",
       operation_type: "regular_payment",
@@ -98,11 +105,37 @@ export const receiveWebHook = async (req, res) => {
   }
 };
 
-export const onSuccess = (req, res) => {
-  //transofrm a backsticks
+export const onSuccess = async (req, res) => {
+  const externalReference = req.query.external_reference;
+  const [userId, courseId] = externalReference.split(":");
+  console.log("🚀 ~ onSuccess ~ userId", userId);
+  console.log("🚀 ~ onSuccess ~ courseId", courseId);
 
-  res.redirect(`${BASE_URL}/success-page`);
+  try {
+    // Buscar el usuario para verificar si ya tiene el curso
+    const user = await User.findById(userId);
+    if (user.courses.includes(courseId)) {
+      console.log("El usuario ya tiene este curso");
+    } else {
+      // Actualizar el usuario solo si no tiene el curso
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $addToSet: { courses: courseId } }, // $addToSet solo agrega si el curso no está ya presente
+        { new: true }
+      );
+      console.log("Curso agregado con éxito", updatedUser);
+    }
+
+    res.redirect(`${BASE_URL}/success-page?courseId=${courseId}`);
+  } catch (error) {
+    console.error("Error al actualizar los cursos del usuario:", error);
+    res.status(500).json({
+      message: "Error al procesar la compra del curso",
+      error: error.message,
+    });
+  }
 };
+
 export const onFailure = (req, res) => {
   res.redirect(`${BASE_URL}/failure-page`);
 };

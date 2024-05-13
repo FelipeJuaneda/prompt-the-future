@@ -1,4 +1,4 @@
-import { Course } from "../models/courseModel.js";
+import { Course } from "../models/course.model.js";
 
 //Traer todos los cursos
 export const getAllCourses = async (request, response) => {

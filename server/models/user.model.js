@@ -22,8 +22,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }], // Array de IDs de cursos
   },
   { timestamps: true }
 );
 
-export default mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);

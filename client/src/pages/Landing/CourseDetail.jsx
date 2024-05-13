@@ -9,6 +9,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import AcordionDetailCourses from "../../components/Landing/AcordionDetailCourses";
 import { createPaymentForCourse } from "../../api/payment";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "sonner";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
@@ -57,6 +58,7 @@ function CourseDetail() {
     } catch (error) {
       console.error("Error al comprar el curso:", error);
       setLoading(false);
+      toast.error(`Error al procesar la compra: ${error}`);
     }
   };
   return (
