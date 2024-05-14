@@ -10,14 +10,15 @@ import Profile from "./pages/Profile";
 import ProtectedRoute from "./ProtectedRoute";
 import Platform from "./pages/Platform/Platform";
 import CourseContentPage from "./pages/Platform/CourseContentPage";
-import PlatformLayout from "./layouts/ProtectedLayout";
+import PlatformLayout from "./layouts/PlatformLayout";
 import PublicLayout from "./layouts/LandingLayout";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
     <Routes>
-      <Route element={<PublicLayout />}>
-        <Route path="/" element={<Landing />} />
+      <Route path="/" element={<PublicLayout />}>
+        <Route index element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/courses/details/:id" element={<CourseDetail />} />
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/courses/delete/:id" element={<DeleteCourse />} /> 
         </Route> */}
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

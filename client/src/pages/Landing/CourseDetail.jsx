@@ -58,7 +58,7 @@ function CourseDetail() {
     } catch (error) {
       console.error("Error al comprar el curso:", error);
       setLoading(false);
-      toast.error(`Error al procesar la compra: ${error}`);
+      toast.error(error.response.data.message);
     }
   };
   return (
