@@ -12,7 +12,6 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "El correo ya está en uso" });
 
     const passwordHash = await bcrypt.hash(password, 10);
-
     const newUser = new User({
       email,
       password: passwordHash,
@@ -22,14 +21,18 @@ export const register = async (req, res) => {
 
     const userSaved = await newUser.save();
     const token = await createAccessToken({ id: userSaved._id });
-    res.cookie("token", token);
-    res.json({
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+      maxAge: 86400000,
+    });
+    res.status(201).json({
       id: userSaved._id,
       name: userSaved.name,
       surname: userSaved.surname,
       email: userSaved.email,
-      createdAt: userSaved.createdAt,
-      updatedAt: userSaved.updatedAt,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -42,19 +45,23 @@ export const login = async (req, res) => {
     const userFound = await User.findOne({ email });
     if (!userFound)
       return res.status(400).json({ message: "Usuario no encontrado" });
+
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch)
       return res.status(400).json({ message: "Contraseña incorrecta" });
 
     const token = await createAccessToken({ id: userFound._id });
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+      maxAge: 86400000,
+    });
     res.json({
       id: userFound._id,
       name: userFound.name,
       surname: userFound.surname,
       email: userFound.email,
-      createdAt: userFound.createdAt,
-      updatedAt: userFound.updatedAt,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

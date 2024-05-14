@@ -53,6 +53,7 @@ function CourseDetail() {
       if (response.data.init_point) {
         window.location.href = response.data.init_point;
       } else {
+        toast.error("No se pudo iniciar el proceso de pago");
         console.error("No se pudo iniciar el proceso de pago");
       }
     } catch (error) {
