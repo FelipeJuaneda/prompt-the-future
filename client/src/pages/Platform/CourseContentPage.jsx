@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -10,115 +12,85 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import QuizIcon from "@mui/icons-material/Quiz";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { getContentsRequest } from "../../api/content";
+import { toast } from "sonner";
+import Spinner from "../../commons/Spinner";
 
 function CourseContentPage() {
   const { courseId } = useParams();
   const [content, setContent] = useState(null);
-  console.log("🚀 ~ CourseContentPage ~ content:", content);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchContent = async () => {
+      setLoading(true);
       try {
         const response = await getContentsRequest(courseId);
         setContent(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching course content:", error);
-        setError("Failed to fetch course content");
+        toast.error(error.response.data.message, { duration: 4000 });
+        navigate("/");
+        setLoading(false);
       }
     };
 
     fetchContent();
-  }, [courseId]);
+  }, [courseId, navigate]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (loading) return <Spinner />;
 
-  if (!content) {
-    return <div>Loading...</div>;
-  }
+  if (!content)
+    return <Typography variant="h6">No hay contenido disponible</Typography>;
+
+  const renderAccordion = (items, Icon, label, isQuiz = false) => (
+    <Accordion sx={{ bgcolor: "background.paper", mb: 2 }}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls={`panel-${label}-content`}
+        id={`panel-${label}-header`}
+      >
+        <Typography>
+          {label} <Icon />
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails sx={{ flexDirection: "column" }}>
+        {items.map((item) => (
+          <Box key={item._id} sx={{ mb: 2 }}>
+            {isQuiz ? (
+              <>
+                <Typography variant="subtitle1">{item.title}</Typography>
+                <Button variant="contained" color="secondary">
+                  Comenzar Cuestionario
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                href={item.url}
+                target="_blank"
+                sx={{ mb: 2 }}
+              >
+                {item.title}
+              </Button>
+            )}
+          </Box>
+        ))}
+      </AccordionDetails>
+    </Accordion>
+  );
 
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>
         Contenido del Curso
       </Typography>
-
-      <Accordion sx={{ bgcolor: "background.paper", mb: 2 }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel-videos-content"
-          id="panel-videos-header"
-        >
-          <Typography>
-            Videos <VideoLibraryIcon />
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ flexDirection: "column" }}>
-          {content.videos.map((video) => (
-            <Box key={video._id} sx={{ mb: 2 }}>
-              <video width="100%" controls>
-                <source src={video.url} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <Typography variant="subtitle1">{video.title}</Typography>
-              <Typography variant="caption">{video.duration}</Typography>
-            </Box>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion sx={{ bgcolor: "background.paper", mb: 2 }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel-readings-content"
-          id="panel-readings-header"
-        >
-          <Typography>
-            Lecturas <PictureAsPdfIcon />
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ flexDirection: "column" }}>
-          {content.readings.map((reading) => (
-            <Button
-              key={reading._id}
-              variant="contained"
-              color="primary"
-              href={reading.url}
-              target="_blank"
-              sx={{ mb: 2 }}
-            >
-              {reading.title}
-            </Button>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion sx={{ bgcolor: "background.paper", mb: 2 }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel-quizzes-content"
-          id="panel-quizzes-header"
-        >
-          <Typography>
-            Cuestionarios <QuizIcon />
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ flexDirection: "column" }}>
-          {content.quizzes.map((quiz) => (
-            <Box key={quiz._id} sx={{ mb: 2 }}>
-              <Typography variant="subtitle1">{quiz.title}</Typography>
-              <Button variant="contained" color="secondary" href="#">
-                Comenzar Cuestionario
-              </Button>
-            </Box>
-          ))}
-        </AccordionDetails>
-      </Accordion>
+      {renderAccordion(content.videos, VideoLibraryIcon, "Videos")}
+      {renderAccordion(content.readings, PictureAsPdfIcon, "Lecturas")}
+      {renderAccordion(content.quizzes, QuizIcon, "Cuestionarios", true)}
     </Box>
   );
 }
