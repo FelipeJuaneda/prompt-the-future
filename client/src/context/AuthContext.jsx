@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookies.get();
-      console.log("🚀 ~ checkLogin ~ cookies:", cookies);
+      console.log("Cookies at checkLogin:", cookies);
       if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);
@@ -71,6 +71,7 @@ export const AuthProvider = ({ children }) => {
       }
       try {
         const res = await verifyTokenRequest(cookies.token);
+        console.log("verifyTokenRequest response:", res);
         if (!res.data) {
           setIsAuthenticated(false);
           setLoading(false);
@@ -80,6 +81,7 @@ export const AuthProvider = ({ children }) => {
         setUser(res.data);
         setLoading(false);
       } catch (error) {
+        console.error("Token verification error:", error);
         setIsAuthenticated(false);
         setUser(null);
         setLoading(false);
