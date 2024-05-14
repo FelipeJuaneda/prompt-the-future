@@ -26,7 +26,6 @@ export const register = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
-      maxAge: 86400000,
     });
     res.status(201).json({
       id: userSaved._id,
@@ -55,7 +54,6 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
-      maxAge: 86400000,
     });
     res.json({
       id: userFound._id,
