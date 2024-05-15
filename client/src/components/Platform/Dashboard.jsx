@@ -72,6 +72,7 @@ const pages = [
 
 function Dashboard() {
   const { logout, user } = useAuth();
+  console.log("🚀 ~ Dashboard ~ user:", user);
   const [open, setOpen] = useState(true);
   const location = useLocation();
 
@@ -121,10 +122,10 @@ function Dashboard() {
             direction="row"
           >
             <Stack direction="row" spacing={1}>
-              <Link to="/profile">
+              <Link to="profile">
                 <Avatar
-                  alt={user.displayName}
-                  src={user.photoURL}
+                  alt={user.name}
+                  src={"https://i.pravatar.cc/300"}
                   sx={{ width: 50, height: 50, cursor: "pointer" }}
                 />
               </Link>

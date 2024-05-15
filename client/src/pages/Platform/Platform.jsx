@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getCoursesForUser } from "../../api/content";
 import {
   Container,
@@ -10,10 +10,13 @@ import {
   CardMedia,
   CardActionArea,
 } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
+import Spinner from "../../commons/Spinner";
 
 function Platform() {
   const [courses, setCourses] = useState([]);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const { user, isAuthenticated, setRedirectAfterLogin } = useAuth();
 
   useEffect(() => {
     async function fetchCourses() {
@@ -22,12 +25,17 @@ function Platform() {
         setCourses(response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
-        navigate("/login");
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchCourses();
   }, [navigate]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
