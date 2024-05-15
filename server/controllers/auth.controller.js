@@ -75,9 +75,11 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  console.log("🚀 ~ logout ~ res:", res);
-  //remove cookie
-  res.clearCookie("token");
+  res.cookie("token", "", {
+    httpOnly: true,
+    secure: true,
+    expires: new Date(0),
+  });
   return res.sendStatus(200);
 };
 
