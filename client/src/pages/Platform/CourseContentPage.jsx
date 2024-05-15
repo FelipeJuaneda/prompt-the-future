@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Box,
@@ -36,7 +36,7 @@ function CourseContentPage() {
     };
 
     fetchContent();
-  }, [courseId, navigate]);
+  }, [courseId]);
 
   if (loading) return <Spinner />;
 
