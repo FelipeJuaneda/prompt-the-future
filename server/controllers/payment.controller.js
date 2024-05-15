@@ -85,10 +85,13 @@ export const createOrder = async (req, res) => {
 
 // Controlador para recibir el webhook
 export const receiveWebHook = async (req, res) => {
+  console.log("se ejecuto webhook");
   const payment = new Payment(client);
+  console.log("🚀 ~ receiveWebHook ~ payment:", payment);
 
   console.log("req.query", req.query);
   const paymentQuery = req.query;
+  console.log("🚀 ~ receiveWebHook ~ paymentQuery:", paymentQuery);
 
   try {
     if (paymentQuery.type === "payment") {
