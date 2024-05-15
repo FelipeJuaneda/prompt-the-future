@@ -22,7 +22,15 @@ export const register = async (req, res) => {
 
     const userSaved = await newUser.save();
     const token = await createAccessToken({ id: userSaved._id });
-    res.cookie("token", token);
+
+    // Configurar la cookie con las opciones adecuadas para ambos entornos
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000, // 1 día
+    });
+
     res.json({
       id: userSaved._id,
       name: userSaved.name,
@@ -47,7 +55,14 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Contraseña incorrecta" });
 
     const token = await createAccessToken({ id: userFound._id });
-    res.cookie("token", token);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.json({
       id: userFound._id,
       name: userFound.name,
@@ -62,7 +77,10 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
+  console.log("🚀 ~ logout ~ res:", res);
   res.cookie("token", "", {
+    httpOnly: true,
+    secure: true,
     expires: new Date(0),
   });
   return res.sendStatus(200);

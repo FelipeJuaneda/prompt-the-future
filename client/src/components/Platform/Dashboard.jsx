@@ -76,8 +76,12 @@ function Dashboard() {
   const location = useLocation();
 
   const logoutHandler = async () => {
-    await logout();
-    toast.success("¡Deslogueado con éxito!", { duration: 5000 });
+    try {
+      await logout();
+      toast.success("¡Deslogueado con éxito!", { duration: 5000 });
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   const handleDrawerOpen = () => {
