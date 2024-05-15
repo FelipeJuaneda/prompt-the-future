@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -20,7 +20,6 @@ function CourseContentPage() {
   const { courseId } = useParams();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -32,7 +31,6 @@ function CourseContentPage() {
       } catch (error) {
         console.error("Error fetching course content:", error);
         toast.error(error.response.data.message, { duration: 4000 });
-        navigate("/");
         setLoading(false);
       }
     };
