@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -20,7 +20,7 @@ function CourseContentPage() {
   const { courseId } = useParams();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchContent = async () => {
       setLoading(true);
@@ -32,12 +32,14 @@ function CourseContentPage() {
         console.error("Error fetching course content:", error);
         toast.error(error.response.data.message, { duration: 4000 });
         setLoading(false);
+        if (error.response && error.response.status === 403) {
+          navigate("/");
+        }
       }
     };
 
     fetchContent();
-  }, [courseId]);
-
+  }, [courseId, history]);
   if (loading) return <Spinner />;
 
   if (!content)

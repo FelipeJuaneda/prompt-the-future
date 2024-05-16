@@ -18,7 +18,34 @@ const theme = createTheme({
       main: "#FFFFFF",
     },
   },
-  // Otros estilos globales aquí
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "secondary.main",
+            },
+            "&:hover fieldset": {
+              borderColor: "secondary.main",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "secondary.main",
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "secondary.main",
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "secondary.main",
+          },
+          "& .MuiInputBase-input": {
+            color: "secondary.main",
+          },
+        },
+      },
+    },
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(

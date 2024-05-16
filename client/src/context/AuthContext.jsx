@@ -44,9 +44,10 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         setErrors(error.response.data);
-        throw error;
+      } else {
+        setErrors([error.response.data.message || error.response.data]);
       }
-      setErrors([error.response.data]);
+      throw error;
     }
   };
 

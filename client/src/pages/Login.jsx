@@ -50,7 +50,14 @@ export default function Login() {
   });
 
   return (
-    <Box sx={{ mx: "auto", maxWidth: "md", p: 4 }}>
+    <Box
+      sx={{
+        mx: "auto",
+        maxWidth: "md",
+        p: 4,
+        backgroundColor: "secondary.main",
+      }}
+    >
       <Stack spacing={3} sx={{ textAlign: "center" }}>
         <Typography variant="h4" fontWeight="bold">
           Iniciar sesión
