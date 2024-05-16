@@ -2,11 +2,26 @@ import { Box, Typography, Avatar, Link, Grid, Divider } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Profile() {
+  const { user } = useAuth();
   return (
-    <Box sx={{ bgcolor: "background.paper", borderRadius: 4, boxShadow: 4 }}>
-      <Box sx={{ bgcolor: "primary.main", height: 160, position: "relative" }}>
+    <Box
+      sx={{
+        bgcolor: "background.paper",
+        borderRadius: 4,
+        boxShadow: 4,
+        minHeight: "100vh",
+      }}
+    >
+      <Box
+        sx={{
+          height: 160,
+          position: "relative",
+          background: "linear-gradient(135deg, #7F00FF 30%, #E100FF 70%)",
+        }}
+      >
         <Box
           sx={{
             position: "absolute",
@@ -16,28 +31,26 @@ export default function Profile() {
           }}
         >
           <Avatar
-            alt="@shadcn"
+            alt={`@${user.name}`}
             src="/placeholder-avatar.jpg"
             sx={{ width: 100, height: 100, border: "4px solid white" }}
           >
-            R
+            {user.name[0].toUpperCase()}
           </Avatar>
         </Box>
       </Box>
       <Box sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Jared Palmer
+          {`${user.name} ${user.surname}`}
         </Typography>
-        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-          @jaredpalmer
-        </Typography>
+
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} sm={6}>
             <Typography variant="body1" fontWeight="bold">
               Email
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              jared@example.com
+              {user.email}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -45,7 +58,7 @@ export default function Profile() {
               Location
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              San Francisco, CA
+              Cordoba
             </Typography>
           </Grid>
         </Grid>

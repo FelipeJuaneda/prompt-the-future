@@ -6,13 +6,15 @@ import EditCourse from "./pages/EditCourse";
 import CourseDetail from "./pages/Landing/CourseDetail";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Platform/Profile";
 import ProtectedRoute from "./ProtectedRoute";
 import Platform from "./pages/Platform/Platform";
 import CourseContentPage from "./pages/Platform/CourseContentPage";
 import PlatformLayout from "./layouts/PlatformLayout";
 import PublicLayout from "./layouts/LandingLayout";
 import NotFound from "./components/NotFound";
+import EditProfile from "./pages/Platform/EditProfile";
+import RoadMap from "./pages/Platform/RoadMap";
 
 const App = () => {
   return (
@@ -32,6 +34,9 @@ const App = () => {
             element={<CourseContentPage />}
           />
           <Route path="profile" element={<Profile />} />
+          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="roadmaps" element={<RoadMap />} />
+          <Route path="stats" element={<RoadMap />} />
         </Route>
         {/* <Route element={<ProtectedRoute />}>
           <Route path="/courses/create" element={<CreateCourse />} />

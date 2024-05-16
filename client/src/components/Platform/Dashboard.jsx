@@ -122,12 +122,17 @@ function Dashboard() {
             direction="row"
           >
             <Stack direction="row" spacing={1}>
-              <Link to="profile">
+              <Link style={{ textDecoration: "none" }} to="profile">
                 <Avatar
-                  alt={user.name}
-                  src={"https://i.pravatar.cc/300"}
-                  sx={{ width: 50, height: 50, cursor: "pointer" }}
-                />
+                  alt={`@${user.name}`}
+                  sx={{
+                    width: 50,
+                    height: 50,
+                    cursor: "pointer",
+                  }}
+                >
+                  {user.name[0].toUpperCase()}
+                </Avatar>
               </Link>
 
               {open && (
