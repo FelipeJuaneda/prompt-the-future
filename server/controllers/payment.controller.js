@@ -11,9 +11,6 @@ export const createOrder = async (req, res) => {
   const preference = new Preference(client);
   const { course, user } = req.body;
   const externalReference = `${user.id}:${course.id}`;
-  console.log("🚀 ~ User ID:", user.id);
-  console.log("🚀 ~ Course ID:", course.id);
-  // Inicializa el objeto API que deseas usar
   try {
     // Primero verificar si el usuario ya posee el curso
     const existingUser = await User.findById(user.id);
@@ -48,15 +45,17 @@ export const createOrder = async (req, res) => {
       binary_mode: true,
       external_reference: externalReference, // Referencia externa para identificar el pago
       notification_url:
-        "https://b4ea-201-231-72-208.ngrok-free.app/api/payment/webhook",
+        "https://fc70-201-231-72-208.ngrok-free.app/api/payment/webhook",
       operation_type: "regular_payment",
       payment_methods: {
         default_payment_method_id: "master",
         excluded_payment_types: [
-          {
-            id: "ticket",
-            id: "atm",
-          },
+          { id: "ticket" }, // Excluir pagos con ticket
+          { id: "atm" }, // Excluir pagos con ATM
+        ],
+        excluded_payment_methods: [
+          { id: "pagofacil" }, // Excluir pagos con Pago Fácil
+          { id: "rapipago" }, // Excluir pagos con RapiPago
         ],
 
         installments: 12,
@@ -66,13 +65,7 @@ export const createOrder = async (req, res) => {
       statement_descriptor: `Pago Curso: ${course.title}`, // Descripción que aparecerá en el estado de cuenta del cliente,
     };
     const response = await preference.create({ body });
-    console.log(response);
-    // Envía una respuesta exitosa al cliente
     res.send(response);
-    // res.status(200).json({
-    //   message: "Orden creada correctamente",
-    //   data: response.body,
-    // });
   } catch (error) {
     console.error(error);
     // Envía una respuesta de error al cliente
@@ -83,60 +76,46 @@ export const createOrder = async (req, res) => {
   }
 };
 
-// Controlador para recibir el webhook
-export const receiveWebHook = async (req, res) => {
-  console.log("se ejecuto webhook");
+// Función para procesar el pago
+const processPayment = async (paymentQuery) => {
   const payment = new Payment(client);
-  console.log("🚀 ~ receiveWebHook ~ payment:", payment);
+  const data = await payment.get({ id: paymentQuery["data.id"] });
+  if (data.status !== "approved") {
+    return;
+  }
+  const externalReference = data.external_reference;
+  const [userId, courseId] = externalReference.split(":");
 
-  console.log("req.query", req.query);
-  const paymentQuery = req.query;
-  console.log("🚀 ~ receiveWebHook ~ paymentQuery:", paymentQuery);
+  const user = await User.findById(userId);
+  if (user.courses.includes(courseId)) {
+    return;
+  }
+  await User.findByIdAndUpdate(
+    userId,
+    { $addToSet: { courses: courseId } },
+    { new: true }
+  );
+};
 
+//funcion para escuchar eventos de webhook
+export const receiveWebHook = async (req, res) => {
   try {
-    if (paymentQuery.type === "payment") {
-      //obtener la data del payment
-      const data = await payment.get({ id: paymentQuery["data.id"] });
-      console.log("Payment data", data);
-      //guardar datos en base de datos junto con la info de compra del usuario
+    if (req.query.type === "payment") {
+      await processPayment(req.query);
     }
-    // Envía una respuesta exitosa al cliente
     res.sendStatus(204);
   } catch (error) {
-    console.log(error);
-    return res.sendStatus(500).json({ error: error.message });
+    res
+      .status(500)
+      .json({ error: "Error processing webhook", details: error.message });
   }
 };
 
 export const onSuccess = async (req, res) => {
   const externalReference = req.query.external_reference;
-  const [userId, courseId] = externalReference.split(":");
-  console.log("🚀 ~ onSuccess ~ userId", userId);
-  console.log("🚀 ~ onSuccess ~ courseId", courseId);
+  const [courseId] = externalReference.split(":");
 
-  try {
-    // Buscar el usuario para verificar si ya tiene el curso
-    const user = await User.findById(userId);
-    if (user.courses.includes(courseId)) {
-      console.log("El usuario ya tiene este curso");
-    } else {
-      // Actualizar el usuario solo si no tiene el curso
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { $addToSet: { courses: courseId } }, // $addToSet solo agrega si el curso no está ya presente
-        { new: true }
-      );
-      console.log("Curso agregado con éxito", updatedUser);
-    }
-
-    res.redirect(`${BASE_URL}/success-page?courseId=${courseId}`);
-  } catch (error) {
-    console.error("Error al actualizar los cursos del usuario:", error);
-    res.status(500).json({
-      message: "Error al procesar la compra del curso",
-      error: error.message,
-    });
-  }
+  res.redirect(`${BASE_URL}/success-page?courseId=${courseId}`);
 };
 
 export const onFailure = (req, res) => {
