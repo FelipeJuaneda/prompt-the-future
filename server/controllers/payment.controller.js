@@ -45,22 +45,15 @@ export const createOrder = async (req, res) => {
       binary_mode: true,
       external_reference: externalReference, // Referencia externa para identificar el pago
       notification_url:
-        "https://fc70-201-231-72-208.ngrok-free.app/api/payment/webhook",
+        "https://b992-201-231-72-208.ngrok-free.app/api/payment/webhook",
       operation_type: "regular_payment",
       payment_methods: {
         default_payment_method_id: "master",
-        excluded_payment_types: [
-          { id: "ticket" }, // Excluir pagos con ticket
-          { id: "atm" }, // Excluir pagos con ATM
-        ],
-        excluded_payment_methods: [
-          { id: "pagofacil" }, // Excluir pagos con Pago Fácil
-          { id: "rapipago" }, // Excluir pagos con RapiPago
-        ],
-
+        excluded_payment_types: [{ id: "ticket" }, { id: "atm" }],
         installments: 12,
         default_installments: 1,
       },
+
       additional_info: course.overview, // Información adicional sobre el pago
       statement_descriptor: `Pago Curso: ${course.title}`, // Descripción que aparecerá en el estado de cuenta del cliente,
     };
