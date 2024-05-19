@@ -17,7 +17,7 @@ import {
   ListItemText,
   Stack,
 } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -75,11 +75,12 @@ function Dashboard() {
   console.log("🚀 ~ Dashboard ~ user:", user);
   const [open, setOpen] = useState(true);
   const location = useLocation();
-
+  const navigate = useNavigate();
   const logoutHandler = async () => {
     try {
       await logout();
       toast.success("¡Deslogueado con éxito!", { duration: 5000 });
+      navigate("/login");
     } catch (error) {
       console.log("error", error);
     }

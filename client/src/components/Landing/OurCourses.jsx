@@ -24,7 +24,11 @@ const OurCourses = () => {
   }, []);
 
   return (
-    <Container sx={{ backgroundColor: "primary.main" }} maxWidth="lg">
+    <Container
+      id="cursos-section"
+      sx={{ backgroundColor: "primary.main" }}
+      maxWidth="lg"
+    >
       <Box sx={{ padding: "60px 0" }}>
         <Typography
           variant="h6"

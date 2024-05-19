@@ -12,7 +12,11 @@ import langChainIcon from "../../assets/icons/langchain.svg";
 
 const Hackathons = () => {
   return (
-    <Container sx={{ marginTop: 7, py: "60px" }} maxWidth="xl">
+    <Container
+      id="hackathons-section"
+      sx={{ marginTop: 7, py: "60px" }}
+      maxWidth="xl"
+    >
       <Divider
         variant="middle"
         sx={{ backgroundColor: "secondary.main", marginBottom: 4 }}

@@ -1,264 +1,239 @@
-// import AdbIcon from "@mui/icons-material/Adb";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   AppBar,
-  // Avatar,
   Box,
   Button,
   Container,
-  // Divider,
   IconButton,
-  // ListItemIcon,
   Menu,
   MenuItem,
   Stack,
   Toolbar,
-  // Tooltip,
   Typography,
+  Slide,
+  useScrollTrigger,
+  Fab,
+  Fade,
 } from "@mui/material";
-// import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const pages = [
-  { page: "Cursos", to: "/" },
-  { page: "Hackathons", to: "/" },
-  { page: "Eventos", to: "/" },
-  { page: "Empresas", to: "/" },
+  { page: "Cursos", to: "cursos-section" },
+  { page: "Hackathons", to: "hackathons-section" },
+  { page: "Eventos", to: "eventos-section" },
+  { page: "Empresas", to: "empresas-section" },
 ];
 
-function Header() {
+function HideOnScroll(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+HideOnScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  return (
+    <Fade in={trigger}>
+      <Box
+        onClick={() => scroll.scrollToTop()}
+        role="presentation"
+        sx={{ position: "fixed", bottom: 20, right: 20 }}
+      >
+        {children}
+      </Box>
+    </Fade>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};
+
+function Header(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  // const [anchorElUser, setAnchorElUser] = useState(null);
-  // const { isAuthenticated, user, logout } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
-
   return (
-    <AppBar sx={{ backgroundColor: "primary.main" }} position="static">
-      <Container sx={{ height: "75px" }} maxWidth="xl">
-        <Toolbar sx={{ height: "100%" }} disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to={"/"}
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 700,
-              color: "secondary.main",
-              textDecoration: "none",
-            }}
-          >
-            PTF
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+    <React.Fragment>
+      <HideOnScroll {...props}>
+        <AppBar sx={{ backgroundColor: "primary.main" }}>
+          <Container sx={{ height: "75px" }} maxWidth="xl">
+            <Toolbar
+              id="back-to-top-anchor"
+              sx={{ height: "100%" }}
+              disableGutters
             >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page.page}
-                  onClick={handleCloseNavMenu}
-                  component={Link}
-                  to={page.to}
-                >
-                  <Typography textAlign="center">{page.page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to={"/"}
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontWeight: 700,
-              color: "secondary.main",
-              textDecoration: "none",
-            }}
-          >
-            PTF
-          </Typography>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
-              gap: "45px",
-            }}
-          >
-            {pages.map((page, i) => (
-              <Button
-                key={i}
-                onClick={handleCloseNavMenu}
+              <Typography
+                variant="h6"
+                noWrap
+                onClick={() => scroll.scrollToTop()}
                 sx={{
-                  paddingRight: 0,
-                  color: "white",
-                  display: "block",
-                  textTransform: "none",
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 700,
+                  color: "secondary.main",
+                  textDecoration: "none",
+                  cursor: "pointer",
                 }}
-                component={Link}
-                to={page.to}
               >
-                <Stack direction={"row"} alignItems={"center"}>
-                  {page.page}
-                  <ArrowDropDownIcon
-                    sx={{ color: "secondary.main", fontSize: 20 }}
-                  />
-                </Stack>
-              </Button>
-            ))}
-          </Box>
-          <Stack direction={"row"} alignItems={"center"} sx={{ flexGrow: 0 }}>
-            <Button
-              component={Link}
-              to={"/platform"}
-              sx={{ color: "secondary.main", textTransform: "none" }}
-            >
-              Plataforma
-            </Button>
-            <IconButton
-              sx={{ color: "secondary.main" }}
-              aria-label="plataforma"
-            >
-              <MenuIcon color="secondary.main" />
-            </IconButton>
-          </Stack>
-          {/* <Box sx={{ flexGrow: 0 }}>
-            {isAuthenticated ? (
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={user.email}>
-                    {user.email.charAt(0).toUpperCase()}
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <Stack direction={"row"} gap={0}>
-                <Button
-                  component={Link}
-                  to="/login"
-                  color="inherit"
-                  sx={{ textTransform: "none" }}
-                >
-                  Iniciar sesión
-                </Button>
-                <Button
-                  component={Link}
-                  to="/register"
-                  variant="contained"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "white",
-                    color: "#0d0d0d",
-                    "&:hover": {
-                      backgroundColor: "#0d0d0d",
-                      color: "white",
-                    },
-                  }}
-                >
-                  Regístrate
-                </Button>
-              </Stack>
-            )}
+                PTF
+              </Typography>
 
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {isAuthenticated && (
-                <Box>
-                  <MenuItem
-                    component={Link}
-                    to="/profile"
-                    onClick={handleCloseUserMenu}
-                    sx={{ justifyContent: "center" }}
-                  >
-                    <Typography textAlign="center">{user.email}</Typography>
-                  </MenuItem>
-                  <Divider variant="middle" />
-                  <MenuItem
-                    onClick={() => {
-                      handleCloseUserMenu();
-                      logout();
+              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="open navigation menu"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{ display: { xs: "block", md: "none" } }}
+                >
+                  {pages.map((page) => (
+                    <MenuItem key={page.page} onClick={handleCloseNavMenu}>
+                      <ScrollLink
+                        to={page.to}
+                        smooth={true}
+                        duration={500}
+                        offset={-70}
+                      >
+                        <Typography textAlign="center">{page.page}</Typography>
+                      </ScrollLink>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap
+                onClick={() => scroll.scrollToTop()}
+                sx={{
+                  mr: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontWeight: 700,
+                  color: "secondary.main",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                PTF
+              </Typography>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: "none", md: "flex" },
+                  justifyContent: "center",
+                  gap: "45px",
+                }}
+              >
+                {pages.map((page, i) => (
+                  <ScrollLink
+                    key={i}
+                    to={page.to}
+                    smooth={true}
+                    duration={500}
+                    offset={-70}
+                    style={{
+                      color: "white",
+                      display: "block",
+                      textTransform: "none",
+                      cursor: "pointer",
+                      textDecoration: "none",
                     }}
                   >
-                    <ListItemIcon>
-                      <LogoutOutlinedIcon fontSize="small" />
-                    </ListItemIcon>
-                    <Typography
-                      sx={{ textTransform: "none" }}
-                      textAlign="center"
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        paddingRight: 0,
+                        color: "white",
+                        display: "block",
+                        textTransform: "none",
+                      }}
                     >
-                      Cerrar sesión
-                    </Typography>
-                  </MenuItem>
-                </Box>
-              )}
-            </Menu>
-          </Box> */}
-        </Toolbar>
-      </Container>
-    </AppBar>
+                      <Stack direction={"row"} alignItems={"center"}>
+                        {page.page}
+                        <ArrowDropDownIcon
+                          sx={{ color: "secondary.main", fontSize: 20 }}
+                        />
+                      </Stack>
+                    </Button>
+                  </ScrollLink>
+                ))}
+              </Box>
+              <Stack
+                direction={"row"}
+                alignItems={"center"}
+                sx={{ flexGrow: 0 }}
+              >
+                <Button
+                  component={RouterLink}
+                  to={"/platform"}
+                  sx={{ color: "secondary.main", textTransform: "none" }}
+                >
+                  Plataforma
+                </Button>
+                <IconButton
+                  sx={{ color: "secondary.main" }}
+                  aria-label="plataforma"
+                >
+                  <MenuIcon color="secondary.main" />
+                </IconButton>
+              </Stack>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </HideOnScroll>
+      <Toolbar />
+      <ScrollTop {...props}>
+        <Fab size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
+    </React.Fragment>
   );
 }
+
 export default Header;
