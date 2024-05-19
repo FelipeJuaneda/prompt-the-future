@@ -25,9 +25,10 @@ function CourseDetail() {
       try {
         const res = await getCourseRequest(id);
         setCourseDetail(res.data);
-        setLoading(false);
       } catch (error) {
-        console.log(error);
+        toast.error("Error al obtener el curso");
+        navigate("/");
+      } finally {
         setLoading(false);
       }
     }
@@ -41,7 +42,6 @@ function CourseDetail() {
       return;
     }
     try {
-      setLoading(true);
       const courseDetailPayment = {
         id: courseDetail._id,
         title: courseDetail.title,
@@ -49,7 +49,6 @@ function CourseDetail() {
         price: courseDetail.price,
       };
       const response = await createPaymentForCourse(courseDetailPayment, user);
-      setLoading(false);
       if (response.data.init_point) {
         window.location.href = response.data.init_point;
       } else {
@@ -58,7 +57,6 @@ function CourseDetail() {
       }
     } catch (error) {
       console.error("Error al comprar el curso:", error);
-      setLoading(false);
       toast.error(error.response.data.message);
     }
   };

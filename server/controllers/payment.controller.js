@@ -45,7 +45,7 @@ export const createOrder = async (req, res) => {
       binary_mode: true,
       external_reference: externalReference, // Referencia externa para identificar el pago
       notification_url:
-        "https://b992-201-231-72-208.ngrok-free.app/api/payment/webhook",
+        "https://bfb5-201-231-72-208.ngrok-free.app/api/payment/webhook",
       operation_type: "regular_payment",
       payment_methods: {
         default_payment_method_id: "master",
@@ -60,8 +60,6 @@ export const createOrder = async (req, res) => {
     const response = await preference.create({ body });
     res.send(response);
   } catch (error) {
-    console.error(error);
-    // Envía una respuesta de error al cliente
     res.status(500).json({
       message: "Error al crear la orden de pago",
       error: error.message,
@@ -106,13 +104,14 @@ export const receiveWebHook = async (req, res) => {
 
 export const onSuccess = async (req, res) => {
   const externalReference = req.query.external_reference;
-  const [courseId] = externalReference.split(":");
-
-  res.redirect(`${BASE_URL}/success-page?courseId=${courseId}`);
+  const [userId, courseId] = externalReference.split(":");
+  res.redirect(`${BASE_URL}/success-page/${courseId}`);
 };
 
 export const onFailure = (req, res) => {
-  res.redirect(`${BASE_URL}/failure-page`);
+  const externalReference = req.query.external_reference;
+  const [userId, courseId] = externalReference.split(":");
+  res.redirect(`${BASE_URL}/failure-page/${courseId}`);
 };
 export const onPending = (req, res) => {
   res.redirect(`${BASE_URL}/pending-page`);

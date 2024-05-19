@@ -15,6 +15,8 @@ import PublicLayout from "./layouts/LandingLayout";
 import NotFound from "./components/NotFound";
 import EditProfile from "./pages/Platform/EditProfile";
 import RoadMap from "./pages/Platform/RoadMap";
+import SuccessPage from "./pages/Landing/SuccessPage";
+import FailurePage from "./pages/Landing/FailurePage";
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/courses/details/:id" element={<CourseDetail />} />
+        <Route path={`/success-page/:courseId`} element={<SuccessPage />} />
+        <Route path={`/failure-page/:courseId`} element={<FailurePage />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>
