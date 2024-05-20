@@ -45,7 +45,7 @@ export const createOrder = async (req, res) => {
       binary_mode: true,
       external_reference: externalReference, // Referencia externa para identificar el pago
       notification_url:
-        "https://bfb5-201-231-72-208.ngrok-free.app/api/payment/webhook",
+        "https://8b5f-201-231-72-208.ngrok-free.app/api/payment/webhook",
       operation_type: "regular_payment",
       payment_methods: {
         default_payment_method_id: "master",

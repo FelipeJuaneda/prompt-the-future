@@ -1,0 +1,57 @@
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Pagination, Navigation } from "swiper/modules";
+import { Swiper } from "swiper/react";
+
+const Carrousele = ({ children }) => {
+  return (
+    <Swiper
+      style={{ padding: "70px 0" }}
+      modules={[Pagination]}
+      spaceBetween={30}
+      slidesPerView={1}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        0: {
+          slidesPerView: 1.1,
+          spaceBetween: 20,
+        },
+        430: {
+          slidesPerView: 1.3,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 1.9,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 40,
+        },
+      }}
+    >
+      {children}
+      <style jsx global>{`
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: #8627cc; /* Color violeta */
+        }
+
+        .swiper-pagination-bullet {
+          background: #8627cc; /* Color violeta */
+        }
+
+        .swiper-pagination-bullet-active {
+          background: #5e1999; /* Un tono más oscuro de violeta para el activo */
+        }
+      `}</style>
+    </Swiper>
+  );
+};
+
+export default Carrousele;

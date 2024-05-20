@@ -1,8 +1,10 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { SwiperSlide } from "swiper/react";
 import OnlineButton from "../../commons/OnlineButton";
 import CourseCard from "./CourseCard";
 import { getCoursesRequest } from "../../api/courses";
+import Carrousele from "../../commons/Carrousele";
 
 const OurCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -35,16 +37,7 @@ const OurCourses = () => {
           sx={{ textAlign: "center", fontWeight: "bold" }}
           color={"secondary.main"}
         >
-          Únete a la comunidad de Inteligencia{" "}
-          <Typography
-            component="span"
-            variant="h6"
-            sx={{ display: "inline", fontWeight: "bold" }}
-          >
-            Artificial
-            <br />
-          </Typography>
-          más grande a nivel hispanohablante
+          Unite a la comunidad de IA con mayor excelencia Académica.
         </Typography>
       </Box>
 
@@ -61,25 +54,19 @@ const OurCourses = () => {
           Nuestros cursos
         </Typography>
 
-        <Grid
-          container
-          spacing={4}
-          padding={"70px 0"}
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Carrousele>
           {loading
             ? Array.from({ length: skeletonCount }).map((_, index) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <SwiperSlide key={index}>
                   <CourseCard loading={true} />
-                </Grid>
+                </SwiperSlide>
               ))
             : courses.map((course, index) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <SwiperSlide key={index}>
                   <CourseCard course={course} loading={false} />
-                </Grid>
+                </SwiperSlide>
               ))}
-        </Grid>
+        </Carrousele>
       </Box>
     </Container>
   );

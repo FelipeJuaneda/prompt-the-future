@@ -20,6 +20,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import logo from "../../assets/icons/logo.svg";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const pages = [
@@ -94,21 +95,19 @@ function Header(props) {
               sx={{ height: "100%" }}
               disableGutters
             >
-              <Typography
-                variant="h6"
-                noWrap
+              <Box
+                component={RouterLink}
+                to="/"
                 onClick={() => scroll.scrollToTop()}
                 sx={{
                   mr: 2,
                   display: { xs: "none", md: "flex" },
-                  fontWeight: 700,
-                  color: "secondary.main",
-                  textDecoration: "none",
+                  alignItems: "center",
                   cursor: "pointer",
                 }}
               >
-                PTF
-              </Typography>
+                <img src={logo} alt="Logo" style={{ height: 30 }} />
+              </Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -145,22 +144,20 @@ function Header(props) {
                   ))}
                 </Menu>
               </Box>
-              <Typography
-                variant="h5"
-                noWrap
+              <Box
+                component={RouterLink}
+                to="/"
                 onClick={() => scroll.scrollToTop()}
                 sx={{
                   mr: 2,
                   display: { xs: "flex", md: "none" },
                   flexGrow: 1,
-                  fontWeight: 700,
-                  color: "secondary.main",
-                  textDecoration: "none",
+                  alignItems: "center",
                   cursor: "pointer",
                 }}
               >
-                PTF
-              </Typography>
+                <img src={logo} alt="Logo" style={{ height: 30 }} />
+              </Box>
               <Box
                 sx={{
                   flexGrow: 1,

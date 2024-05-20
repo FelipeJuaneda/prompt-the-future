@@ -5,7 +5,7 @@ const Title = () => {
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: "70vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -55,11 +55,11 @@ const Title = () => {
               color: "#8627CC",
               fontWeight: "bold",
               fontSize: {
-                xs: "1.5rem",
-                sm: "2.9rem",
-                md: "3.7rem",
-                lg: "4.4rem",
-                xl: "6rem",
+                xs: "2.5rem",
+                sm: "3.9rem",
+                md: "4.7rem",
+                lg: "5.5rem",
+                xl: "7rem",
               },
             }}
           >
@@ -95,22 +95,22 @@ const Title = () => {
               fontSize: { xs: "0.75rem", sm: "1rem", md: "1.25rem" },
             }}
           >
-            Comunidad de Innovación en IA
+            Transforma el mundo con la Inteligencia Artificial
           </Typography>
           <Button
             sx={{
               mt: 2,
               py: 1,
               px: 3,
-              bgcolor: "primary.main",
-              color: "secondary.main",
+              bgcolor: "secondary.main",
+              color: "primary.main",
               borderRadius: 2,
               textTransform: "none",
               fontSize: { xs: "0.75rem", sm: "1rem", md: "1.25rem" },
               transition: "all 0.3s",
               "&:hover": {
-                opacity: "0.9",
-                backgroundColor: "primary.main",
+                opacity: "0.8",
+                backgroundColor: "secondary.main",
                 boxShadow: "none",
               },
             }}
