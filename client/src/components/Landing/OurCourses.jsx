@@ -4,7 +4,7 @@ import { SwiperSlide } from "swiper/react";
 import OnlineButton from "../../commons/OnlineButton";
 import CourseCard from "./CourseCard";
 import { getCoursesRequest } from "../../api/courses";
-import Carrousele from "../../commons/Carrousele";
+import Carrousele from "../../commons/Carrousele/Carrousele";
 
 const OurCourses = () => {
   const [courses, setCourses] = useState([]);

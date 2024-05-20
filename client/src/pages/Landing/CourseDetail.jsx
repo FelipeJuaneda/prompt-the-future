@@ -2,7 +2,6 @@ import { Typography, Button, Box, Container, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../commons/Spinner";
-import robotImg from "../../assets/imgs/robot.png";
 import { getCourseRequest } from "../../api/courses";
 import OnlineButton from "../../commons/OnlineButton";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
@@ -75,7 +74,7 @@ function CourseDetail() {
               display: { xs: "none", md: "container" },
             }}
             component={"img"}
-            src={robotImg}
+            src={courseDetail.img}
             alt="robot"
           />
           <Box sx={{ width: { xs: "100%", md: "65%", lg: "70%" } }}>
