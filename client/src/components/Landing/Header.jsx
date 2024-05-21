@@ -20,7 +20,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import logo from "../../assets/icons/logo.svg";
+import logo from "../../assets/icons/logoBlanco.svg";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const pages = [
@@ -92,7 +92,7 @@ function Header(props) {
           <Container sx={{ height: "75px" }} maxWidth="xl">
             <Toolbar
               id="back-to-top-anchor"
-              sx={{ height: "100%" }}
+              sx={{ height: "75px !important" }}
               disableGutters
             >
               <Box
@@ -137,7 +137,7 @@ function Header(props) {
                     to={page.to}
                     smooth={true}
                     duration={500}
-                    offset={-70}
+                    offset={-75}
                     style={{
                       color: "white",
                       display: "block",
@@ -204,7 +204,7 @@ function Header(props) {
                           to={page.to}
                           smooth={true}
                           duration={500}
-                          offset={-70}
+                          offset={-75}
                         >
                           <Typography textAlign="center">
                             {page.page}
@@ -219,7 +219,7 @@ function Header(props) {
           </Container>
         </AppBar>
       </HideOnScroll>
-      <Toolbar />
+      <Toolbar sx={{ height: "75px" }} />
       <ScrollTop {...props}>
         <Fab size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

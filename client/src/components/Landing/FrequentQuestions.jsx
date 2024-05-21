@@ -50,7 +50,7 @@ const FrequentQuestions = () => {
           <Accordion
             key={index}
             sx={{
-              backgroundColor: "secondary.main",
+              backgroundColor: "#D9D9D9",
               borderRadius: "10px",
               marginBottom: "20px",
               "&:before": {
@@ -87,7 +87,6 @@ const FrequentQuestions = () => {
               <Typography
                 variant="body2"
                 sx={{
-                  fontWeight: "bold",
                   color: "primary.main",
                   my: "4px",
                   fontSize: {

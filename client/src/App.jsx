@@ -17,6 +17,7 @@ import EditProfile from "./pages/Platform/EditProfile";
 import RoadMap from "./pages/Platform/RoadMap";
 import SuccessPage from "./pages/Landing/SuccessPage";
 import FailurePage from "./pages/Landing/FailurePage";
+import HackathonDetail from "./pages/Landing/HackathonDetail";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/courses/details/:id" element={<CourseDetail />} />
         <Route path={`/success-page/:courseId`} element={<SuccessPage />} />
         <Route path={`/failure-page/:courseId`} element={<FailurePage />} />
+        <Route path={`/hackathon`} element={<HackathonDetail />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>
