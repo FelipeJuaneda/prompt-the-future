@@ -21,7 +21,7 @@ const Hackathons = () => {
         variant="middle"
         sx={{ backgroundColor: "secondary.main", marginBottom: 4 }}
       />
-      <Box sx={{ padding: "60px 0" }}>
+      <Box sx={{ padding: { xs: "30px 0", md: "60px" } }}>
         <Typography variant="h4" color={"secondary.main"}>
           Hackathons
         </Typography>

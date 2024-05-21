@@ -26,11 +26,7 @@ const OurCourses = () => {
   }, []);
 
   return (
-    <Container
-      id="cursos-section"
-      sx={{ backgroundColor: "primary.main" }}
-      maxWidth="lg"
-    >
+    <Container sx={{ backgroundColor: "primary.main" }} maxWidth="lg">
       <Box sx={{ padding: "60px 0" }}>
         <Typography
           variant="h6"
@@ -45,7 +41,7 @@ const OurCourses = () => {
         <OnlineButton />
       </Box>
 
-      <Box sx={{ py: "40px" }}>
+      <Box id="cursos-section" sx={{ py: "40px" }}>
         <Typography
           color={"secondary.main"}
           sx={{ fontWeight: "bold" }}

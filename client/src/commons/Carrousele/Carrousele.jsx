@@ -7,7 +7,7 @@ import "./Carrousele.css";
 const Carrousele = ({ children }) => {
   return (
     <Swiper
-      style={{ padding: "70px 0" }}
+      style={{ padding: "50px 0" }}
       modules={[Pagination]}
       spaceBetween={30}
       slidesPerView={1}

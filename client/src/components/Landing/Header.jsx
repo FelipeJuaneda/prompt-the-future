@@ -198,8 +198,9 @@ function Header(props) {
                     onClose={handleCloseNavMenu}
                   >
                     {pages.map((page) => (
-                      <MenuItem key={page.page} onClick={handleCloseNavMenu}>
+                      <MenuItem key={page.page}>
                         <ScrollLink
+                          onClick={handleCloseNavMenu}
                           to={page.to}
                           smooth={true}
                           duration={500}
