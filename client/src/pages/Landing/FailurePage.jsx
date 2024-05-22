@@ -3,7 +3,7 @@ import { Box, Typography, Button, Avatar } from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { getCourseRequest } from "../../api/courses";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Spinner from "../../commons/Spinner";
+import Loading from "../../commons/Loading";
 import { toast } from "sonner";
 
 const FailurePage = () => {
@@ -31,7 +31,7 @@ const FailurePage = () => {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <Loading />
       ) : (
         <Box
           sx={{

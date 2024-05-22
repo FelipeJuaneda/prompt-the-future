@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes.js";
 import coursesRoute from "./routes/courses.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import contentRoutes from "./routes/content.routes.js";
+import emailRoutes from "./routes/email.routes.js";
 import { BASE_URL } from "./config.js";
 
 const app = express();
@@ -29,5 +30,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/courses", coursesRoute);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/access", contentRoutes);
+app.use("/api/email", emailRoutes);
 
 export default app;

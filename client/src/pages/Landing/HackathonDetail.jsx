@@ -1,12 +1,52 @@
-import React from "react";
 import { Box, Button, Container, Stack, Typography, Grid } from "@mui/material";
 import OnlineButton from "../../commons/OnlineButton";
 import discord from "../../assets/icons/discord.svg";
 import EventIcon from "@mui/icons-material/Event";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import fondoImg from "../../assets/imgs/whyPromptTheFuture.png";
+import { useAuth } from "../../context/AuthContext";
+import { sendEventEmail } from "../../api/email";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const HackathonDetail = () => {
+  const { isAuthenticated, user, setRedirectAfterLogin } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleJoin = async () => {
+    if (!user && !isAuthenticated) {
+      setRedirectAfterLogin(location.pathname);
+      toast.warning("Debes estar registrado y logueado para unirte");
+      navigate("/login");
+      return;
+    }
+    const eventDetails = {
+      name: "Buenos Aires Tech Week - AI Hackathon",
+      date: "Viernes 7 de Junio 2024",
+      location: "REMOTO Tech Week, Buenos Aires",
+    };
+    const dataUser = {
+      email: user.email,
+      name: `${user.name} ${user.surname}`,
+    };
+    try {
+      console.log("Sending email to:", dataUser.email);
+      const response = await sendEventEmail(dataUser, eventDetails);
+      console.log("Email response:", response);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw error;
+    }
+  };
+  const handlerClick = (values, event) => {
+    toast.promise(handleJoin, {
+      loading: "Enviando...",
+      success: "Se ha enviado un correo con la información del evento",
+      error: "Hubo un error al enviar el correo",
+    });
+  };
+
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography
@@ -42,6 +82,7 @@ const HackathonDetail = () => {
                 backgroundColor: "#CF94E6",
               },
             }}
+            onClick={handlerClick}
           >
             Unirme
           </Button>
@@ -321,6 +362,7 @@ const HackathonDetail = () => {
                 backgroundColor: "#CF94E6",
               },
             }}
+            onClick={handlerClick}
           >
             Unirme
           </Button>

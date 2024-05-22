@@ -72,10 +72,10 @@ const pages = [
 
 function Dashboard() {
   const { logout, user } = useAuth();
-  console.log("🚀 ~ Dashboard ~ user:", user);
   const [open, setOpen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+
   const logoutHandler = async () => {
     try {
       await logout();

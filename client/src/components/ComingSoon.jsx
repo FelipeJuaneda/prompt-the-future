@@ -1,13 +1,7 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-} from "@mui/material";
+import { Box, Typography, Button, Container } from "@mui/material";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -30,7 +24,7 @@ const ComingSoon = () => {
           gutterBottom
           sx={{ fontWeight: "bold", color: "text.primary" }}
         >
-          Prompt The Future
+          <span style={{ color: "#8627CC" }}>Prompt</span> The Future
         </Typography>
         <Typography
           variant="h5"
@@ -45,9 +39,12 @@ const ComingSoon = () => {
           <Button
             variant="contained"
             color="primary"
+            component={Link}
+            to="/"
             sx={{ borderRadius: "50px", padding: "10px 20px" }}
+            startIcon={<HomeIcon />}
           >
-            Suscríbete para actualizaciones
+            Volver al Inicio
           </Button>
         </Box>
       </Container>

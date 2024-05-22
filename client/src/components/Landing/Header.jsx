@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   AppBar,
@@ -21,7 +21,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import logo from "../../assets/icons/logoBlanco.svg";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import {
+  Link as ScrollLink,
+  animateScroll as scroll,
+  scroller,
+} from "react-scroll";
 
 const pages = [
   { page: "Cursos", to: "cursos-section" },
@@ -76,6 +80,9 @@ ScrollTop.propTypes = {
 
 function Header(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [targetSection, setTargetSection] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -83,6 +90,30 @@ function Header(props) {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  useEffect(() => {
+    if (targetSection) {
+      scroller.scrollTo(targetSection, {
+        duration: 500,
+        smooth: true,
+        offset: -75,
+      });
+      setTargetSection(null);
+    }
+  }, [location, targetSection]);
+
+  const handleNavClick = (section) => {
+    if (location.pathname === "/") {
+      scroller.scrollTo(section, {
+        duration: 500,
+        smooth: true,
+        offset: -75,
+      });
+    } else {
+      setTargetSection(section);
+      navigate("/", { replace: true });
+    }
   };
 
   return (
@@ -132,37 +163,23 @@ function Header(props) {
                 }}
               >
                 {pages.map((page, i) => (
-                  <ScrollLink
+                  <Button
                     key={i}
-                    to={page.to}
-                    smooth={true}
-                    duration={500}
-                    offset={-75}
-                    style={{
+                    onClick={() => handleNavClick(page.to)}
+                    sx={{
+                      paddingRight: 0,
                       color: "white",
                       display: "block",
                       textTransform: "none",
-                      cursor: "pointer",
-                      textDecoration: "none",
                     }}
                   >
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        paddingRight: 0,
-                        color: "white",
-                        display: "block",
-                        textTransform: "none",
-                      }}
-                    >
-                      <Stack direction={"row"} alignItems={"center"}>
-                        {page.page}
-                        <ArrowDropDownIcon
-                          sx={{ color: "secondary.main", fontSize: 20 }}
-                        />
-                      </Stack>
-                    </Button>
-                  </ScrollLink>
+                    <Stack direction={"row"} alignItems={"center"}>
+                      {page.page}
+                      <ArrowDropDownIcon
+                        sx={{ color: "secondary.main", fontSize: 20 }}
+                      />
+                    </Stack>
+                  </Button>
                 ))}
               </Box>
               <Stack
@@ -199,17 +216,12 @@ function Header(props) {
                   >
                     {pages.map((page) => (
                       <MenuItem key={page.page}>
-                        <ScrollLink
-                          onClick={handleCloseNavMenu}
-                          to={page.to}
-                          smooth={true}
-                          duration={500}
-                          offset={-75}
+                        <Button
+                          onClick={() => handleNavClick(page.to)}
+                          sx={{ color: "inherit", textTransform: "none" }}
                         >
-                          <Typography textAlign="center">
-                            {page.page}
-                          </Typography>
-                        </ScrollLink>
+                          {page.page}
+                        </Button>
                       </MenuItem>
                     ))}
                   </Menu>

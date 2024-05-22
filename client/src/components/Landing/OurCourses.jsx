@@ -53,12 +53,12 @@ const OurCourses = () => {
         <Carrousele>
           {loading
             ? Array.from({ length: skeletonCount }).map((_, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide style={{ maxWidth: "260px" }} key={index}>
                   <CourseCard loading={true} />
                 </SwiperSlide>
               ))
             : courses.map((course, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide style={{ maxWidth: "260px" }} key={index}>
                   <CourseCard course={course} loading={false} />
                 </SwiperSlide>
               ))}

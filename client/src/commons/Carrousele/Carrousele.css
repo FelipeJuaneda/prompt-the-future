@@ -5,3 +5,14 @@
 .swiper-pagination-bullet-active {
   background: #5e1999;
 }
+
+.swiper-wrapper {
+  justify-content: center;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .swiper-wrapper {
+    justify-content: flex-start;
+  }
+}

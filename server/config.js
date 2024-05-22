@@ -9,6 +9,8 @@ export const API_BASE_URL = process.env.API_BASE_URL;
 export const mongoDBURL = process.env.MONGODB_URL;
 export const TOKEN_SECRET = process.env.TOKEN_SECRET;
 export const MERCADOPAGO_API_KEY = process.env.MERCADOPAGO_TOKEN;
+export const EMAIL_USER = process.env.EMAIL_USER;
+export const EMAIL_PASS = process.env.EMAIL_PASS;
 
 if (!mongoDBURL || !TOKEN_SECRET) {
   console.error("Falta configuración esencial en variables de entorno.");

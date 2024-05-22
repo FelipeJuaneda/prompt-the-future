@@ -1,7 +1,7 @@
 import { Typography, Button, Box, Container, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Spinner from "../../commons/Spinner";
+import Loading from "../../commons/Loading";
 import { getCourseRequest } from "../../api/courses";
 import OnlineButton from "../../commons/OnlineButton";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
@@ -62,7 +62,7 @@ function CourseDetail() {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <Loading />
       ) : (
         <Container sx={{ py: 5 }} maxWidth="lg">
           <Box
@@ -200,13 +200,13 @@ function CourseDetail() {
               </Box>
             </Stack>
           </Stack>
-          <Button
+          {/* <Button
             sx={{ backgroundColor: "green", "&:hover": { bgcolor: "#098609" } }}
             variant="outlined"
             onClick={handleBuyCourse}
           >
             Comprar curso
-          </Button>
+          </Button> */}
         </Container>
       )}
     </>

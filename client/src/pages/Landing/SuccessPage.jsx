@@ -3,7 +3,7 @@ import { Box, Typography, Button, Avatar } from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { getCourseRequest } from "../../api/courses";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Spinner from "../../commons/Spinner";
+import Loading from "../../commons/Loading";
 import { toast } from "sonner";
 
 const SuccessPage = () => {
@@ -31,7 +31,7 @@ const SuccessPage = () => {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <Loading />
       ) : (
         <Box
           sx={{

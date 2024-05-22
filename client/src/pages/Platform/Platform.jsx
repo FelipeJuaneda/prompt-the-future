@@ -11,7 +11,7 @@ import {
   CardActionArea,
   Button,
 } from "@mui/material";
-import Spinner from "../../commons/Spinner";
+import Loading from "../../commons/Loading";
 
 function Platform() {
   const [courses, setCourses] = useState([]);
@@ -33,7 +33,7 @@ function Platform() {
   }, []);
 
   if (loading) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   return (

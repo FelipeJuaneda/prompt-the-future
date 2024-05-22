@@ -14,7 +14,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import QuizIcon from "@mui/icons-material/Quiz";
 import { getContentsRequest } from "../../api/content";
 import { toast } from "sonner";
-import Spinner from "../../commons/Spinner";
+import Loading from "../../commons/Loading";
 
 function CourseContentPage() {
   const { courseId } = useParams();
@@ -40,7 +40,7 @@ function CourseContentPage() {
 
     fetchContent();
   }, [courseId, history]);
-  if (loading) return <Spinner />;
+  if (loading) return <Loading />;
 
   if (!content)
     return <Typography variant="h6">No hay contenido disponible</Typography>;
