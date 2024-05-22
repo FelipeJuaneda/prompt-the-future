@@ -17,9 +17,8 @@ const HackathonDetail = () => {
   const handleJoin = async () => {
     if (!user && !isAuthenticated) {
       setRedirectAfterLogin(location.pathname);
-      toast.warning("Debes estar registrado y logueado para unirte");
       navigate("/login");
-      return;
+      throw new Error("User not authenticated");
     }
     const eventDetails = {
       name: "Buenos Aires Tech Week - AI Hackathon",
@@ -31,9 +30,7 @@ const HackathonDetail = () => {
       name: `${user.name} ${user.surname}`,
     };
     try {
-      console.log("Sending email to:", dataUser.email);
       const response = await sendEventEmail(dataUser, eventDetails);
-      console.log("Email response:", response);
     } catch (error) {
       console.error("Error sending email:", error);
       throw error;
@@ -43,7 +40,10 @@ const HackathonDetail = () => {
     toast.promise(handleJoin, {
       loading: "Enviando...",
       success: "Se ha enviado un correo con la información del evento",
-      error: "Hubo un error al enviar el correo",
+      error: (error) =>
+        error.message === "User not authenticated"
+          ? "Debes tener una cuenta para unirte"
+          : "Hubo un error al enviar el correo",
     });
   };
 

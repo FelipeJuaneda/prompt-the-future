@@ -44,7 +44,9 @@ export default function Login() {
     event.preventDefault();
     toast.promise(signin(values), {
       loading: "Iniciando sesión...",
-      success: "¡Sesión iniciada!",
+      success: (user) => {
+        return `¡Bienvenido/a, ${user.name}!`;
+      },
       error: "Error al iniciar sesión",
     });
   });
