@@ -3,6 +3,8 @@ import {
   loginRequest,
   logoutRequest,
   registerRequest,
+  requestPasswordReset,
+  resetPassword,
   verifyTokenRequest,
 } from "../api/auth";
 import Cookies from "js-cookie";
@@ -62,6 +64,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const requestPasswordResetFunction = async (email) => {
+    try {
+      await requestPasswordReset(email);
+    } catch (error) {
+      setErrors([error.response.data.message || error.response.data]);
+      throw error;
+    }
+  };
+
+  const resetPasswordFunction = async (token, newPassword) => {
+    try {
+      await resetPassword(token, newPassword);
+    } catch (error) {
+      setErrors([error.response.data.message || error.response.data]);
+      console.log(error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -101,6 +122,8 @@ export const AuthProvider = ({ children }) => {
         signup,
         signin,
         logout,
+        requestPasswordResetFunction,
+        resetPasswordFunction,
         errors,
         loading,
         setRedirectAfterLogin,

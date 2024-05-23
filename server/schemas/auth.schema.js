@@ -47,3 +47,13 @@ export const loginSchema = z.object({
       message: "La contraseña debe tener al menos 6 caracteres",
     }),
 });
+
+export const resetPasswordSchema = z.object({
+  password: z
+    .string({
+      required_error: "La contraseña es obligatoria",
+    })
+    .min(6, {
+      message: "La contraseña debe tener al menos 6 caracteres",
+    }),
+});

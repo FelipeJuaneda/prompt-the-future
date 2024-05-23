@@ -16,6 +16,7 @@ import FailurePage from "./pages/Landing/FailurePage";
 import HackathonDetail from "./pages/Landing/HackathonDetail";
 import ComingSoon from "./components/ComingSoon";
 import ScrollToTop from "./commons/ScrollToTop";
+import ResetPassword from "./components/Landing/ResetPassword";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path={`/success-page/:courseId`} element={<SuccessPage />} />
           <Route path={`/failure-page/:courseId`} element={<FailurePage />} />
           <Route path={`/hackathon`} element={<HackathonDetail />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
         <Route path={"/platform"} element={<ComingSoon />} />
 

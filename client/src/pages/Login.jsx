@@ -22,6 +22,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const {
     register,
     handleSubmit,
@@ -33,6 +35,7 @@ export default function Login() {
     errors: loginErrors,
     redirectAfterLogin,
     setRedirectAfterLogin,
+    requestPasswordResetFunction,
   } = useAuth();
   const navigate = useNavigate();
 
@@ -65,6 +68,18 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  const handleForgotPasswordSubmit = handleSubmit(async (values, event) => {
+    event.preventDefault();
+    toast.promise(requestPasswordResetFunction(values.email), {
+      loading: "Enviando correo electrónico...",
+      success: () => {
+        setEmailSent(true);
+        return "Correo electrónico enviado";
+      },
+      error: "Error al enviar el correo electrónico",
+    });
+  });
 
   return (
     <Box
@@ -120,139 +135,230 @@ export default function Login() {
           <Box sx={{ mb: 4 }}>
             <img src={logoNegro} alt="Logo" style={{ maxWidth: "100px" }} />
           </Box>
-          <Stack spacing={1} sx={{ textAlign: "center", marginBottom: 4 }}>
-            <Typography variant="h4" fontWeight="bold">
-              ¡Bienvenido de vuelta!
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Ingresa tus datos
-            </Typography>
-          </Stack>
-          {loginErrors.map((error, i) => (
-            <Alert
-              sx={{ marginBottom: "20px" }}
-              key={i}
-              variant="outlined"
-              severity="error"
-            >
-              {error}
-            </Alert>
-          ))}
-          <Stack
-            onSubmit={handlerOnSubmit}
-            component={"form"}
-            spacing={2}
-            sx={{ mt: 3 }}
-          >
-            <TextField
-              id="email"
-              label="Correo electrónico"
-              variant="outlined"
-              fullWidth
-              type="email"
-              error={!!errors.email}
-              helperText={errors.email ? "El email es requerido" : ""}
-              {...register("email", { required: true })}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: errors.email ? "error.main" : "primary.main",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: errors.email ? "error.main" : "primary.dark",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: errors.email ? "error.main" : "primary.main",
-                  },
-                },
-              }}
-            />
-            <TextField
-              id="password"
-              label="Contraseña"
-              variant="outlined"
-              fullWidth
-              type={showPassword ? "text" : "password"}
-              error={!!errors.password}
-              helperText={errors.password ? "La contraseña es requerida" : ""}
-              {...register("password", { required: true })}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: errors.password
-                      ? "error.main"
-                      : "primary.main",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: errors.password
-                      ? "error.main"
-                      : "primary.dark",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: errors.password
-                      ? "error.main"
-                      : "primary.main",
-                  },
-                },
-              }}
-            />
-            <Button
-              variant="contained"
-              fullWidth
-              type="submit"
-              sx={{
-                backgroundColor: "primary.main",
-                padding: "10px 20px",
-                fontSize: "1rem",
-                "&:hover": {
-                  backgroundColor: "primary.dark",
-                },
-              }}
-            >
-              Iniciar sesión
-            </Button>
-            <Link
-              component={LinkRouter}
-              to="/forgot-password"
-              underline="hover"
-              sx={{
-                mt: 1,
-                textAlign: "center",
-                display: "block",
-                color: "primary.main",
-              }}
-            >
-              ¿Olvidaste tu contraseña?
-            </Link>
-          </Stack>
-          <Typography
-            variant="body1"
-            sx={{ textAlign: "center", color: "text.secondary", mt: 3 }}
-          >
-            ¿No tienes una cuenta?{" "}
-            <Link
-              component={LinkRouter}
-              to="/register"
-              underline="hover"
-              color="primary"
-            >
-              Regístrate
-            </Link>
-          </Typography>
+          {forgotPassword ? (
+            emailSent ? (
+              <Typography variant="h6" color="text.primary">
+                Hemos enviado un correo electrónico a tu dirección de correo con
+                instrucciones para restablecer tu contraseña.
+              </Typography>
+            ) : (
+              <Stack gap={3} sx={{ textAlign: "center", marginBottom: 4 }}>
+                <Box>
+                  <Typography variant="h4" fontWeight="bold">
+                    Restablecer contraseña
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Ingresa tu correo electrónico y te enviaremos un código para
+                    restablecerla.
+                  </Typography>
+                </Box>
+                <Box>
+                  <TextField
+                    id="email"
+                    label="Correo electrónico"
+                    variant="outlined"
+                    fullWidth
+                    type="email"
+                    error={!!errors.email}
+                    helperText={errors.email ? "El email es requerido" : ""}
+                    {...register("email", { required: true })}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: errors.email
+                            ? "error.main"
+                            : "primary.main",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: errors.email
+                            ? "error.main"
+                            : "primary.dark",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: errors.email
+                            ? "error.main"
+                            : "primary.main",
+                        },
+                      },
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={handleForgotPasswordSubmit}
+                    sx={{
+                      marginTop: "10px",
+                      backgroundColor: "primary.main",
+                      padding: "10px 20px",
+                      fontSize: "1rem",
+                      "&:hover": {
+                        backgroundColor: "primary.dark",
+                      },
+                    }}
+                  >
+                    Enviar
+                  </Button>
+                </Box>
+                <Link
+                  underline="hover"
+                  sx={{
+                    mt: 1,
+                    textAlign: "center",
+                    display: "block",
+                    color: "primary.main",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setForgotPassword(false)}
+                >
+                  Volver a Iniciar sesión
+                </Link>
+              </Stack>
+            )
+          ) : (
+            <>
+              <Stack spacing={1} sx={{ textAlign: "center", marginBottom: 4 }}>
+                <Typography variant="h4" fontWeight="bold">
+                  ¡Bienvenido de vuelta!
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Ingresa tus datos
+                </Typography>
+              </Stack>
+              {loginErrors.map((error, i) => (
+                <Alert
+                  sx={{ marginBottom: "20px" }}
+                  key={i}
+                  variant="outlined"
+                  severity="error"
+                >
+                  {error}
+                </Alert>
+              ))}
+              <Stack
+                onSubmit={handlerOnSubmit}
+                component={"form"}
+                spacing={2}
+                sx={{ mt: 3 }}
+              >
+                <TextField
+                  id="email"
+                  label="Correo electrónico"
+                  variant="outlined"
+                  fullWidth
+                  type="email"
+                  error={!!errors.email}
+                  helperText={errors.email ? "El email es requerido" : ""}
+                  {...register("email", { required: true })}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: errors.email
+                          ? "error.main"
+                          : "primary.main",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: errors.email
+                          ? "error.main"
+                          : "primary.dark",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: errors.email
+                          ? "error.main"
+                          : "primary.main",
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  id="password"
+                  label="Contraseña"
+                  variant="outlined"
+                  fullWidth
+                  type={showPassword ? "text" : "password"}
+                  error={!!errors.password}
+                  helperText={
+                    errors.password ? "La contraseña es requerida" : ""
+                  }
+                  {...register("password", { required: true })}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: errors.password
+                          ? "error.main"
+                          : "primary.main",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: errors.password
+                          ? "error.main"
+                          : "primary.dark",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: errors.password
+                          ? "error.main"
+                          : "primary.main",
+                      },
+                    },
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                  sx={{
+                    backgroundColor: "primary.main",
+                    padding: "10px 20px",
+                    fontSize: "1rem",
+                    "&:hover": {
+                      backgroundColor: "primary.dark",
+                    },
+                  }}
+                >
+                  Iniciar sesión
+                </Button>
+                <Link
+                  underline="hover"
+                  sx={{
+                    mt: 1,
+                    textAlign: "center",
+                    display: "block",
+                    color: "primary.main",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setForgotPassword(true)}
+                >
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </Stack>
+              <Typography
+                variant="body1"
+                sx={{ textAlign: "center", color: "text.secondary", mt: 3 }}
+              >
+                ¿No tienes una cuenta?{" "}
+                <Link
+                  component={LinkRouter}
+                  to="/register"
+                  underline="hover"
+                  color="primary"
+                >
+                  Regístrate
+                </Link>
+              </Typography>
+            </>
+          )}
         </Box>
       </Box>
     </Box>
