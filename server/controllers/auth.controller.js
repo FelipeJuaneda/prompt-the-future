@@ -116,7 +116,6 @@ export const verifyToken = async (req, res) => {
   });
 };
 
-// Función para enviar correos electrónicos utilizando Nodemailer
 const sendEmail = async (email, subject, html) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -136,16 +135,13 @@ const sendEmail = async (email, subject, html) => {
 
 export const requestPasswordReset = async (req, res) => {
   const { email } = req.body;
-
   try {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-
     const token = jwt.sign({ id: user._id }, TOKEN_SECRET, { expiresIn: "1h" });
     const resetLink = `${BASE_URL}/reset-password?token=${token}`;
-
     const htmlMessage = `
       <div style="font-family: Arial, sans-serif; text-align: center;">
         <h1 style="color: #333;">
@@ -160,9 +156,7 @@ export const requestPasswordReset = async (req, res) => {
         </p>
       </div>
     `;
-
     await sendEmail(email, "Restablecimiento de contraseña", htmlMessage);
-
     res
       .status(200)
       .json({ message: "Correo de restablecimiento de contraseña enviado" });
@@ -173,7 +167,6 @@ export const requestPasswordReset = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
   const { token, newPassword } = req.body;
-
   try {
     resetPasswordSchema.parse({ password: newPassword });
     const decoded = jwt.verify(token, TOKEN_SECRET);
@@ -181,10 +174,8 @@ export const resetPassword = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-
     user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
-
     res.status(200).json({ message: "Contraseña restablecida correctamente" });
   } catch (error) {
     res.status(500).json({ message: error.message });

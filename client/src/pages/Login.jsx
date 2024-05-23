@@ -77,7 +77,9 @@ export default function Login() {
         setEmailSent(true);
         return "Correo electrónico enviado";
       },
-      error: "Error al enviar el correo electrónico",
+      error: (err) => {
+        return err.response.data.message || "Error al iniciar sesión";
+      },
     });
   });
 
@@ -138,7 +140,7 @@ export default function Login() {
           {forgotPassword ? (
             emailSent ? (
               <Typography variant="h6" color="text.primary">
-                Hemos enviado un correo electrónico a tu dirección de correo con
+                Hemos enviado un correo electrónico a tu dirección con
                 instrucciones para restablecer tu contraseña.
               </Typography>
             ) : (

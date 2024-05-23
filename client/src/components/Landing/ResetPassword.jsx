@@ -16,6 +16,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useAuth } from "../../context/AuthContext";
 import logoNegro from "../../assets/icons/logoNegro.svg";
+
 export default function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [searchParams] = useSearchParams();
