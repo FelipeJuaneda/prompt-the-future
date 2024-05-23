@@ -6,15 +6,22 @@ import {
   Button,
   Link,
   Alert,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { Link as LinkRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import fondoLogin from "../assets/imgs/fondoLogin.png";
+import logoNegro from "../assets/icons/logoNegro.svg";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -51,82 +58,203 @@ export default function Login() {
     });
   });
 
+  const handleClickShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Box
       sx={{
-        mx: "auto",
-        maxWidth: "md",
-        p: 4,
-        backgroundColor: "secondary.main",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        height: "calc(100vh - 75px)",
+        backgroundColor: "background.default",
+        color: "text.primary",
       }}
     >
-      <Stack spacing={3} sx={{ textAlign: "center" }}>
-        <Typography variant="h4" fontWeight="bold">
-          Iniciar sesión
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Ingresa tus credenciales para acceder a tu cuenta.
-        </Typography>
-      </Stack>
-      {loginErrors.map((error, i) => (
-        <Alert
-          sx={{ marginBottom: "20px" }}
-          key={i}
-          variant="outlined"
-          severity="error"
-        >
-          {error}
-        </Alert>
-      ))}
-      <Stack onSubmit={handlerOnSubmit} component={"form"} spacing={2}>
-        <Stack spacing={2}>
-          <TextField
-            id="email"
-            label="Correo electrónico"
-            variant="outlined"
-            fullWidth
-            type="email"
-            {...register("email", { required: true })}
-          />
-          {errors.email && (
-            <Alert variant="outlined" severity="warning">
-              El email es requerido
-            </Alert>
-          )}
-        </Stack>
-        <Stack spacing={2}>
-          <TextField
-            id="password"
-            label="Contraseña"
-            variant="outlined"
-            fullWidth
-            type="password"
-            {...register("password", { required: true })}
-          />
-          {errors.password && (
-            <Alert variant="outlined" severity="warning">
-              La contraseña es requerida
-            </Alert>
-          )}
-        </Stack>
-        <Button variant="contained" fullWidth type="submit">
-          Iniciar sesión
-        </Button>
-      </Stack>
-      <Typography
-        variant="body1"
-        sx={{ textAlign: "center", color: "text.secondary", mt: 2 }}
+      <Box
+        sx={{
+          flex: 1,
+          display: { xs: "none", md: "flex" },
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundImage: `url(${fondoLogin})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
+        }}
       >
-        ¿No tienes una cuenta?{" "}
-        <Link
-          component={LinkRouter}
-          to="/register"
-          underline="hover"
-          color="primary"
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            width: "100%",
+            height: "50%",
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0), rgba(44,44,44,1))",
+          }}
+        />
+      </Box>
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: { xs: 3, sm: 6 },
+          backgroundColor: "secondary.main",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: "750px",
+            borderRadius: 2,
+            textAlign: "center",
+          }}
         >
-          Regístrate
-        </Link>
-      </Typography>
+          <Box sx={{ mb: 4 }}>
+            <img src={logoNegro} alt="Logo" style={{ maxWidth: "100px" }} />
+          </Box>
+          <Stack spacing={1} sx={{ textAlign: "center", marginBottom: 4 }}>
+            <Typography variant="h4" fontWeight="bold">
+              ¡Bienvenido de vuelta!
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Ingresa tus datos
+            </Typography>
+          </Stack>
+          {loginErrors.map((error, i) => (
+            <Alert
+              sx={{ marginBottom: "20px" }}
+              key={i}
+              variant="outlined"
+              severity="error"
+            >
+              {error}
+            </Alert>
+          ))}
+          <Stack
+            onSubmit={handlerOnSubmit}
+            component={"form"}
+            spacing={2}
+            sx={{ mt: 3 }}
+          >
+            <TextField
+              id="email"
+              label="Correo electrónico"
+              variant="outlined"
+              fullWidth
+              type="email"
+              error={!!errors.email}
+              helperText={errors.email ? "El email es requerido" : ""}
+              {...register("email", { required: true })}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: errors.email ? "error.main" : "primary.main",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: errors.email ? "error.main" : "primary.dark",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: errors.email ? "error.main" : "primary.main",
+                  },
+                },
+              }}
+            />
+            <TextField
+              id="password"
+              label="Contraseña"
+              variant="outlined"
+              fullWidth
+              type={showPassword ? "text" : "password"}
+              error={!!errors.password}
+              helperText={errors.password ? "La contraseña es requerida" : ""}
+              {...register("password", { required: true })}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: errors.password
+                      ? "error.main"
+                      : "primary.main",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: errors.password
+                      ? "error.main"
+                      : "primary.dark",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: errors.password
+                      ? "error.main"
+                      : "primary.main",
+                  },
+                },
+              }}
+            />
+            <Button
+              variant="contained"
+              fullWidth
+              type="submit"
+              sx={{
+                backgroundColor: "primary.main",
+                padding: "10px 20px",
+                fontSize: "1rem",
+                "&:hover": {
+                  backgroundColor: "primary.dark",
+                },
+              }}
+            >
+              Iniciar sesión
+            </Button>
+            <Link
+              component={LinkRouter}
+              to="/forgot-password"
+              underline="hover"
+              sx={{
+                mt: 1,
+                textAlign: "center",
+                display: "block",
+                color: "primary.main",
+              }}
+            >
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </Stack>
+          <Typography
+            variant="body1"
+            sx={{ textAlign: "center", color: "text.secondary", mt: 3 }}
+          >
+            ¿No tienes una cuenta?{" "}
+            <Link
+              component={LinkRouter}
+              to="/register"
+              underline="hover"
+              color="primary"
+            >
+              Regístrate
+            </Link>
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 }
