@@ -75,6 +75,7 @@ export default function Register() {
         canonical="https://prompt-the-future.com/register"
       />
       <Box
+        component={"section"}
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row-reverse" },

@@ -96,6 +96,8 @@ const HackathonDetail = () => {
               Unirme
             </Button>
             <Button
+              href="https://discord.com/invite/QBWdf3PA"
+              target="_blank"
               variant="outlined"
               sx={{
                 textTransform: "none",
@@ -388,6 +390,8 @@ const HackathonDetail = () => {
               Unirme
             </Button>
             <Button
+              href="https://discord.com/invite/QBWdf3PA"
+              target="_blank"
               variant="outlined"
               sx={{
                 textTransform: "none",

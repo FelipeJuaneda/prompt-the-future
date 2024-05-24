@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
 import {
   Box,
   Container,
@@ -25,17 +24,6 @@ const Footer = () => {
         paddingTop: "24px ",
       }}
     >
-      <Helmet>
-        <title>Conéctate con Nosotros | Prompt The Future</title>
-        <meta
-          name="description"
-          content="Conéctate con Prompt The Future. Descubre nuestros cursos, conoce a nuestro equipo, y únete a nuestra comunidad en Discord. Contacta con nosotros por email o Whatsapp y síguenos en LinkedIn e Instagram."
-        />
-        <meta
-          name="keywords"
-          content="contacto Prompt The Future, cursos IA, equipo Prompt The Future, comunidad Discord, email, Whatsapp, LinkedIn, Instagram"
-        />
-      </Helmet>
       <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
       <Box sx={{ pt: 5, pb: 1 }}>
         <Grid container spacing={4}>
@@ -106,16 +94,15 @@ const Footer = () => {
               Contacto
             </Typography>
             <Link
-              to={"/"}
-              component={LinkRouter}
               underline="hover"
+              href="mailto:Prompt The Future<admin@prompt-the-future.com>"
               style={{
                 color: "white",
                 display: "block",
                 marginBottom: "8px",
               }}
             >
-              Email: info@example.com
+              Email: admin@prompt-the-future.com
             </Link>
             <Link
               to={"/"}
@@ -150,7 +137,11 @@ const Footer = () => {
           gap={5}
           sx={{ pt: 5, pb: 2 }}
         >
-          <Link to={"/"} component={LinkRouter} underline="hover">
+          <Link
+            href="https://www.linkedin.com/company/prompt-the-future/"
+            target="_blank"
+            underline="hover"
+          >
             <Box
               component={"img"}
               src={linkedinIcon}
@@ -158,7 +149,11 @@ const Footer = () => {
               sx={{ width: 30, height: 30, "&:hover": { opacity: 0.6 } }}
             />
           </Link>
-          <Link to={"/"} component={LinkRouter} underline="hover">
+          <Link
+            href="https://www.instagram.com/prompt_thefuture?igsh=eGJ3enIxOHptYWl0&utm_source=qr"
+            target="_blank"
+            underline="hover"
+          >
             <Box
               component={"img"}
               src={instagramIcon}

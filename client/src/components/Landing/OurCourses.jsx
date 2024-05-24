@@ -26,10 +26,14 @@ const OurCourses = () => {
   }, []);
 
   return (
-    <Container sx={{ backgroundColor: "primary.main" }} maxWidth="lg">
+    <Container
+      component={"section"}
+      sx={{ backgroundColor: "primary.main" }}
+      maxWidth="lg"
+    >
       <Box sx={{ padding: "60px 0" }}>
         <Typography
-          component={"h1"}
+          component={"h3"}
           variant="h6"
           sx={{ textAlign: "center", fontWeight: "bold" }}
           color={"secondary.main"}
@@ -46,7 +50,7 @@ const OurCourses = () => {
         <Typography
           color={"secondary.main"}
           sx={{ fontWeight: "bold" }}
-          component={"h2"}
+          component={"h4"}
           variant="h4"
         >
           Nuestros cursos

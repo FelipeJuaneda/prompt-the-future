@@ -29,6 +29,7 @@ const questions = [
 const FrequentQuestions = () => {
   return (
     <Container
+      component={"section"}
       sx={{
         backgroundColor: "primary.main",
         borderRadius: "8px",
@@ -36,6 +37,7 @@ const FrequentQuestions = () => {
       maxWidth="xl"
     >
       <Typography
+        component={"h6"}
         variant="h4"
         sx={{
           color: "#fff",

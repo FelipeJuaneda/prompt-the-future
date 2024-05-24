@@ -4,6 +4,7 @@ import fondoLanding from "../../assets/imgs/fondoLanding.png";
 const Title = () => {
   return (
     <Box
+      component={"section"}
       sx={{
         height: "70vh",
         display: "flex",
@@ -88,6 +89,7 @@ const Title = () => {
           sx={{ paddingLeft: { xs: "10px", md: "17px" }, marginTop: "10px" }}
         >
           <Typography
+            component={"p"}
             variant="h6"
             sx={{
               color: "primary.main",

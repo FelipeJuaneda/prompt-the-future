@@ -27,7 +27,7 @@ const Hackathons = () => {
         sx={{ backgroundColor: "secondary.main", marginBottom: 4 }}
       />
       <Box sx={{ padding: { xs: "30px 0", md: "50px" } }}>
-        <Typography component={"h1"} variant="h4" color={"secondary.main"}>
+        <Typography component={"h5"} variant="h4" color={"secondary.main"}>
           Hackathons
         </Typography>
       </Box>
@@ -75,7 +75,7 @@ const Hackathons = () => {
           </Box>
           <Typography
             sx={{ color: "black", fontWeight: "bold" }}
-            component={"h2"}
+            component={"p"}
             variant="h6"
           >
             Buenos Aires Tech Week - AI Hackathon Build LLM Applications With

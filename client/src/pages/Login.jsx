@@ -93,6 +93,7 @@ export default function Login() {
         canonical="https://prompt-the-future.com/login"
       />
       <Box
+        component={"section"}
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
@@ -166,7 +167,7 @@ export default function Login() {
                       para restablecerla.
                     </Typography>
                   </Box>
-                  <Box>
+                  <Box component={"form"}>
                     <TextField
                       id="email"
                       label="Correo electrónico"
@@ -199,6 +200,7 @@ export default function Login() {
                     <Button
                       variant="contained"
                       fullWidth
+                      type="submit"
                       onClick={handleForgotPasswordSubmit}
                       sx={{
                         marginTop: "10px",

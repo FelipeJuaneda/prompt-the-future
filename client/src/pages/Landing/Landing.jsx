@@ -1,10 +1,10 @@
-import React from "react";
 import Title from "../../components/Landing/Title";
 import OurCourses from "../../components/Landing/OurCourses";
 import WhyPromptTheFuture from "../../components/Landing/WhyPromptTheFuture";
 import Hackathons from "../../components/Landing/Hackathons";
 import FrequentQuestions from "../../components/Landing/FrequentQuestions";
 import SEO from "../../commons/Seo";
+import { Box } from "@mui/material";
 
 const Landing = () => {
   return (
@@ -15,11 +15,13 @@ const Landing = () => {
         keywords="Prompt The Future, cursos de IA, Inteligencia Artificial, hackathons, preguntas frecuentes, educación en IA, eventos tecnológicos, plataforma de IA"
         canonical="https://prompt-the-future.com/"
       />
-      <Title />
-      <OurCourses />
-      <WhyPromptTheFuture />
-      <Hackathons />
-      <FrequentQuestions />
+      <Box component={"main"}>
+        <Title />
+        <OurCourses />
+        <WhyPromptTheFuture />
+        <Hackathons />
+        <FrequentQuestions />
+      </Box>
     </>
   );
 };

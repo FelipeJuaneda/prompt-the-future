@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -12,7 +11,6 @@ import {
   MenuItem,
   Stack,
   Toolbar,
-  Typography,
   Slide,
   useScrollTrigger,
   Fab,
@@ -119,17 +117,6 @@ function Header(props) {
 
   return (
     <Box component={"header"}>
-      <Helmet>
-        <title>Navega por Prompt The Future | Prompt The Future</title>
-        <meta
-          name="description"
-          content="Navega fácilmente por Prompt The Future. Descubre nuestros cursos, hackathons, eventos, y más desde nuestra intuitiva barra de navegación. Únete a nuestra plataforma y accede a recursos de vanguardia."
-        />
-        <meta
-          name="keywords"
-          content="navegación Prompt The Future, barra de navegación, cursos IA, hackathons, eventos, plataforma educativa, recursos IA"
-        />
-      </Helmet>
       <HideOnScroll {...props}>
         <AppBar sx={{ backgroundColor: "primary.main" }}>
           <Container sx={{ height: "75px" }} maxWidth="xl">

@@ -14,7 +14,7 @@ import tecnologyIcon from "../../assets/icons/tecnologyIcon.svg";
 
 const WhyPromptTheFuture = () => {
   return (
-    <Container maxWidth="xl">
+    <Container component={"section"} maxWidth="xl">
       <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
       <Stack
         direction={"row"}
@@ -22,6 +22,7 @@ const WhyPromptTheFuture = () => {
         sx={{ padding: "60px 0" }}
       >
         <Typography
+          component={"span"}
           variant="h5"
           sx={{
             textAlign: "center",
@@ -33,6 +34,7 @@ const WhyPromptTheFuture = () => {
           Aprende
         </Typography>
         <Typography
+          component={"span"}
           variant="h5"
           sx={{
             textAlign: "center",
@@ -44,6 +46,7 @@ const WhyPromptTheFuture = () => {
           Innova
         </Typography>
         <Typography
+          component={"span"}
           variant="h5"
           sx={{
             textAlign: "center",
@@ -77,6 +80,7 @@ const WhyPromptTheFuture = () => {
             }}
           >
             <Typography
+              component={"span"}
               variant="h4"
               sx={{
                 fontWeight: "bold",
@@ -86,8 +90,8 @@ const WhyPromptTheFuture = () => {
             >
               ¿Por qué{" "}
               <Typography
+                component={"span"}
                 variant="h4"
-                component="span"
                 sx={{ color: "#8627CC", fontWeight: "bold" }}
               >
                 Prompt
