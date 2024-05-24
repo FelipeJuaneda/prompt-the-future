@@ -1,5 +1,6 @@
-import { Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Box, Container, Typography } from "@mui/material";
 import { SwiperSlide } from "swiper/react";
 import OnlineButton from "../../commons/OnlineButton";
 import CourseCard from "./CourseCard";
@@ -26,45 +27,60 @@ const OurCourses = () => {
   }, []);
 
   return (
-    <Container sx={{ backgroundColor: "primary.main" }} maxWidth="lg">
-      <Box sx={{ padding: "60px 0" }}>
-        <Typography
-          variant="h6"
-          sx={{ textAlign: "center", fontWeight: "bold" }}
-          color={"secondary.main"}
-        >
-          Unite a la comunidad de IA con mayor excelencia Académica.
-        </Typography>
-      </Box>
+    <>
+      <Helmet>
+        <title>Nu nuestros Cursos | Prompt The Future</title>
+        <meta
+          name="description"
+          content="Descubre nuestros cursos de Inteligencia Artificial en Prompt The Future. Únete a la comunidad con la mayor excelencia académica y transforma tu futuro aprendiendo de los mejores."
+        />
+        <meta
+          name="keywords"
+          content="cursos de Inteligencia Artificial, Prompt The Future, excelencia académica, cursos IA, aprendizaje IA, comunidad IA"
+        />
+      </Helmet>
+      <Container sx={{ backgroundColor: "primary.main" }} maxWidth="lg">
+        <Box sx={{ padding: "60px 0" }}>
+          <Typography
+            component={"h1"}
+            variant="h6"
+            sx={{ textAlign: "center", fontWeight: "bold" }}
+            color={"secondary.main"}
+          >
+            Unite a la comunidad de IA con mayor excelencia Académica.
+          </Typography>
+        </Box>
 
-      <Box sx={{ paddingLeft: 4 }}>
-        <OnlineButton />
-      </Box>
+        <Box sx={{ paddingLeft: 4 }}>
+          <OnlineButton />
+        </Box>
 
-      <Box id="cursos-section" sx={{ py: "40px" }}>
-        <Typography
-          color={"secondary.main"}
-          sx={{ fontWeight: "bold" }}
-          variant="h4"
-        >
-          Nuestros cursos
-        </Typography>
+        <Box id="cursos-section" sx={{ py: "40px" }}>
+          <Typography
+            color={"secondary.main"}
+            sx={{ fontWeight: "bold" }}
+            component={"h2"}
+            variant="h4"
+          >
+            Nuestros cursos
+          </Typography>
 
-        <Carrousele>
-          {loading
-            ? Array.from({ length: skeletonCount }).map((_, index) => (
-                <SwiperSlide style={{ maxWidth: "260px" }} key={index}>
-                  <CourseCard loading={true} />
-                </SwiperSlide>
-              ))
-            : courses.map((course, index) => (
-                <SwiperSlide style={{ maxWidth: "260px" }} key={index}>
-                  <CourseCard course={course} loading={false} />
-                </SwiperSlide>
-              ))}
-        </Carrousele>
-      </Box>
-    </Container>
+          <Carrousele>
+            {loading
+              ? Array.from({ length: skeletonCount }).map((_, index) => (
+                  <SwiperSlide style={{ maxWidth: "260px" }} key={index}>
+                    <CourseCard loading={true} />
+                  </SwiperSlide>
+                ))
+              : courses.map((course, index) => (
+                  <SwiperSlide style={{ maxWidth: "260px" }} key={index}>
+                    <CourseCard course={course} loading={false} />
+                  </SwiperSlide>
+                ))}
+          </Carrousele>
+        </Box>
+      </Container>
+    </>
   );
 };
 

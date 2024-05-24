@@ -107,7 +107,7 @@ const HackathonDetail = () => {
             <Box
               component="img"
               src={discord}
-              alt="Discord Icon"
+              alt="Prompt The FutureDiscord"
               sx={{ width: 20, height: 20, ml: 1 }}
             />
           </Button>
@@ -387,7 +387,7 @@ const HackathonDetail = () => {
             <Box
               component="img"
               src={discord}
-              alt="Discord Icon"
+              alt="Prompt The Future Discord"
               sx={{ width: 20, height: 20, ml: 1 }}
             />
           </Button>

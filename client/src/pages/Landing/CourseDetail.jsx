@@ -75,7 +75,7 @@ function CourseDetail() {
             }}
             component={"img"}
             src={courseDetail.img}
-            alt="robot"
+            alt="Robot Prompt The Future"
           />
           <Box sx={{ width: { xs: "100%", md: "65%", lg: "70%" } }}>
             <Typography

@@ -135,7 +135,11 @@ export default function Login() {
           }}
         >
           <Box sx={{ mb: 4 }}>
-            <img src={logoNegro} alt="Logo" style={{ maxWidth: "100px" }} />
+            <img
+              src={logoNegro}
+              alt="Logo Prompt The Future"
+              style={{ maxWidth: "100px" }}
+            />
           </Box>
           {forgotPassword ? (
             emailSent ? (

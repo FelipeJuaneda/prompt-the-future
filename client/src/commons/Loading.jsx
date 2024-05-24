@@ -15,7 +15,7 @@ const Loading = () => {
       <Box
         component="img"
         src={logo}
-        alt="Logo"
+        alt="Logo Prompt The Future"
         sx={{
           width: 100,
           height: 100,

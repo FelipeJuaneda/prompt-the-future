@@ -116,7 +116,11 @@ export default function Register() {
           }}
         >
           <Box sx={{ mb: 4 }}>
-            <img src={logoNegro} alt="Logo" style={{ maxWidth: "100px" }} />
+            <img
+              src={logoNegro}
+              alt="Logo Prompt The Future"
+              style={{ maxWidth: "100px" }}
+            />
           </Box>
           <Stack spacing={1} sx={{ textAlign: "center", marginBottom: 4 }}>
             <Typography variant="h4" fontWeight="bold">

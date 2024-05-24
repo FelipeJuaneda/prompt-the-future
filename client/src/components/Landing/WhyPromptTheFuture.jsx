@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import {
   Box,
   Container,
@@ -14,164 +15,181 @@ import tecnologyIcon from "../../assets/icons/tecnologyIcon.svg";
 
 const WhyPromptTheFuture = () => {
   return (
-    <Container maxWidth="xl">
-      <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
-      <Stack
-        direction={"row"}
-        justifyContent={"space-around"}
-        sx={{ padding: "60px 0" }}
-      >
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "secondary.main",
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-          }}
+    <>
+      <Helmet>
+        <title>¿Por Qué Prompt The Future? | Prompt The Future</title>
+        <meta
+          name="description"
+          content="Descubre por qué Prompt The Future es la mejor opción para aprender y trabajar con Inteligencia Artificial. Potencia tu carrera, obtén certificaciones de empresas líderes, únete a una comunidad activa y trabaja con tecnologías revolucionarias."
+        />
+        <meta
+          name="keywords"
+          content="Prompt The Future, Inteligencia Artificial, certificación IA, comunidad tecnológica, tecnologías revolucionarias, aprendizaje IA, carrera profesional IA"
+        />
+      </Helmet>
+      <Container maxWidth="xl">
+        <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
+        <Stack
+          direction={"row"}
+          justifyContent={"space-around"}
+          sx={{ padding: "60px 0" }}
         >
-          Aprende
-        </Typography>
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "secondary.main",
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-          }}
-        >
-          Innova
-        </Typography>
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "secondary.main",
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-          }}
-        >
-          Transforma
-        </Typography>
-      </Stack>
-      <Grid
-        container
-        spacing={4}
-        sx={{ alignItems: "center", minHeight: "500px" }}
-      >
-        <Grid item xs={12} md={6}>
-          <Box
+          <Typography
+            variant="h5"
             sx={{
-              backgroundImage: `url(${fondoImg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              borderRadius: "20px",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              minHeight: "376px",
-              p: 4,
+              textAlign: "center",
+              fontWeight: "bold",
+              color: "secondary.main",
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
             }}
           >
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: "bold", textAlign: "right", display: "block" }}
+            Aprende
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center",
+              fontWeight: "bold",
+              color: "secondary.main",
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+            }}
+          >
+            Innova
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center",
+              fontWeight: "bold",
+              color: "secondary.main",
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+            }}
+          >
+            Transforma
+          </Typography>
+        </Stack>
+        <Grid
+          container
+          spacing={4}
+          sx={{ alignItems: "center", minHeight: "500px" }}
+        >
+          <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                backgroundImage: `url(${fondoImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "20px",
+                color: "white",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                minHeight: "376px",
+                p: 4,
+              }}
             >
-              ¿Por qué{" "}
               <Typography
                 variant="h4"
-                component="span"
-                sx={{ color: "#8627CC", fontWeight: "bold" }}
+                sx={{
+                  fontWeight: "bold",
+                  textAlign: "right",
+                  display: "block",
+                }}
               >
-                Prompt
-              </Typography>
-              <br />
-              The Future?
-            </Typography>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Grid container spacing={2}>
-            {[
-              {
-                icon: rocketIcon,
-                title: "Potencia tu carrera profesional",
-                text: "Aprende a utilizar la IA para potenciar tu carrera y adaptarte a las nuvas tecnologias, manteniendote en la vanguardia del desarollo tecnologico",
-              },
-              {
-                icon: certificateIcon,
-                title: "Certifícate con empresas líderes de la Industria",
-                text: "Nuestros certificados estan avalados por los mejores profesionales trabajando con IA y las empresas lideres de la industria",
-              },
-              {
-                icon: comunityIcon,
-                title: "Participa activamente de una comunidad.",
-                text: "Conviertete en parte de nuestra comunidad, aportando experiencias, recursos y participando de nuestras actividades para ganar experiencia practica",
-              },
-              {
-                icon: tecnologyIcon,
-                title:
-                  "Trabaja con las tecnologías mas nuevas y revolucionarias",
-                text: "Todos nuestros cursos y actividades estan constantemente actualizadas para utilizar las tecnologias mas novedosas.",
-              },
-            ].map((item, index) => (
-              <Grid item xs={12} sm={6} md={6} key={index}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "space-evenly",
-                    bgcolor: "#454444",
-                    borderRadius: 3,
-                    height: 180,
-                    p: 2,
-                    overflow: "hidden",
-                  }}
+                ¿Por qué{" "}
+                <Typography
+                  variant="h4"
+                  component="span"
+                  sx={{ color: "#8627CC", fontWeight: "bold" }}
                 >
-                  <Stack
-                    width={"100%"}
-                    direction={"row"}
-                    justifyContent={"space-between"}
-                    gap={2}
+                  Prompt
+                </Typography>
+                <br />
+                The Future?
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={2}>
+              {[
+                {
+                  icon: rocketIcon,
+                  title: "Potencia tu carrera profesional",
+                  text: "Aprende a utilizar la IA para potenciar tu carrera y adaptarte a las nuevas tecnologías, manteniéndote en la vanguardia del desarrollo tecnológico.",
+                },
+                {
+                  icon: certificateIcon,
+                  title: "Certifícate con empresas líderes de la Industria",
+                  text: "Nuestros certificados están avalados por los mejores profesionales trabajando con IA y las empresas líderes de la industria.",
+                },
+                {
+                  icon: comunityIcon,
+                  title: "Participa activamente de una comunidad.",
+                  text: "Conviértete en parte de nuestra comunidad, aportando experiencias, recursos y participando de nuestras actividades para ganar experiencia práctica.",
+                },
+                {
+                  icon: tecnologyIcon,
+                  title:
+                    "Trabaja con las tecnologías más nuevas y revolucionarias",
+                  text: "Todos nuestros cursos y actividades están constantemente actualizadas para utilizar las tecnologías más novedosas.",
+                },
+              ].map((item, index) => (
+                <Grid item xs={12} sm={6} md={6} key={index}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "space-evenly",
+                      bgcolor: "#454444",
+                      borderRadius: 3,
+                      height: 180,
+                      p: 2,
+                      overflow: "hidden",
+                    }}
                   >
+                    <Stack
+                      width={"100%"}
+                      direction={"row"}
+                      justifyContent={"space-between"}
+                      gap={2}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontWeight: "bold",
+                          textAlign: "start",
+                          color: "white",
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                      <Box
+                        component={"img"}
+                        src={item.icon}
+                        alt={item.title}
+                        sx={{ width: 25, height: 25 }}
+                      />
+                    </Stack>
                     <Typography
-                      variant="body2"
+                      variant="caption"
                       sx={{
-                        fontWeight: "bold",
                         textAlign: "start",
                         color: "white",
                       }}
                     >
-                      {item.title}
+                      {item.text}
                     </Typography>
-                    <Box
-                      component={"img"}
-                      src={item.icon}
-                      alt={item.title}
-                      sx={{ width: 25, height: 25 }}
-                    />
-                  </Stack>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      textAlign: "start",
-                      color: "white",
-                    }}
-                  >
-                    {item.text}
-                  </Typography>
-                </Box>
-              </Grid>
-            ))}
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 
