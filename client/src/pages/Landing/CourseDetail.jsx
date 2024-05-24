@@ -9,6 +9,7 @@ import AcordionDetailCourses from "../../components/Landing/AcordionDetailCourse
 import { createPaymentForCourse } from "../../api/payment";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
+import SEO from "../../commons/Seo";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
@@ -61,6 +62,12 @@ function CourseDetail() {
   };
   return (
     <>
+      <SEO
+        title={`${courseDetail.title} | Prompt The Future`}
+        description={`Descubre el curso ${courseDetail.title} en Prompt The Future. ${courseDetail.description}`}
+        keywords={`curso ${courseDetail.title}, Prompt The Future, educación en IA, curso de Inteligencia Artificial, ${courseDetail.title} en Prompt The Future`}
+        canonical={`https://prompt-the-future.com/courses/details/${id}`}
+      />
       {loading ? (
         <Loading />
       ) : (

@@ -130,6 +130,10 @@ const sendEmail = async (email, subject, html) => {
     to: email,
     subject,
     html,
+    envelope: {
+      from: "noreply@prompt-the-future.com",
+      to: email,
+    },
   });
 };
 

@@ -1,24 +1,20 @@
-import { Helmet } from "react-helmet-async";
+import React from "react";
 import Title from "../../components/Landing/Title";
 import OurCourses from "../../components/Landing/OurCourses";
 import WhyPromptTheFuture from "../../components/Landing/WhyPromptTheFuture";
 import Hackathons from "../../components/Landing/Hackathons";
 import FrequentQuestions from "../../components/Landing/FrequentQuestions";
+import SEO from "../../commons/Seo";
 
 const Landing = () => {
   return (
     <>
-      <Helmet>
-        <title>Inicio | Prompt The Future</title>
-        <meta
-          name="description"
-          content="Bienvenidos a Prompt The Future, la plataforma líder en educación y eventos de Inteligencia Artificial. Descubre nuestros cursos de IA, participa en hackathons, y resuelve tus dudas con nuestras preguntas frecuentes."
-        />
-        <meta
-          name="keywords"
-          content="Prompt The Future, cursos de IA, hackathons, preguntas frecuentes, educación en IA, eventos tecnológicos, plataforma de IA"
-        />
-      </Helmet>
+      <SEO
+        title="Inicio | Prompt The Future"
+        description="Bienvenidos a Prompt The Future, la plataforma líder en educación y eventos de Inteligencia Artificial. Descubre nuestros cursos de IA, participa en hackathons, y resuelve tus dudas con nuestras preguntas frecuentes."
+        keywords="Prompt The Future, cursos de IA, Inteligencia Artificial, hackathons, preguntas frecuentes, educación en IA, eventos tecnológicos, plataforma de IA"
+        canonical="https://prompt-the-future.com/"
+      />
       <Title />
       <OurCourses />
       <WhyPromptTheFuture />

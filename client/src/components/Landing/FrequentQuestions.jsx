@@ -5,7 +5,6 @@ import {
   Typography,
   Container,
   Box,
-  Stack,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
