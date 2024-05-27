@@ -79,7 +79,7 @@ export default function Register() {
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row-reverse" },
-          height: "calc(100vh - 75px)",
+          minHeight: "calc(100vh - 75px)",
           backgroundColor: "background.default",
           color: "text.primary",
         }}

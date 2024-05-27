@@ -57,7 +57,7 @@ const Hackathons = () => {
               position: "absolute",
               right: 0,
               top: { xs: 0, md: 25 },
-              borderTopLeftRadius: "10px",
+              borderTopLeftRadius: { xs: 0, md: "10px" },
               borderBottomLeftRadius: "10px",
             }}
           >

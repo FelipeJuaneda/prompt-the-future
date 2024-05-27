@@ -89,7 +89,7 @@ export default function Login() {
       <SEO
         title="Iniciar Sesión | Prompt The Future"
         description="Inicia sesión en Prompt The Future para acceder a tu cuenta y explorar nuestros cursos y eventos de Inteligencia Artificial. ¡Únete a la comunidad de IA más grande de habla hispana!"
-        keywords="iniciar sesión, login, Prompt The Future, educación en IA, hackathons de IA, eventos de IA, Inteligencia Artificial, plataforma de IA, cursos de IA, comunidad de IA, certificados de IA"
+        keywords="iniciar sesión, login, Prompt The Future, educación en IA, hackathons de IA, eventos de IA, Inteligencia Artificial, plataforma de IA, cursos de IA, comunidad de IA, certificados de IA, IA, comunidad de IA de habla hispana"
         canonical="https://prompt-the-future.com/login"
       />
       <Box
@@ -97,7 +97,7 @@ export default function Login() {
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
-          height: "calc(100vh - 75px)",
+          minHeight: "calc(100vh - 75px)",
           backgroundColor: "background.default",
           color: "text.primary",
         }}

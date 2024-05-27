@@ -222,7 +222,7 @@ function Header(props) {
                     onClose={handleCloseNavMenu}
                   >
                     {pages.map((page) => (
-                      <MenuItem key={page.page}>
+                      <MenuItem onClick={handleCloseNavMenu} key={page.page}>
                         <Button
                           onClick={() => handleNavClick(page.to)}
                           sx={{ color: "inherit", textTransform: "none" }}
