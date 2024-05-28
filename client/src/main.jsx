@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Toaster } from "sonner";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
+import { CoursesProvider } from "./context/CoursesContext.jsx";
 
 const theme = createTheme({
   typography: {
@@ -53,12 +54,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <AuthProvider>
-      <HelmetProvider>
-        <BrowserRouter>
-          <App />
-          <Toaster position="bottom-right" expand={true} richColors />
-        </BrowserRouter>
-      </HelmetProvider>
+      <CoursesProvider>
+        <HelmetProvider>
+          <BrowserRouter>
+            <App />
+            <Toaster position="bottom-right" expand={true} richColors />
+          </BrowserRouter>
+        </HelmetProvider>
+      </CoursesProvider>
     </AuthProvider>
   </ThemeProvider>
 );

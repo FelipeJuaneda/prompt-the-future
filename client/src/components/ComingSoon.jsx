@@ -41,7 +41,14 @@ const ComingSoon = () => {
             color="primary"
             component={Link}
             to="/"
-            sx={{ borderRadius: "50px", padding: "10px 20px" }}
+            sx={{
+              borderRadius: "50px",
+              padding: "10px 20px",
+              backgroundColor: "#8627CC",
+              "&:hover": {
+                backgroundColor: "#6e20a9",
+              },
+            }}
             startIcon={<HomeIcon />}
           >
             Volver al Inicio

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -12,8 +12,11 @@ import arrobaIcon from "../../assets/icons/arroba.svg";
 import instagramIcon from "../../assets/icons/instagram.svg";
 import linkedinIcon from "../../assets/icons/linkedin.svg";
 import { Link as LinkRouter } from "react-router-dom";
+import { useCourses } from "../../context/CoursesContext";
 
 const Footer = () => {
+  const { courses } = useCourses();
+
   return (
     <Container
       component={"footer"}
@@ -21,7 +24,7 @@ const Footer = () => {
       sx={{
         backgroundColor: "primary.main",
         color: "white",
-        paddingTop: "24px ",
+        paddingTop: "24px",
       }}
     >
       <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
@@ -35,26 +38,21 @@ const Footer = () => {
             >
               Educación
             </Typography>
-            <Link
-              to={"/"}
-              component={LinkRouter}
-              underline="hover"
-              style={{
-                color: "white",
-                display: "block",
-                marginBottom: "8px",
-              }}
-            >
-              Curso Fundamentos Inteligencia Artificial
-            </Link>
-            <Link
-              to={"/"}
-              component={LinkRouter}
-              underline="hover"
-              style={{ color: "white" }}
-            >
-              Curso Prompt Engineering
-            </Link>
+            {courses.map((course, index) => (
+              <Link
+                to={`/courses/details/${course._id}`}
+                component={LinkRouter}
+                underline="hover"
+                style={{
+                  color: "white",
+                  display: "block",
+                  marginBottom: index === courses.length - 1 ? "0px" : "8px",
+                }}
+                key={course._id}
+              >
+                Curso {course.title}
+              </Link>
+            ))}
           </Grid>
           <Grid item xs={12} sm={3}>
             <Typography
@@ -73,6 +71,7 @@ const Footer = () => {
                 display: "block",
                 marginBottom: "8px",
               }}
+              aria-label="Equipo"
             >
               Equipo
             </Link>
@@ -81,6 +80,7 @@ const Footer = () => {
               component={LinkRouter}
               underline="hover"
               style={{ color: "white" }}
+              aria-label="Profesores y Tutores"
             >
               Profesores y Tutores
             </Link>
@@ -101,16 +101,17 @@ const Footer = () => {
                 display: "block",
                 marginBottom: "8px",
               }}
+              aria-label="Email: admin@prompt-the-future.com"
             >
               Email: admin@prompt-the-future.com
             </Link>
             <Link
-              to={"/"}
-              component={LinkRouter}
+              href="tel:+5401140853574"
               underline="hover"
               style={{ color: "white" }}
+              aria-label="Whatsapp: +54 011 4085 3574"
             >
-              Whatsapp: +1 234 567 890
+              Whatsapp: +54 011 4085 3574
             </Link>
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -122,10 +123,11 @@ const Footer = () => {
               Discord
             </Typography>
             <Link
-              to={"/"}
-              component={LinkRouter}
+              href="https://discord.com/invite/QBWdf3PA"
+              target="_blank"
               underline="hover"
               style={{ color: "white" }}
+              aria-label="Únete a nuestro Discord!"
             >
               Únete a nuestro Discord!
             </Link>
@@ -141,6 +143,7 @@ const Footer = () => {
             href="https://www.linkedin.com/company/prompt-the-future/"
             target="_blank"
             underline="hover"
+            aria-label="LinkedIn"
           >
             <Box
               component={"img"}
@@ -153,6 +156,7 @@ const Footer = () => {
             href="https://www.instagram.com/prompt_thefuture?igsh=eGJ3enIxOHptYWl0&utm_source=qr"
             target="_blank"
             underline="hover"
+            aria-label="Instagram"
           >
             <Box
               component={"img"}
@@ -161,7 +165,12 @@ const Footer = () => {
               sx={{ width: 30, height: 30, "&:hover": { opacity: 0.6 } }}
             />
           </Link>
-          <Link to={"/"} component={LinkRouter} underline="hover">
+          <Link
+            to={"/"}
+            component={LinkRouter}
+            underline="hover"
+            aria-label="Email"
+          >
             <Box
               component={"img"}
               src={arrobaIcon}
@@ -170,12 +179,12 @@ const Footer = () => {
             />
           </Link>
         </Stack>
-        <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
+        {/* <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
         <Box sx={{ textAlign: "center", pt: 3 }}>
           <Typography variant="caption" sx={{ color: "white" }}>
             © Prompt The Future, Todos los Derechos Reservados
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Container>
   );

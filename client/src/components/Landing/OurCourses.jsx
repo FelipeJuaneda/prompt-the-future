@@ -1,29 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import { SwiperSlide } from "swiper/react";
 import OnlineButton from "../../commons/OnlineButton";
 import CourseCard from "./CourseCard";
-import { getCoursesRequest } from "../../api/courses";
 import Carrousele from "../../commons/Carrousele/Carrousele";
+import { useCourses } from "../../context/CoursesContext";
 
 const OurCourses = () => {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { courses, loading } = useCourses();
   const [skeletonCount, setSkeletonCount] = useState(2);
-
-  useEffect(() => {
-    const getCourses = async () => {
-      try {
-        const response = await getCoursesRequest();
-        setCourses(response.data.data);
-      } catch (error) {
-        console.error("Error al cargar los cursos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getCourses();
-  }, []);
 
   return (
     <Container

@@ -103,6 +103,11 @@ function Header(props) {
   }, [location, targetSection]);
 
   const handleNavClick = (section) => {
+    if (section === "empresas-section") {
+      navigate("/companies");
+      return;
+    }
+
     if (location.pathname === "/") {
       scroller.scrollTo(section, {
         duration: 500,

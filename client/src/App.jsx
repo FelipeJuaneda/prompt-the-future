@@ -17,6 +17,7 @@ import HackathonDetail from "./pages/Landing/HackathonDetail";
 import ComingSoon from "./components/ComingSoon";
 import ScrollToTop from "./commons/ScrollToTop";
 import ResetPassword from "./components/Landing/ResetPassword";
+import Companies from "./pages/Landing/Companies";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
         <Route path={"/platform"} element={<ComingSoon />} />
+        <Route path={"/companies"} element={<Companies />} />
 
         {/* <Route element={<ProtectedRoute />}>
         <Route path="/platform" element={<PlatformLayout />}>
