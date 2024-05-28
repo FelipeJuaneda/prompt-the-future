@@ -6,17 +6,17 @@ import { getCourseRequest } from "../../api/courses";
 import OnlineButton from "../../commons/OnlineButton";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import AcordionDetailCourses from "../../components/Landing/AcordionDetailCourses";
-import { createPaymentForCourse } from "../../api/payment";
-import { useAuth } from "../../context/AuthContext";
+// import { createPaymentForCourse } from "../../api/payment";
+// import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
 import SEO from "../../commons/Seo";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
   const [loading, setLoading] = useState(false);
-  const { user, isAuthenticated, setRedirectAfterLogin } = useAuth();
+  // const { user, isAuthenticated, setRedirectAfterLogin } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const { id } = useParams();
 
   useEffect(() => {
@@ -35,31 +35,31 @@ function CourseDetail() {
     getCourse();
   }, [id]);
 
-  const handleBuyCourse = async () => {
-    if (!isAuthenticated) {
-      setRedirectAfterLogin(location.pathname);
-      navigate("/login");
-      return;
-    }
-    try {
-      const courseDetailPayment = {
-        id: courseDetail._id,
-        title: courseDetail.title,
-        overview: courseDetail.overview,
-        price: courseDetail.price,
-      };
-      const response = await createPaymentForCourse(courseDetailPayment, user);
-      if (response.data.init_point) {
-        window.location.href = response.data.init_point;
-      } else {
-        toast.error("No se pudo iniciar el proceso de pago");
-        console.error("No se pudo iniciar el proceso de pago");
-      }
-    } catch (error) {
-      console.error("Error al comprar el curso:", error);
-      toast.error(error.response.data.message);
-    }
-  };
+  // const handleBuyCourse = async () => {
+  //   if (!isAuthenticated) {
+  //     setRedirectAfterLogin(location.pathname);
+  //     navigate("/login");
+  //     return;
+  //   }
+  //   try {
+  //     const courseDetailPayment = {
+  //       id: courseDetail._id,
+  //       title: courseDetail.title,
+  //       overview: courseDetail.overview,
+  //       price: courseDetail.price,
+  //     };
+  //     const response = await createPaymentForCourse(courseDetailPayment, user);
+  //     if (response.data.init_point) {
+  //       window.location.href = response.data.init_point;
+  //     } else {
+  //       toast.error("No se pudo iniciar el proceso de pago");
+  //       console.error("No se pudo iniciar el proceso de pago");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al comprar el curso:", error);
+  //     toast.error(error.response.data.message);
+  //   }
+  // };
   return (
     <>
       <SEO
@@ -130,7 +130,7 @@ function CourseDetail() {
                   paddingBottom: 4,
                 }}
               >
-                Informacion sobre el curso
+                Información sobre el curso
               </Typography>
 
               <AcordionDetailCourses courseDetail={courseDetail} />

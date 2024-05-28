@@ -38,7 +38,7 @@ const OurCourses = () => {
           sx={{ textAlign: "center", fontWeight: "bold" }}
           color={"secondary.main"}
         >
-          Unite a la comunidad de IA con mayor excelencia Académica.
+          Únete a la comunidad de IA con mayor excelencia Académica.
         </Typography>
       </Box>
 

@@ -29,7 +29,7 @@ import {
 const pages = [
   { page: "Cursos", to: "cursos-section" },
   { page: "Hackathons", to: "hackathons-section" },
-  { page: "Eventos", to: "eventos-section" },
+  // { page: "Eventos", to: "eventos-section" },
   { page: "Empresas", to: "empresas-section" },
 ];
 

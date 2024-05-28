@@ -97,7 +97,7 @@ const Title = () => {
               fontSize: { xs: "0.75rem", sm: "1rem", md: "1.25rem" },
             }}
           >
-            Transforma el mundo con la Inteligencia Artificial
+            Transforma el mundo con Inteligencia Artificial
           </Typography>
           <Button
             sx={{

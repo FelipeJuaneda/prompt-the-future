@@ -29,7 +29,7 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)(
         : "rgba(0, 0, 0, .03)",
     flexDirection: "row-reverse",
     "& .MuiAccordionSummary-expandIconWrapper": {
-      display: "none", // Ocultar icono de expansión
+      display: "none",
     },
     "& .MuiAccordionSummary-content": {
       marginLeft: theme.spacing(1),
@@ -58,7 +58,9 @@ function AcordionDetailCourses({ courseDetail }) {
           <Typography sx={{ fontWeight: "bold" }}>Introducción</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{courseDetail.introduction}</Typography>
+          <Typography whiteSpace={"pre-line"}>
+            {courseDetail.introduction}
+          </Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -77,7 +79,7 @@ function AcordionDetailCourses({ courseDetail }) {
         onChange={handleChange("panel3")}
       >
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography sx={{ fontWeight: "bold" }}>Certificacion</Typography>
+          <Typography sx={{ fontWeight: "bold" }}>Certificación</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>{courseDetail.certification}</Typography>

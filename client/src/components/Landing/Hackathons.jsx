@@ -82,7 +82,7 @@ const Hackathons = () => {
             GPT-4
           </Typography>
           <Typography sx={{ color: "primary.main" }} variant="body2">
-            Cree aplicaciones notables con comprensión avanzada de audio, visión
+            Crea aplicaciones notables con comprensión avanzada de audio, visión
             y texto con el nuevo GPT-4o.
           </Typography>
           <Box>

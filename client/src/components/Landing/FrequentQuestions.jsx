@@ -22,7 +22,7 @@ const questions = [
   {
     question: "Hay una certificación final?",
     answer:
-      "Sí, todos nuestros programas ofrecen una certificación final al completar satisfactoriamente todos los módulos.",
+      "Al completar tu curso se te otorgará un certificado avalado por Prompt The Future, que podrás compartir en tus redes para mostrar tu reconocimiento",
   },
 ];
 
