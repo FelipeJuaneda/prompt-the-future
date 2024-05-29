@@ -16,6 +16,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 //For parsing cookies
 app.use(cookieParser());
+app.disable("x-powered-by");
 
 app.use(
   cors({

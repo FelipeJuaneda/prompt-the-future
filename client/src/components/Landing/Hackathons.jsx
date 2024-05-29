@@ -19,7 +19,7 @@ const Hackathons = () => {
     <Container
       component={"section"}
       id="hackathons-section"
-      sx={{ marginTop: 7 }}
+      sx={{ marginTop: 7, marginBottom: 4 }}
       maxWidth="xl"
     >
       <Divider

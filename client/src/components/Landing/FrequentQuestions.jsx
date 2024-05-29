@@ -5,6 +5,7 @@ import {
   Typography,
   Container,
   Box,
+  Divider,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -33,9 +34,15 @@ const FrequentQuestions = () => {
       sx={{
         backgroundColor: "primary.main",
         borderRadius: "8px",
+        marginTop: 7,
+        marginBottom: 4,
       }}
       maxWidth="xl"
     >
+      <Divider
+        variant="middle"
+        sx={{ backgroundColor: "secondary.main", marginBottom: 4 }}
+      />
       <Typography
         component={"h6"}
         variant="h4"
