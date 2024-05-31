@@ -10,15 +10,15 @@ import {
   IconButton,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import { Link as LinkRouter, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import fondoRegister from "../assets/imgs/fondoRegister.png";
-import logoNegro from "../assets/icons/logoNegro.svg";
+import fondoRegister from "../../../assets/imgs/fondoRegister.png";
+import logoNegro from "../../../assets/icons/logoNegro.svg";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import SEO from "../commons/Seo";
+import SEO from "../../../utils/Seo";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);

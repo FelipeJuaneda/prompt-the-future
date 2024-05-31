@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing/Landing";
 import CourseDetail from "./pages/Landing/CourseDetail";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
 // import Profile from "./pages/Platform/Profile";
 // import ProtectedRoute from "./ProtectedRoute";
 // import Platform from "./pages/Platform/Platform";
@@ -15,9 +13,11 @@ import SuccessPage from "./pages/Landing/SuccessPage";
 import FailurePage from "./pages/Landing/FailurePage";
 import HackathonDetail from "./pages/Landing/HackathonDetail";
 import ComingSoon from "./components/ComingSoon";
-import ScrollToTop from "./commons/ScrollToTop";
-import ResetPassword from "./components/Landing/ResetPassword";
+import ResetPassword from "./pages/Auth/ResetPassword";
 import Companies from "./pages/Landing/Companies";
+import Register from "./pages/Auth/Register/Register";
+import Login from "./pages/Auth/Login/Login";
+import ScrollToTop from "./utils/ScrollToTop";
 
 const App = () => {
   return (

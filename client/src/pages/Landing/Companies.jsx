@@ -1,7 +1,7 @@
 import { Box, Typography, Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import SEO from "../../commons/Seo";
+import SEO from "../../utils/Seo";
 
 const Companies = () => {
   return (

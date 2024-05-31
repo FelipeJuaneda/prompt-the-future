@@ -3,8 +3,8 @@ import OurCourses from "../../components/Landing/OurCourses";
 import WhyPromptTheFuture from "../../components/Landing/WhyPromptTheFuture";
 import Hackathons from "../../components/Landing/Hackathons";
 import FrequentQuestions from "../../components/Landing/FrequentQuestions";
-import SEO from "../../commons/Seo";
 import { Box } from "@mui/material";
+import SEO from "../../utils/Seo";
 
 const Landing = () => {
   return (

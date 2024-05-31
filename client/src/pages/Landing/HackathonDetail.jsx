@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 import { sendEventEmail } from "../../api/email";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import SEO from "../../commons/Seo";
+import SEO from "../../utils/Seo";
 
 const HackathonDetail = () => {
   const { isAuthenticated, user, setRedirectAfterLogin } = useAuth();

@@ -12,14 +12,16 @@ import {
 import { Link as LinkRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import fondoLogin from "../assets/imgs/fondoLogin.png";
-import logoNegro from "../assets/icons/logoNegro.svg";
+import fondoLogin from "../../../assets/imgs/fondoLogin.png";
+import logoNegro from "../../../assets/icons/logoNegro.svg";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import SEO from "../commons/Seo";
+import EmailSentMessage from "./EmailSentMessage";
+import ForgotPasswordForm from "./ForgotPasswordForm";
+import SEO from "../../../utils/Seo";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -152,83 +154,14 @@ export default function Login() {
             </Box>
             {forgotPassword ? (
               emailSent ? (
-                <Typography variant="h6" color="text.primary">
-                  Hemos enviado un correo electrónico a tu dirección con
-                  instrucciones para restablecer tu contraseña.
-                </Typography>
+                <EmailSentMessage />
               ) : (
-                <Stack gap={3} sx={{ textAlign: "center", marginBottom: 4 }}>
-                  <Box>
-                    <Typography variant="h4" fontWeight="bold">
-                      Restablecer contraseña
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Ingresa tu correo electrónico y te enviaremos un código
-                      para restablecerla.
-                    </Typography>
-                  </Box>
-                  <Box component={"form"}>
-                    <TextField
-                      id="email"
-                      label="Correo electrónico"
-                      variant="outlined"
-                      fullWidth
-                      type="email"
-                      error={!!errors.email}
-                      helperText={errors.email ? "El email es requerido" : ""}
-                      {...register("email", { required: true })}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: errors.email
-                              ? "error.main"
-                              : "primary.main",
-                          },
-                          "&:hover fieldset": {
-                            borderColor: errors.email
-                              ? "error.main"
-                              : "primary.dark",
-                          },
-                          "&.Mui-focused fieldset": {
-                            borderColor: errors.email
-                              ? "error.main"
-                              : "primary.main",
-                          },
-                        },
-                      }}
-                    />
-                    <Button
-                      variant="contained"
-                      fullWidth
-                      type="submit"
-                      onClick={handleForgotPasswordSubmit}
-                      sx={{
-                        marginTop: "10px",
-                        backgroundColor: "primary.main",
-                        padding: "10px 20px",
-                        fontSize: "1rem",
-                        "&:hover": {
-                          backgroundColor: "primary.dark",
-                        },
-                      }}
-                    >
-                      Enviar
-                    </Button>
-                  </Box>
-                  <Link
-                    underline="hover"
-                    sx={{
-                      mt: 1,
-                      textAlign: "center",
-                      display: "block",
-                      color: "primary.main",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setForgotPassword(false)}
-                  >
-                    Volver a Iniciar sesión
-                  </Link>
-                </Stack>
+                <ForgotPasswordForm
+                  handleForgotPasswordSubmit={handleForgotPasswordSubmit}
+                  register={register}
+                  errors={errors}
+                  setForgotPassword={setForgotPassword}
+                />
               )
             ) : (
               <>

@@ -8,8 +8,8 @@ import AcordionDetailCourses from "../../components/Landing/AcordionDetailCourse
 // import { createPaymentForCourse } from "../../api/payment";
 // import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
-import SEO from "../../commons/Seo";
 import { useCourses } from "../../context/CoursesContext";
+import SEO from "../../utils/Seo";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
