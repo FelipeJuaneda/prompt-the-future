@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing/Landing";
 import CourseDetail from "./pages/Landing/CourseDetail";
-// import Profile from "./pages/Platform/Profile";
-// import ProtectedRoute from "./ProtectedRoute";
-// import Platform from "./pages/Platform/Platform";
-// import CourseContentPage from "./pages/Platform/CourseContentPage";
-// import PlatformLayout from "./layouts/PlatformLayout";
+import Profile from "./pages/Platform/Profile";
+import ProtectedRoute from "./ProtectedRoute";
+import Platform from "./pages/Platform/Platform";
+import CourseContentPage from "./pages/Platform/CourseContentPage";
+import PlatformLayout from "./layouts/PlatformLayout";
+import RoadMap from "./pages/Platform/RoadMap";
+import EditProfile from "./pages/Platform/EditProfile";
 import PublicLayout from "./layouts/LandingLayout";
 import NotFound from "./components/NotFound";
-// import RoadMap from "./pages/Platform/RoadMap";
 import SuccessPage from "./pages/Landing/SuccessPage";
 import FailurePage from "./pages/Landing/FailurePage";
 import HackathonDetail from "./pages/Landing/HackathonDetail";
@@ -34,22 +35,22 @@ const App = () => {
           <Route path={`/hackathon`} element={<HackathonDetail />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
-        <Route path={"/platform"} element={<ComingSoon />} />
+        {/* <Route path={"/platform"} element={<ComingSoon />} /> */}
         <Route path={"/companies"} element={<Companies />} />
 
-        {/* <Route element={<ProtectedRoute />}>
-        <Route path="/platform" element={<PlatformLayout />}>
-          <Route index element={<Platform />} />
-          <Route
-            path="course-content/:courseId"
-            element={<CourseContentPage />}
-          />
-          <Route path="profile" element={<Profile />} />
-          <Route path="edit-profile" element={<EditProfile />} />
-          <Route path="roadmaps" element={<RoadMap />} />
-          <Route path="stats" element={<RoadMap />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/platform" element={<PlatformLayout />}>
+            <Route index element={<Platform />} />
+            <Route
+              path="course-content/:courseId"
+              element={<CourseContentPage />}
+            />
+            <Route path="profile" element={<Profile />} />
+            <Route path="edit-profile" element={<EditProfile />} />
+            <Route path="roadmaps" element={<RoadMap />} />
+            <Route path="stats" element={<RoadMap />} />
+          </Route>
         </Route>
-      </Route> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
