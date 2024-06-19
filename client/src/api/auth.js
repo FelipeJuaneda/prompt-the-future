@@ -8,3 +8,5 @@ export const requestPasswordReset = (email) =>
   axios.post(`/auth/request-password-reset`, { email });
 export const resetPassword = (token, newPassword) =>
   axios.post(`/auth/reset-password`, { token, newPassword });
+export const updateProfileRequest = (userData) =>
+  axios.put("/auth/profile", userData);

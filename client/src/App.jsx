@@ -7,7 +7,6 @@ import Platform from "./pages/Platform/Platform";
 import CourseContentPage from "./pages/Platform/CourseContentPage";
 import PlatformLayout from "./layouts/PlatformLayout";
 import RoadMap from "./pages/Platform/RoadMap";
-import EditProfile from "./pages/Platform/EditProfile";
 import PublicLayout from "./layouts/LandingLayout";
 import NotFound from "./components/NotFound";
 import SuccessPage from "./pages/Landing/SuccessPage";
@@ -19,6 +18,7 @@ import Companies from "./pages/Landing/Companies";
 import Register from "./pages/Auth/Register/Register";
 import Login from "./pages/Auth/Login/Login";
 import ScrollToTop from "./utils/ScrollToTop";
+import Courses from "./pages/Platform/Courses";
 
 const App = () => {
   return (
@@ -46,7 +46,7 @@ const App = () => {
               element={<CourseContentPage />}
             />
             <Route path="profile" element={<Profile />} />
-            <Route path="edit-profile" element={<EditProfile />} />
+            <Route path="courses" element={<Courses />} />
             <Route path="roadmaps" element={<RoadMap />} />
             <Route path="stats" element={<RoadMap />} />
           </Route>

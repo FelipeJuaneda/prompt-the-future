@@ -2,7 +2,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
-import { Pagination, Navigation, FreeMode } from "swiper/modules";
+import { Pagination, FreeMode } from "swiper/modules";
 import { Swiper } from "swiper/react";
 import "./Carrousele.css";
 const Carrousele = ({ children }) => {

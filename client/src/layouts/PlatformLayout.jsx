@@ -6,10 +6,11 @@ function PlatformLayout() {
   return (
     <Box sx={{ display: "flex" }}>
       <Dashboard />
-      <Box sx={{ flexGrow: 1 }}>
-        <Outlet />;
+      <Box sx={{ flexGrow: 1, maxWidth: "100%", width: "100%" }}>
+        <Outlet />
       </Box>
     </Box>
   );
 }
+
 export default PlatformLayout;

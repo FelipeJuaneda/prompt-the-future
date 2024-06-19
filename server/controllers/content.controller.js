@@ -10,7 +10,6 @@ export const getCoursesForUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    console.log("Cursos encontrados para el usuario:", user.courses);
     res.status(200).json(user.courses);
   } catch (error) {
     console.error("Error al obtener los cursos del usuario:", error);
@@ -27,8 +26,6 @@ export const getCourseContent = async (req, res) => {
       return res.status(400).json({ message: "ID de curso inválido" });
     }
     const content = await CourseContent.findOne({ courseId: courseId });
-    console.log("🚀 ~ getCourseContent ~ content:", content);
-
     if (!content) {
       return res.status(404).json({ message: "Contenido no encontrado" });
     }

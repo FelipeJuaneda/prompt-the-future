@@ -6,6 +6,7 @@ import {
   requestPasswordReset,
   resetPassword,
   verifyTokenRequest,
+  updateProfileRequest,
 } from "../api/auth";
 import Cookies from "js-cookie";
 
@@ -83,6 +84,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateProfile = async (userData) => {
+    try {
+      const res = await updateProfileRequest(userData);
+      setUser(res.data);
+      return res.data;
+    } catch (error) {
+      setErrors([error.response.data.message || error.response.data]);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -124,6 +136,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         requestPasswordResetFunction,
         resetPasswordFunction,
+        updateProfile,
         errors,
         loading,
         setRedirectAfterLogin,

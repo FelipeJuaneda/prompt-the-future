@@ -1,0 +1,11 @@
+/* swiperCustomStyles.css */
+.swiper-slide {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto !important;
+}
+
+.swiper-wrapper {
+  justify-content: flex-start;
+}

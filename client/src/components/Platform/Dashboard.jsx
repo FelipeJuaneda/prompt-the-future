@@ -1,12 +1,4 @@
-import Typography from "@mui/material/Typography";
-import HomeIcon from "@mui/icons-material/Home";
-import BookIcon from "@mui/icons-material/Book";
-import AltRouteIcon from "@mui/icons-material/AltRoute";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
-import SettingsIcon from "@mui/icons-material/Settings";
-import FeedbackIcon from "@mui/icons-material/Feedback";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MuiDrawer from "@mui/material/Drawer";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -16,14 +8,27 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
+  Typography,
+  Drawer as MuiDrawer,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+  Tooltip,
 } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import AltRouteIcon from "@mui/icons-material/AltRoute";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import FeedbackIcon from "@mui/icons-material/Feedback";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import styled from "@emotion/styled";
-import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
-const drawerWidth = 280;
+const drawerWidth = 270;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -65,16 +70,24 @@ const Drawer = styled(MuiDrawer, {
 
 const pages = [
   { name: "Home", href: "/platform", icon: <HomeIcon /> },
-  { name: "Cursos", href: "courses", icon: <BookIcon /> },
-  { name: "Roadmaps", href: "roadmaps", icon: <AltRouteIcon /> },
-  { name: "Estadísticas", href: "stats", icon: <ShowChartIcon /> },
+  { name: "Cursos", href: "/platform/courses", icon: <BookIcon /> },
+  { name: "Roadmaps", href: "/platform/roadmaps", icon: <AltRouteIcon /> },
+  { name: "Estadísticas", href: "/platform/stats", icon: <ShowChartIcon /> },
 ];
 
 function Dashboard() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { logout, user } = useAuth();
-  const [open, setOpen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const initialOpenState =
+    JSON.parse(localStorage.getItem("dashboardOpen")) || false;
+  const initialLockState =
+    JSON.parse(localStorage.getItem("dashboardLocked")) || false;
+  const [open, setOpen] = useState(initialOpenState);
+  const [isLocked, setIsLocked] = useState(initialLockState);
 
   const logoutHandler = async () => {
     try {
@@ -87,12 +100,31 @@ function Dashboard() {
   };
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    if (!isLocked && !isMobile) {
+      setOpen(true);
+    }
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    if (!isLocked && !isMobile) {
+      setOpen(false);
+    }
   };
+
+  const toggleLock = () => {
+    const newLockState = !isLocked;
+    setIsLocked(newLockState);
+    localStorage.setItem("dashboardLocked", newLockState);
+    if (newLockState) {
+      setOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!isLocked) {
+      localStorage.setItem("dashboardOpen", open);
+    }
+  }, [open, isLocked]);
 
   return (
     <Drawer
@@ -117,58 +149,101 @@ function Dashboard() {
         <Stack spacing={4}>
           <Stack
             sx={{ minHeight: "51.5px" }}
-            justifyContent="center"
+            justifyContent="space-between"
             alignItems="center"
             spacing={4}
             direction="row"
           >
-            <Stack direction="row" spacing={1}>
-              <Link style={{ textDecoration: "none" }} to="profile">
-                <Avatar
-                  alt={`@${user.name}`}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    cursor: "pointer",
-                  }}
-                >
-                  {user.name[0].toUpperCase()}
-                </Avatar>
-              </Link>
-
-              {open && (
-                <Stack
-                  sx={{ maxWidth: "120px", overflow: "hidden" }}
-                  direction="column"
-                  spacing={0.5}
-                >
-                  <Typography sx={{ fontSize: 16, color: "#fff" }}>
-                    {user?.displayName || user?.email}
-                  </Typography>
-
-                  <Typography
+            <Stack direction="row" spacing={1.5}>
+              <Tooltip
+                title="Perfil"
+                slotProps={{
+                  popper: {
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, -6],
+                        },
+                      },
+                    ],
+                  },
+                }}
+              >
+                <Link style={{ textDecoration: "none" }} to="profile">
+                  <Avatar
+                    alt={`@${user.name}`}
+                    src={user.img || "/placeholder-avatar.jpg"}
                     sx={{
-                      fontSize: 13,
-                      backgroundColor: "#faff002e",
-                      color: "#FFF500",
-                      width: "fit-content",
-                      padding: "2px 15px",
-                      borderRadius: "30px",
-                      textAlign: "center",
+                      width: 50,
+                      height: 50,
+                      cursor: "pointer",
+                      marginLeft: "5px",
                     }}
                   >
-                    Estudiante
-                  </Typography>
-                </Stack>
-              )}
+                    {user.name[0].toUpperCase()}
+                  </Avatar>
+                </Link>
+              </Tooltip>
+
+              <Stack
+                sx={{
+                  maxWidth: "120px",
+                  overflow: "hidden",
+                  visibility: open ? "visible" : "hidden",
+                  opacity: open ? 1 : 0,
+                  transition:
+                    "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+                }}
+                marginLeft={0}
+                direction="column"
+                spacing={0.5}
+              >
+                <Typography sx={{ fontSize: 16, color: "#fff" }}>
+                  {user?.displayName ||
+                    `${
+                      user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1)
+                    } ${
+                      user?.surname?.charAt(0).toUpperCase() +
+                      user?.surname?.slice(1)
+                    }` ||
+                    user?.email}
+                </Typography>
+
+                <Typography
+                  sx={{
+                    fontSize: 13,
+                    backgroundColor: "#faff002e",
+                    color: "#FFF500",
+                    width: "fit-content",
+                    padding: "2px 15px",
+                    borderRadius: "30px",
+                    textAlign: "center",
+                  }}
+                >
+                  Estudiante
+                </Typography>
+              </Stack>
             </Stack>
-            {open && (
-              <Link to="edit-profile">
-                <SettingsIcon
-                  sx={{ color: "#949494", fontSize: "20px", cursor: "pointer" }}
-                />
-              </Link>
-            )}
+            <Tooltip
+              title={isLocked ? "Desbloquear dashboard" : "Bloquear dashboard"}
+              slotProps={{
+                popper: {
+                  modifiers: [
+                    {
+                      name: "offset",
+                      options: {
+                        offset: [0, -6],
+                      },
+                    },
+                  ],
+                },
+              }}
+            >
+              <IconButton onClick={toggleLock} sx={{ color: "#949494" }}>
+                {isLocked ? <LockIcon /> : <LockOpenIcon />}
+              </IconButton>
+            </Tooltip>
           </Stack>
           <List>
             {pages.map((page) => (
@@ -196,7 +271,7 @@ function Dashboard() {
                       style={{
                         width: 7,
                         height: "100%",
-                        backgroundColor: "#1F5BFF",
+                        backgroundColor: "#8627CC",
                         position: "absolute",
                         left: 0,
                         transition: "left 0.3s ease-in-out",
@@ -205,7 +280,15 @@ function Dashboard() {
                   )}
                   {page.icon}
                 </ListItemIcon>
-                {open && <ListItemText primary={page.name} />}
+                <ListItemText
+                  primary={page.name}
+                  sx={{
+                    visibility: open ? "visible" : "hidden",
+                    opacity: open ? 1 : 0,
+                    transition:
+                      "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+                  }}
+                />
               </ListItemButton>
             ))}
           </List>
@@ -215,7 +298,15 @@ function Dashboard() {
             <ListItemIcon sx={{ color: "#fff", justifyContent: "center" }}>
               <FeedbackIcon />
             </ListItemIcon>
-            {open && <ListItemText primary="Soporte" />}
+            <ListItemText
+              primary="Soporte"
+              sx={{
+                visibility: open ? "visible" : "hidden",
+                opacity: open ? 1 : 0,
+                transition:
+                  "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+              }}
+            />
           </ListItemButton>
           <Divider variant="fullWidth" sx={{ background: "#2f2f2f" }} />
           <ListItemButton
@@ -225,7 +316,15 @@ function Dashboard() {
             <ListItemIcon sx={{ color: "#fff", justifyContent: "center" }}>
               <LogoutIcon />
             </ListItemIcon>
-            {open && <ListItemText primary="Cerrar sesión" />}
+            <ListItemText
+              primary="Cerrar sesión"
+              sx={{
+                visibility: open ? "visible" : "hidden",
+                opacity: open ? 1 : 0,
+                transition:
+                  "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+              }}
+            />
           </ListItemButton>
         </Stack>
       </Stack>

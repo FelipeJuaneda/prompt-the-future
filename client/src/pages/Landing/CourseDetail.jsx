@@ -125,7 +125,7 @@ function CourseDetail() {
           </Typography>
           <Typography
             whiteSpace={"pre-line"}
-            variant="caption"
+            variant="body2"
             sx={{ mb: 1, color: "secondary.main" }}
           >
             {courseDetail.description}

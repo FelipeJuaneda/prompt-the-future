@@ -22,7 +22,33 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }], // Array de IDs de cursos
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
+    location: {
+      type: String,
+      trim: true,
+    },
+    description: {
+      type: String,
+      trim: true,
+    },
+    img: {
+      type: String,
+      trim: true,
+    },
+    socialMedia: {
+      instagram: {
+        type: String,
+        trim: true,
+      },
+      linkedin: {
+        type: String,
+        trim: true,
+      },
+      x: {
+        type: String,
+        trim: true,
+      },
+    },
   },
   { timestamps: true }
 );

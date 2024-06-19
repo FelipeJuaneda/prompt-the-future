@@ -25,6 +25,7 @@ import {
   animateScroll as scroll,
   scroller,
 } from "react-scroll";
+import { useAuth } from "../../context/AuthContext";
 
 const pages = [
   { page: "Cursos", to: "cursos-section" },
@@ -80,6 +81,7 @@ ScrollTop.propTypes = {
 function Header(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [targetSection, setTargetSection] = useState(null);
+  const { setRedirectAfterLogin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -203,6 +205,7 @@ function Header(props) {
                   component={RouterLink}
                   to={"/platform"}
                   sx={{ color: "secondary.main", textTransform: "none" }}
+                  onClick={() => setRedirectAfterLogin("/platform")}
                 >
                   Plataforma
                 </Button>

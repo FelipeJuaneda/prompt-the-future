@@ -35,6 +35,10 @@ export const register = async (req, res) => {
       name: userSaved.name,
       surname: userSaved.surname,
       email: userSaved.email,
+      location: userSaved.location,
+      description: userSaved.description,
+      img: userSaved.img,
+      socialMedia: userSaved.socialMedia,
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
     });
@@ -65,6 +69,10 @@ export const login = async (req, res) => {
       name: userFound.name,
       surname: userFound.surname,
       email: userFound.email,
+      location: userFound.location,
+      description: userFound.description,
+      img: userFound.img,
+      socialMedia: userFound.socialMedia,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });
@@ -92,9 +100,46 @@ export const profile = async (req, res) => {
     name: userFound.name,
     surname: userFound.surname,
     email: userFound.email,
+    location: userFound.location,
+    description: userFound.description,
+    img: userFound.img,
+    socialMedia: userFound.socialMedia,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
   });
+};
+
+export const updateProfile = async (req, res) => {
+  const { name, surname, location, description, img, socialMedia } = req.body;
+  try {
+    const userFound = await User.findById(req.user.id);
+    if (!userFound)
+      return res.status(400).json({ message: "Usuario no encontrado" });
+
+    userFound.name = name || userFound.name;
+    userFound.surname = surname || userFound.surname;
+    userFound.location = location || userFound.location;
+    userFound.description = description || userFound.description;
+    userFound.img = img || userFound.img;
+    userFound.socialMedia = socialMedia || userFound.socialMedia;
+
+    const userUpdated = await userFound.save();
+
+    res.json({
+      id: userUpdated._id,
+      name: userUpdated.name,
+      surname: userUpdated.surname,
+      email: userUpdated.email,
+      location: userUpdated.location,
+      description: userUpdated.description,
+      img: userUpdated.img,
+      socialMedia: userUpdated.socialMedia,
+      createdAt: userUpdated.createdAt,
+      updatedAt: userUpdated.updatedAt,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const verifyToken = async (req, res) => {
@@ -112,6 +157,10 @@ export const verifyToken = async (req, res) => {
       name: userFound.name,
       surname: userFound.surname,
       email: userFound.email,
+      location: userFound.location,
+      description: userFound.description,
+      img: userFound.img,
+      socialMedia: userFound.socialMedia,
     });
   });
 };

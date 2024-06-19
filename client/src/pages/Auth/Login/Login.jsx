@@ -40,6 +40,7 @@ export default function Login() {
     setRedirectAfterLogin,
     requestPasswordResetFunction,
   } = useAuth();
+  console.log("🚀 ~ Login ~ redirectAfterLogin:", redirectAfterLogin);
   const navigate = useNavigate();
 
   useEffect(() => {
