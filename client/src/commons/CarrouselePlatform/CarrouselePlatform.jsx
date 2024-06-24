@@ -4,6 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./CarrouselPlatform.css";
+
 const CarrouselePlatform = ({ children }) => {
   return (
     <Swiper
@@ -23,6 +24,7 @@ const CarrouselePlatform = ({ children }) => {
           slidesPerView: 3,
         },
       }}
+      className="custom-carrousele-platform"
     >
       {children}
     </Swiper>

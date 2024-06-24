@@ -5,6 +5,7 @@ import "swiper/css/free-mode";
 import { Pagination, FreeMode } from "swiper/modules";
 import { Swiper } from "swiper/react";
 import "./Carrousele.css";
+
 const Carrousele = ({ children }) => {
   return (
     <Swiper
@@ -34,6 +35,7 @@ const Carrousele = ({ children }) => {
           spaceBetween: 40,
         },
       }}
+      className="custom-carrousele"
     >
       {children}
     </Swiper>

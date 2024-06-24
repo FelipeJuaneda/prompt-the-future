@@ -1,18 +1,18 @@
-.swiper-pagination-bullet {
+.custom-carrousele .swiper-pagination-bullet {
   background: #8627cc;
 }
 
-.swiper-pagination-bullet-active {
+.custom-carrousele .swiper-pagination-bullet-active {
   background: #5e1999;
 }
 
-.swiper-wrapper {
+.custom-carrousele .swiper-wrapper {
   justify-content: center;
   gap: 20px;
 }
 
 @media (max-width: 900px) {
-  .swiper-wrapper {
+  .custom-carrousele .swiper-wrapper {
     justify-content: flex-start;
   }
 }

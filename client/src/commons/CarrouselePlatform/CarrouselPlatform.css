@@ -1,11 +1,21 @@
-/* swiperCustomStyles.css */
-.swiper-slide {
+.custom-carrousele-platform .swiper-slide {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: auto !important;
 }
 
-.swiper-wrapper {
+.custom-carrousele-platform .swiper-pagination-bullet-active {
+  background: #5e1999;
+}
+
+.custom-carrousele-platform .swiper-wrapper {
   justify-content: flex-start;
+  gap: 20px;
+}
+
+/* Styles for navigation arrows */
+.custom-carrousele-platform .swiper-button-next,
+.custom-carrousele-platform .swiper-button-prev {
+  color: #8627cc;
 }
