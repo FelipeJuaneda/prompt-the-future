@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -12,38 +12,16 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import QuizIcon from "@mui/icons-material/Quiz";
-import { getContentsRequest } from "../../api/content";
-import { toast } from "sonner";
 import Loading from "../../commons/Loading";
+import useCourseContent from "../../hooks/useCourseContent";
+import HeaderContentPage from "../../components/Platform/HeaderContentPage";
+import NoContentMessage from "../../components/Platform/NoContentMessage";
 
 function CourseContentPage() {
   const { courseId } = useParams();
-  const [content, setContent] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const fetchContent = async () => {
-      setLoading(true);
-      try {
-        const response = await getContentsRequest(courseId);
-        setContent(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching course content:", error);
-        toast.error(error.response.data.message, { duration: 4000 });
-        setLoading(false);
-        if (error.response && error.response.status === 403) {
-          navigate("/");
-        }
-      }
-    };
+  const { content, loading } = useCourseContent(courseId);
 
-    fetchContent();
-  }, [courseId, history]);
   if (loading) return <Loading />;
-
-  if (!content)
-    return <Typography variant="h6">No hay contenido disponible</Typography>;
 
   const renderAccordion = (items, Icon, label, isQuiz = false) => (
     <Accordion sx={{ bgcolor: "background.paper", mb: 2 }}>
@@ -84,14 +62,20 @@ function CourseContentPage() {
   );
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        Contenido del Curso
-      </Typography>
-      {renderAccordion(content.videos, VideoLibraryIcon, "Videos")}
-      {renderAccordion(content.readings, PictureAsPdfIcon, "Lecturas")}
-      {renderAccordion(content.quizzes, QuizIcon, "Cuestionarios", true)}
-    </Box>
+    <>
+      <HeaderContentPage content={content} />
+      <Box sx={{ p: 3 }}>
+        {content ? (
+          <>
+            {renderAccordion(content.videos, VideoLibraryIcon, "Videos")}
+            {renderAccordion(content.readings, PictureAsPdfIcon, "Lecturas")}
+            {renderAccordion(content.quizzes, QuizIcon, "Cuestionarios", true)}
+          </>
+        ) : (
+          <NoContentMessage />
+        )}
+      </Box>
+    </>
   );
 }
 
