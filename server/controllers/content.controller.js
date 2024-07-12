@@ -3,8 +3,6 @@ import { CourseContent } from "../models/courseContent.model.js";
 import { User } from "../models/user.model.js";
 
 export const getCoursesForUser = async (req, res) => {
-  console.log("User ID from authRequired middleware:", req.user.id); // Asegúrate de que este log muestre el ID correcto
-
   try {
     const user = await User.findById(req.user.id).populate("courses");
     if (!user) {

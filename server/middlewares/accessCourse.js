@@ -1,12 +1,8 @@
-// middlewares/accessCourseRequired.js
 import { User } from "../models/user.model.js";
 
 export const accessCourseRequired = async (req, res, next) => {
-  const userId = req.user.id; // Asumiendo que el middleware authRequired ya ha adjuntado el objeto user al req
-  console.log("🚀 ~ accessCourseRequired ~ userId:", userId);
-  const courseId = req.params.courseId; // Asegúrate de que el ID del curso se recibe como parámetro de ruta
-  console.log("🚀 ~ accessCourseRequired ~ courseId:", courseId);
-
+  const userId = req.user.id;
+  const courseId = req.params.courseId;
   try {
     const user = await User.findById(userId);
     if (!user) {
