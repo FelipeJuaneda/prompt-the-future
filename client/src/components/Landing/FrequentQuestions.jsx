@@ -11,12 +11,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const questions = [
   {
-    question: "Que dedicación requieren los programas?",
+    question: "¿Cuanto cuesta unirme a la plataforma?",
     answer:
       "La dedicación varía según el programa, pero en general se espera que los estudiantes dediquen unas pocas horas cada semana a sus estudios.",
   },
   {
-    question: "Hay un nivel mínimo de estudios o conocimientos previos?",
+    question: "¿Hay un nivel minimo de estudios o conocimientos previos para participar?",
     answer:
       "No se requiere un nivel mínimo de estudios previos, pero tener conocimientos básicos relacionados puede ser útil.",
   },

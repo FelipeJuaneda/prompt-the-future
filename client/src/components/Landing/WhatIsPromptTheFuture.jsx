@@ -12,83 +12,40 @@ import comunityIcon from "../../assets/icons/comunityIcon.svg";
 import rocketIcon from "../../assets/icons/rocketIcon.svg";
 import tecnologyIcon from "../../assets/icons/tecnologyIcon.svg";
 
-const WhyPromptTheFuture = () => {
+const WhatIsPromptTheFuture = () => {
   return (
-    <Container component={"section"} maxWidth="xl">
-      <Divider variant="middle" sx={{ backgroundColor: "secondary.main" }} />
-      <Stack
-        direction={"row"}
-        justifyContent={"space-around"}
-        sx={{ padding: "60px 0" }}
-      >
-        <Typography
-          component={"span"}
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "secondary.main",
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-          }}
-        >
-          Aprende
-        </Typography>
-        <Typography
-          component={"span"}
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "secondary.main",
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-          }}
-        >
-          Innova
-        </Typography>
-        <Typography
-          component={"span"}
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "secondary.main",
-            fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-          }}
-        >
-          Transforma
-        </Typography>
-      </Stack>
-      <Grid
-        container
-        spacing={4}
-        sx={{ alignItems: "center", minHeight: "500px" }}
-      >
+    <Container
+      sx={{
+        backgroundImage: `url(${fondoImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        color: "white",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        minHeight: "376px",
+        p: 7,
+      }}
+      component={"section"}
+      maxWidth="xl"
+    >
+      <Grid container spacing={4} sx={{ alignItems: "center" }}>
         <Grid item xs={12} md={6}>
-          <Box
-            sx={{
-              backgroundImage: `url(${fondoImg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              borderRadius: "20px",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              minHeight: "376px",
-              p: 4,
-            }}
-          >
+          <Box>
             <Typography
               component={"span"}
               variant="h4"
               sx={{
                 fontWeight: "bold",
-                textAlign: "right",
+                textAlign: "start",
+                width: "50%",
+                margin: "auto",
                 display: "block",
               }}
             >
-              ¿Por qué{" "}
+              ¿Que es{" "}
               <Typography
                 component={"span"}
                 variant="h4"
@@ -97,7 +54,13 @@ const WhyPromptTheFuture = () => {
                 Prompt
               </Typography>
               <br />
-              The Future?
+              <Typography
+                sx={{ fontWeight: "bold" }}
+                variant="h4"
+                color={"black"}
+              >
+                The Future?
+              </Typography>
             </Typography>
           </Box>
         </Grid>
@@ -107,24 +70,24 @@ const WhyPromptTheFuture = () => {
             {[
               {
                 icon: rocketIcon,
-                title: "Potencia tu carrera profesional",
-                text: "Aprende a utilizar la IA para potenciar tu carrera y adaptarte a las nuevas tecnologías, manteniéndote en la vanguardia del desarrollo tecnológico.",
+                title: "Crear nunca fue tan facil",
+                text: "Gracias a la revolucion de la IA, materializar ideas y projectos es mucho mas facil. PTF es tu entorno perfecto para crear utilizando inteligencia artificial.",
               },
               {
                 icon: certificateIcon,
-                title: "Certifícate con empresas líderes de la Industria",
-                text: "Nuestros certificados están avalados por los mejores profesionales trabajando con IA y las empresas líderes de la industria.",
+                title: "Aprende con los mejores profesionales",
+                text: "Certificate con profesionales que utilizan IA en su carrera profesional y son reconocidos por su excelencia academica.",
               },
               {
                 icon: comunityIcon,
                 title: "Participa activamente de una comunidad.",
-                text: "Conviértete en parte de nuestra comunidad, aportando experiencias, recursos y participando de nuestras actividades para ganar experiencia práctica.",
+                text: "Conviertete en parte de nuestra comunidad, aportando experiencias, recursos y participando de nuestras actividades para ganar experiencia practica.h",
               },
               {
                 icon: tecnologyIcon,
                 title:
-                  "Trabaja con las tecnologías más nuevas y revolucionarias",
-                text: "Todos nuestros cursos y actividades están constantemente actualizadas para utilizar las tecnologías más novedosas.",
+                  "Trabaja con las tecnologias mas nuevas y revolucionarias",
+                text: "Todos nuestros cursos y actividades estan constantemente actualizadas para utilizar las tecnologias mas avanzadas y novedosas.",
               },
             ].map((item, index) => (
               <Grid item xs={12} sm={6} md={6} key={index}>
@@ -183,4 +146,4 @@ const WhyPromptTheFuture = () => {
   );
 };
 
-export default WhyPromptTheFuture;
+export default WhatIsPromptTheFuture;

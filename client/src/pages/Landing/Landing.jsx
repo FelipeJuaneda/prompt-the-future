@@ -1,10 +1,11 @@
 import Title from "../../components/Landing/Title";
 import OurCourses from "../../components/Landing/OurCourses";
-import WhyPromptTheFuture from "../../components/Landing/WhyPromptTheFuture";
+import WhatIsPromptTheFuture from "../../components/Landing/WhatIsPromptTheFuture";
 import Hackathons from "../../components/Landing/Hackathons";
 import FrequentQuestions from "../../components/Landing/FrequentQuestions";
 import { Box } from "@mui/material";
 import SEO from "../../utils/Seo";
+import WhereIdeas from "./WhereIdeas";
 
 const Landing = () => {
   return (
@@ -17,9 +18,10 @@ const Landing = () => {
       />
       <Box component={"main"}>
         <Title />
-        <OurCourses />
-        <WhyPromptTheFuture />
-        <Hackathons />
+        <WhereIdeas/>
+        {/* <OurCourses /> */}
+        <WhatIsPromptTheFuture />
+        {/* <Hackathons /> */}
         <FrequentQuestions />
       </Box>
     </>
