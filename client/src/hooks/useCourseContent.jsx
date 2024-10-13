@@ -20,6 +20,7 @@ const useCourseContent = (courseId) => {
         const content = {
           ...responseContent.data,
           title: responseCourse.data.title,
+          description: responseCourse.data.description,
         };
 
         setContent(content);

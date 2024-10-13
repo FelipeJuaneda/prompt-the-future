@@ -1,11 +1,9 @@
 import { Box, Button, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-//import 4 images from assets/imgs/Landing folder
 import learn from "../../assets/imgs/Landing/learn.png";
 import design from "../../assets/imgs/Landing/design.png";
 import code from "../../assets/imgs/Landing/code.png";
 import share from "../../assets/imgs/Landing/share.png";
-import logo from "../../assets/imgs/logoPrompt.png";
 
 const imageData = [
   { label: "Learn", url: "/learn", image: learn },

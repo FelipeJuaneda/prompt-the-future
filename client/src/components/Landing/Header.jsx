@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  Link,
+  Link as RouterLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   AppBar,
@@ -28,10 +33,11 @@ import {
 import { useAuth } from "../../context/AuthContext";
 
 const pages = [
-  { page: "Cursos", to: "cursos-section" },
-  { page: "Hackathons", to: "hackathons-section" },
+  { page: "Learn", to: "/learn" },
+  { page: "Design", to: "/design" },
   // { page: "Eventos", to: "eventos-section" },
-  { page: "Empresas", to: "empresas-section" },
+  { page: "Code", to: "/code" },
+  { page: "Share", to: "/share" },
 ];
 
 function HideOnScroll(props) {
@@ -178,8 +184,9 @@ function Header(props) {
               >
                 {pages.map((page, i) => (
                   <Button
+                    LinkComponent={Link}
                     key={i}
-                    onClick={() => handleNavClick(page.to)}
+                    to={page.to}
                     sx={{
                       paddingRight: 0,
                       color: "white",
@@ -232,7 +239,8 @@ function Header(props) {
                     {pages.map((page) => (
                       <MenuItem onClick={handleCloseNavMenu} key={page.page}>
                         <Button
-                          onClick={() => handleNavClick(page.to)}
+                          LinkComponent={Link}
+                          to={page.to}
                           sx={{ color: "inherit", textTransform: "none" }}
                         >
                           {page.page}

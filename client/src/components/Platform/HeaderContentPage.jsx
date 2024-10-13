@@ -1,8 +1,5 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useNavigate } from "react-router-dom";
 
 const HeaderContentPage = ({ content }) => {
@@ -33,17 +30,6 @@ const HeaderContentPage = ({ content }) => {
         >
           {content.title}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton color="inherit">
-            <NotificationsIcon />
-          </IconButton>
-          <IconButton color="inherit">
-            <HelpOutlineIcon />
-          </IconButton>
-          <IconButton color="inherit">
-            <AccountCircleIcon />
-          </IconButton>
-        </Box>
       </Toolbar>
     </AppBar>
   );

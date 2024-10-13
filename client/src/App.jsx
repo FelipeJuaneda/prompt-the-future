@@ -11,14 +11,14 @@ import PublicLayout from "./layouts/LandingLayout";
 import NotFound from "./components/NotFound";
 import SuccessPage from "./pages/Landing/SuccessPage";
 import FailurePage from "./pages/Landing/FailurePage";
-import HackathonDetail from "./pages/Landing/HackathonDetail";
 import ComingSoon from "./components/ComingSoon";
 import ResetPassword from "./pages/Auth/ResetPassword";
-import Companies from "./pages/Landing/Companies";
 import Register from "./pages/Auth/Register/Register";
 import Login from "./pages/Auth/Login/Login";
 import ScrollToTop from "./utils/ScrollToTop";
 import Courses from "./pages/Platform/Courses";
+import Design from "./pages/Landing/Design";
+import Learn from "./components/Landing/Learn";
 
 const App = () => {
   return (
@@ -32,12 +32,13 @@ const App = () => {
           <Route path="/courses/details/:id" element={<CourseDetail />} />
           <Route path={`/success-page/:courseId`} element={<SuccessPage />} />
           <Route path={`/failure-page/:courseId`} element={<FailurePage />} />
-          <Route path={`/hackathon`} element={<HackathonDetail />} />
+          <Route path={`/design`} element={<Design />} />
+          <Route path={`/learn`} element={<Learn />} />
+          <Route path={`/code`} element={<ComingSoon />} />
+          <Route path={`/share`} element={<ComingSoon />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
         {/* <Route path={"/platform"} element={<ComingSoon />} /> */}
-        <Route path={"/companies"} element={<Companies />} />
-
         <Route element={<ProtectedRoute />}>
           <Route path="/platform" element={<PlatformLayout />}>
             <Route index element={<Platform />} />
