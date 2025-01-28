@@ -20,10 +20,11 @@ app.disable("x-powered-by");
 
 app.use(
   cors({
-    origin: BASE_URL,
+    // origin: BASE_URL,
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
-    credentials: true,
+    // credentials: true,
   })
 );
 
