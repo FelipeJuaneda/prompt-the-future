@@ -19,10 +19,12 @@ import ScrollToTop from "./utils/ScrollToTop";
 import Courses from "./pages/Platform/Courses";
 import Design from "./pages/Landing/Design";
 import Learn from "./components/Landing/Learn";
+import { Worker } from '@react-pdf-viewer/core';
 
 const App = () => {
   return (
     <>
+    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<PublicLayout />}>
@@ -54,6 +56,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+    </Worker>
     </>
   );
 };

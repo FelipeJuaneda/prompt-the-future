@@ -32,6 +32,13 @@ const courseContentSchema = new mongoose.Schema({
       ],
     },
   ],
+  modules: [
+    {
+      title: { type: String, required: true }, 
+      description: { type: String },           
+      pdfUrl: { type: String, required: true }, 
+    },
+  ],
 });
 
 export const CourseContent = mongoose.model(

@@ -16,7 +16,7 @@ function CourseContentPage() {
   const [moduleTabValue, setModuleTabValue] = useState(0);
 
   const handleTabChange = (event, newValue) => {
-    setTabValue(newValue); // Maneja el cambio de tab horizontal
+    setTabValue(newValue);
   };
 
   const handleModuleTabChange = (event, newValue) => {
@@ -25,40 +25,34 @@ function CourseContentPage() {
 
   if (loading) return <Loading />;
 
-  const renderModuleContent = (moduleIndex) => {
-    return (
-      <Box>
-        <Typography variant="h6">Módulo {moduleIndex + 1}</Typography>
-        <Paper sx={{ p: 2, mt: 2, backgroundColor: "#333", color: "white" }}>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Box key={index} sx={{ mb: 4 }}>
-              <Typography variant="h6">Clase {index + 1}: "Título"</Typography>
-              {/* Icono de video */}
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "#555",
-                  height: "200px",
-                  mt: 2,
-                }}
-              >
-                <PlayCircleIcon sx={{ fontSize: 80, color: "red" }} />
-              </Box>
-              <Typography variant="body2" sx={{ mt: 2 }}>
-                Texto texto texto texto texto texto texto texto texto texto
-                texto texto texto texto texto texto texto texto texto texto
-                texto texto texto texto texto texto texto texto texto texto
-                texto texto texto texto texto texto texto texto texto texto
-                texto texto texto texto texto texto texto texto texto texto.
-              </Typography>
-            </Box>
-          ))}
-        </Paper>
+const renderModuleContent = (moduleIndex) => {
+  const module = content.modules[moduleIndex];
+  if (!module) {
+    return <Typography>No se encontró el módulo.</Typography>;
+  }
+
+  const pdfPreviewUrl = module.pdfUrl.replace("/view?usp=sharing", "/preview");
+
+  return (
+      <Box
+        sx={{
+          mt: 2,
+          border: "1px solid #ddd",
+          borderRadius: 2,
+          overflow: "hidden",
+          height:"100%"
+        }}
+      >
+        <iframe
+          src={pdfPreviewUrl}
+          width="100%"
+          height="100%"
+          title={module.moduleTitle}
+        ></iframe>
       </Box>
-    );
-  };
+  );
+};
+
 
   const renderTabContent = (tabIndex) => {
     switch (tabIndex) {
@@ -112,10 +106,10 @@ function CourseContentPage() {
                 height: "max-content",
               }}
             >
-              {Array.from({ length: 4 }).map((_, index) => (
+              {content.modules.map((module, index) => (
                 <Tab
                   label={`Módulo ${index + 1}`}
-                  key={index}
+                  key={module._id}
                   sx={{
                     color: "white",
                     textAlign: "left",
